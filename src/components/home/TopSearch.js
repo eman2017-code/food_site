@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Container, Form } from "react-bootstrap";
-import Select2 from "react-select2-wrapper";
 import Icofont from "react-icofont";
 import OwlCarousel from "react-owl-carousel3";
 import ProductBox from "./ProductBox";
@@ -29,24 +28,6 @@ class TopSearch extends React.Component {
               <div className="homepage-search-form">
                 <Form className="form-noborder">
                   <div className="form-row">
-                    <Form.Group className="col-lg-3 col-md-3 col-sm-12">
-                      <div className="location-dropdown">
-                        <Icofont icon="location-arrow" />
-                        <Select2
-                          className="custom-select"
-                          data={[
-                            { text: "Breakfast", id: 1 },
-                            { text: "Lunch", id: 2 },
-                            { text: "Dinner", id: 3 },
-                            { text: "Cafés", id: 4 },
-                            { text: "Delivery", id: 5 }
-                          ]}
-                          options={{
-                            placeholder: "Quick Searches"
-                          }}
-                        />
-                      </div>
-                    </Form.Group>
                     <Form.Group className="col-lg-7 col-md-7 col-sm-12">
                       <Form.Control
                         type="text"
