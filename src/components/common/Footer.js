@@ -17,18 +17,6 @@ class Footer extends React.Component {
   render() {
     return (
       <>
-        <section className="section pt-5 pb-5 text-center bg-white">
-          <Container>
-            <Row>
-              <Col sm={12}>
-                <h5 className="m-0">
-                  Operate food store or restaurants?{" "}
-                  <Link to="login">Work With Us</Link>
-                </h5>
-              </Col>
-            </Row>
-          </Container>
-        </section>
         <section className="footer pt-5 pb-5">
           <Container>
             <Row>
