@@ -340,43 +340,6 @@ class List extends React.Component {
                     </Accordion>
                   </div>
                 </div>
-                <div className="filters pt-2">
-                  <div className="filters-body rounded shadow-sm bg-white">
-                    <div className="filters-card p-4">
-                      <div>
-                        <div className="filters-card-body card-shop-filters pt-0">
-                          <Form.Check
-                            custom
-                            type="radio"
-                            name="partner"
-                            defaultChecked={true}
-                            id="custom-cb26"
-                            label="Gold Partner"
-                          />
-                          <Form.Check
-                            custom
-                            type="radio"
-                            name="partner"
-                            id="custom-cb27"
-                            label="Order Food Online"
-                          />
-                          <Form.Check
-                            custom
-                            type="radio"
-                            name="partner"
-                            id="custom-cb28"
-                            label="Osahan Eat"
-                          />
-                          <hr />
-                          <small className="text-success">
-                            Use code OSAHAN50 to get 50% OFF (up to $30) on
-                            first 5 orders. T&Cs apply.
-                          </small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </Col>
               <Col md={9}>
                 <CategoriesCarousel />
