@@ -26,7 +26,7 @@ class List extends React.Component {
     return (
       <>
         <PageTitle
-          title="Offers Near You"
+          title="Restaurant Listings"
           subTitle="Best deals at your favourite restaurants"
         />
         <section className="section pt-5 pb-5 products-listing">
@@ -46,9 +46,12 @@ class List extends React.Component {
                     <Dropdown.Item href="#/rating">Rating</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-                <h4 className="font-weight-bold mt-0 mb-3">
-                  OFFERS <small className="h6 mb-0 ml-2">299 restaurants</small>
-                </h4>
+                {/* <h4 className="font-weight-bold mt-0 mb-3">
+                  OFFERS{" "} */}
+                <small className="h6 mb-0 ml-2">
+                  {`${this.props.restaurants.length} Restaurants!`}
+                </small>
+                {/* </h4> */}
               </Col>
             </Row>
             <Row>
@@ -387,7 +390,6 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return { restaurants: state.restaurants };
 };
 
