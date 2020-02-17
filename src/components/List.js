@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { listRestaurants } from "../actions";
 import { Link } from "react-router-dom";
 import {
   Row,
@@ -16,7 +18,12 @@ import CardItem from "./common/CardItem";
 import CategoriesCarousel from "./common/CategoriesCarousel";
 
 class List extends React.Component {
+  // componentDidMount() {
+  //   this.props.listRestaurants();
+  // }
+
   render() {
+    console.log("this.props:", this.props);
     return (
       <>
         <PageTitle
@@ -513,4 +520,9 @@ class List extends React.Component {
   }
 }
 
-export default List;
+const mapStateToProps = state => {
+  console.log("state:", state);
+  return { restaurants: state.restaurants };
+};
+
+export default connect(mapStateToProps, { listRestaurants })(List);

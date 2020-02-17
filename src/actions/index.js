@@ -1,3 +1,6 @@
+import _ from "lodash";
+import apiConnector from "../apis/apiConnector";
+
 // login user
 export const loginUser = user => {
   return {
@@ -22,10 +25,17 @@ export const logoutUser = user => {
   };
 };
 
-// list all restaurants
-export const listRestaurants = restaurants => {
-  return {
-    type: "LIST_RESTAURANTS",
-    payload: restaurants
-  };
+// /* memoized --> This function will only be called once. O(n) */
+// // list all restaurants
+// const _listRestaurants = _.memoize(async dispatch => {
+//   const response = apiConnector.getAllRestaurants();
+//   console.log("response:", response);
+//   dispatch({ type: "LIST_RESTAURANTS", payload: response.data });
+// });
+// export const listRestaurants = () => dispatch => _listRestaurants(dispatch);
+
+export const listRestaurants = () => async dispatch => {
+  const response = apiConnector.getAllRestaurants();
+  console.log("response:", response);
+  dispatch({ type: "LIST_RESTAURANTS", payload: response.data });
 };
