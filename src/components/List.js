@@ -18,12 +18,11 @@ import CardItem from "./common/CardItem";
 import CategoriesCarousel from "./common/CategoriesCarousel";
 
 class List extends React.Component {
-  // componentDidMount() {
-  //   this.props.listRestaurants();
-  // }
+  componentDidMount() {
+    this.props.listRestaurants();
+  }
 
   render() {
-    console.log("this.props:", this.props);
     return (
       <>
         <PageTitle
@@ -521,7 +520,6 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state:", state);
   return { restaurants: state.restaurants };
 };
 

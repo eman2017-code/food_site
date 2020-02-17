@@ -25,17 +25,10 @@ export const logoutUser = user => {
   };
 };
 
-// /* memoized --> This function will only be called once. O(n) */
-// // list all restaurants
-// const _listRestaurants = _.memoize(async dispatch => {
-//   const response = apiConnector.getAllRestaurants();
-//   console.log("response:", response);
-//   dispatch({ type: "LIST_RESTAURANTS", payload: response.data });
-// });
-// export const listRestaurants = () => dispatch => _listRestaurants(dispatch);
-
-export const listRestaurants = () => async dispatch => {
-  const response = apiConnector.getAllRestaurants();
-  console.log("response:", response);
-  dispatch({ type: "LIST_RESTAURANTS", payload: response.data });
-};
+/* memoized --> This function will only be called once. O(n) */
+const _listRestaurants = _.memoize(async dispatch => {
+  const response = await apiConnector.getAllRestaurants();
+  dispatch({ type: "LIST_RESTAURANTS", payload: response });
+});
+// list all restaurants
+export const listRestaurants = () => dispatch => _listRestaurants(dispatch);

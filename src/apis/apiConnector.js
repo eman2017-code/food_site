@@ -1,9 +1,9 @@
-import { listRestaurants } from "../actions";
+// import axios from "axios";
 
 /* This is where all of the api calls are made to talk to the API */
 
 /* This allows us to switch url for production and testing purposes */
-const debug = true;
+// const debug = true;
 
 let apiURL = "http://localhost:8000/api/v1/";
 // if (debug) {
@@ -16,10 +16,9 @@ export default {
   // register route
   // login route
   // index route (restaurants)
-  getAllRestaurants: async responseBack => {
-    const response = fetch(apiURL + "restaurants/");
-    const parsedResponse = (await response).json();
-    console.log("parsedResponse:", parsedResponse);
-    return parsedResponse;
+  getAllRestaurants: async () => {
+    const response = await fetch(apiURL + "restaurants/");
+    const parsedResponse = await response.json();
+    return parsedResponse.data;
   }
 };
