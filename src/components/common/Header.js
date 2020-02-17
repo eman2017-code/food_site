@@ -91,22 +91,6 @@ class Header extends React.Component {
                   >
                     Listing
                   </NavDropdown.Item>
-                  <NavDropdown.Item
-                    eventKey={2.2}
-                    as={NavLink}
-                    activeclassname="active"
-                    to="/detail"
-                  >
-                    Detail + Cart
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    eventKey={2.3}
-                    as={NavLink}
-                    activeclassname="active"
-                    to="/checkout"
-                  >
-                    Checkout
-                  </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Pages" alignRight>
                   <NavDropdown.Item
@@ -116,14 +100,6 @@ class Header extends React.Component {
                     to="/track-order"
                   >
                     Track Order
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    eventKey={3.2}
-                    as={NavLink}
-                    activeclassname="active"
-                    to="/invoice"
-                  >
-                    Invoice
                   </NavDropdown.Item>
                   <NavDropdown.Item
                     eventKey={3.3}
@@ -140,22 +116,6 @@ class Header extends React.Component {
                     to="/register"
                   >
                     Register
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    eventKey={3.5}
-                    as={NavLink}
-                    activeclassname="active"
-                    to="/404"
-                  >
-                    404
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    eventKey={3.6}
-                    as={NavLink}
-                    activeclassname="active"
-                    to="/extra"
-                  >
-                    Extra
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown
