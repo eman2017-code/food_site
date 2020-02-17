@@ -21,3 +21,11 @@ export const logoutUser = user => {
     payload: user
   };
 };
+
+// list all restaurants
+export const listRestaurants = restaurants => {
+  return {
+    type: "LIST_RESTAURANTS",
+    payload: restaurants
+  };
+};
