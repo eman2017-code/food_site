@@ -9,7 +9,8 @@ import {
   Dropdown,
   Accordion,
   Button,
-  Form
+  Form,
+  Spinner
 } from "react-bootstrap";
 import Icofont from "react-icofont";
 import PageTitle from "./common/PageTitle";
@@ -350,8 +351,8 @@ class List extends React.Component {
                 <CategoriesCarousel />
                 {this.props.restaurants.map((restaurant, i) => {
                   return (
-                    <Row key={i}>
-                      <Col md={4} sm={6} className="mb-4 pb-2">
+                    <div className="grid-container" key={i}>
+                      <div className="grid-item">
                         <CardItem
                           title={restaurant.name}
                           subTitle={restaurant.city}
@@ -366,10 +367,16 @@ class List extends React.Component {
                           promotedVariant="dark"
                           favIcoIconColor="text-danger"
                         />
-                      </Col>
-                    </Row>
+                      </div>
+                    </div>
                   );
                 })}
+              </Col>
+              <Col md={12} className="text-center load-more">
+                <Button variant="primary" type="button" disabled="">
+                  <Spinner animation="grow" size="sm" className="mr-1" />
+                  Loading...
+                </Button>
               </Col>
             </Row>
           </Container>
