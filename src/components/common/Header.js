@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { loginUser } from "../../actions";
 import {
   Navbar,
   Nav,
@@ -15,6 +17,7 @@ import Icofont from "react-icofont";
 
 class Header extends React.Component {
   constructor(props) {
+    console.log("props in Header Component:", props);
     super(props);
     this.state = {
       isNavExpanded: false
@@ -92,85 +95,81 @@ class Header extends React.Component {
                     Listing
                   </NavDropdown.Item>
                 </NavDropdown>
-                <NavDropdown title="Pages" alignRight>
-                  <NavDropdown.Item
-                    eventKey={3.1}
-                    as={NavLink}
-                    activeclassname="active"
-                    to="/track-order"
+                {this.props.isLoggedIn ? (
+                  <NavDropdown
+                    alignRight
+                    title={
+                      <DropDownTitle
+                        className="d-inline-block"
+                        image="img/user/4.png"
+                        imageAlt="user"
+                        imageClass="nav-osahan-pic rounded-pill"
+                        title="My Account"
+                      />
+                    }
                   >
-                    Track Order
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    eventKey={3.3}
-                    as={NavLink}
-                    activeclassname="active"
-                    to="/login"
-                  >
-                    Login
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    eventKey={3.4}
-                    as={NavLink}
-                    activeclassname="active"
-                    to="/register"
-                  >
-                    Register
-                  </NavDropdown.Item>
-                </NavDropdown>
-                <NavDropdown
-                  alignRight
-                  title={
-                    <DropDownTitle
-                      className="d-inline-block"
-                      image="img/user/4.png"
-                      imageAlt="user"
-                      imageClass="nav-osahan-pic rounded-pill"
-                      title="My Account"
-                    />
-                  }
-                >
-                  <NavDropdown.Item
-                    eventKey={4.1}
-                    as={NavLink}
-                    activeclassname="active"
-                    to="/myaccount/orders"
-                  >
-                    <Icofont icon="food-cart" /> Orders
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    eventKey={4.2}
-                    as={NavLink}
-                    activeclassname="active"
-                    to="/myaccount/offers"
-                  >
-                    <Icofont icon="sale-discount" /> Offers
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    eventKey={4.3}
-                    as={NavLink}
-                    activeclassname="active"
-                    to="/myaccount/favourites"
-                  >
-                    <Icofont icon="heart" /> Favourites
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    eventKey={4.4}
-                    as={NavLink}
-                    activeclassname="active"
-                    to="/myaccount/payments"
-                  >
-                    <Icofont icon="credit-card" /> Payments
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    eventKey={4.5}
-                    as={NavLink}
-                    activeclassname="active"
-                    to="/myaccount/addresses"
-                  >
-                    <Icofont icon="location-pin" /> Addresses
-                  </NavDropdown.Item>
-                </NavDropdown>
+                    <NavDropdown.Item
+                      eventKey={4.1}
+                      as={NavLink}
+                      activeclassname="active"
+                      to="/myaccount/orders"
+                    >
+                      <Icofont icon="food-cart" /> Orders
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      eventKey={4.2}
+                      as={NavLink}
+                      activeclassname="active"
+                      to="/myaccount/offers"
+                    >
+                      <Icofont icon="sale-discount" /> Offers
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      eventKey={4.3}
+                      as={NavLink}
+                      activeclassname="active"
+                      to="/myaccount/favourites"
+                    >
+                      <Icofont icon="heart" /> Favourites
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      eventKey={4.4}
+                      as={NavLink}
+                      activeclassname="active"
+                      to="/myaccount/payments"
+                    >
+                      <Icofont icon="credit-card" /> Payments
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      eventKey={4.5}
+                      as={NavLink}
+                      activeclassname="active"
+                      to="/myaccount/addresses"
+                    >
+                      <Icofont icon="location-pin" /> Addresses
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                ) : (
+                  <NavDropdown title="Login/Register" alignRight>
+                    <NavDropdown.Item
+                      eventKey={3.3}
+                      as={NavLink}
+                      activeclassname="active"
+                      to="/login"
+                    >
+                      Login
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      eventKey={3.4}
+                      as={NavLink}
+                      activeclassname="active"
+                      to="/register"
+                    >
+                      Register
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                )}
+
                 <NavDropdown
                   activeclassname="active"
                   alignRight
@@ -257,4 +256,8 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return { isLoggedIn: state.user.isLoggedIn };
+};
+
+export default connect(mapStateToProps, { loginUser })(Header);

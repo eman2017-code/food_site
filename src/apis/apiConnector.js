@@ -14,6 +14,21 @@ let apiURL = "http://localhost:8000/api/v1/";
 
 export default {
   // register route
+  registerUser: async registrationInfo => {
+    try {
+      const response = await fetch(apiURL + "users/register/", {
+        method: "POST",
+        body: JSON.stringify(registrationInfo),
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      const parsedResponse = await response.json();
+      console.log("parsedResponse:", parsedResponse);
+      return parsedResponse;
+    } catch (error) {}
+  },
   // login route
   // index route (restaurants)
   getAllRestaurants: async () => {
