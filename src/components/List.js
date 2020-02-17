@@ -9,8 +9,7 @@ import {
   Dropdown,
   Accordion,
   Button,
-  Form,
-  Spinner
+  Form
 } from "react-bootstrap";
 import Icofont from "react-icofont";
 import PageTitle from "./common/PageTitle";
@@ -349,167 +348,28 @@ class List extends React.Component {
               </Col>
               <Col md={9}>
                 <CategoriesCarousel />
-                <Row>
-                  <Col md={4} sm={6} className="mb-4 pb-2">
-                    <CardItem
-                      title="Bite Me Sandwiches"
-                      subTitle="North Indian • American • Pure veg"
-                      imageAlt="Product"
-                      image="img/list/1.png"
-                      imageClass="img-fluid item-img"
-                      linkUrl="detail"
-                      offerText="65% off | Use Coupon OSAHAN50"
-                      time="15–25 min"
-                      price="$100 FOR TWO"
-                      showPromoted={true}
-                      promotedVariant="dark"
-                      favIcoIconColor="text-danger"
-                      rating="3.1 (300+)"
-                    />
-                  </Col>
-                  <Col md={4} sm={6} className="mb-4 pb-2">
-                    <CardItem
-                      title="Bite Me Sandwiches"
-                      subTitle="North Indian • American • Pure veg"
-                      imageAlt="Product"
-                      image="img/list/2.png"
-                      imageClass="img-fluid item-img"
-                      linkUrl="detail"
-                      offerText="65% off | Use Coupon OSAHAN50"
-                      time="15–25 min"
-                      price="$100 FOR TWO"
-                      showPromoted={true}
-                      promotedVariant="dark"
-                      favIcoIconColor="text-danger"
-                      rating="3.1 (300+)"
-                    />
-                  </Col>
-                  <Col md={4} sm={6} className="mb-4 pb-2">
-                    <CardItem
-                      title="Bite Me Sandwiches"
-                      subTitle="North Indian • American • Pure veg"
-                      imageAlt="Product"
-                      image="img/list/3.png"
-                      imageClass="img-fluid item-img"
-                      linkUrl="detail"
-                      offerText="65% off | Use Coupon OSAHAN50"
-                      time="15–25 min"
-                      price="$100 FOR TWO"
-                      showPromoted={true}
-                      promotedVariant="dark"
-                      favIcoIconColor="text-danger"
-                      rating="3.1 (300+)"
-                    />
-                  </Col>
-                  <Col md={4} sm={6} className="mb-4 pb-2">
-                    <CardItem
-                      title="Bite Me Sandwiches"
-                      subTitle="North Indian • American • Pure veg"
-                      imageAlt="Product"
-                      image="img/list/4.png"
-                      imageClass="img-fluid item-img"
-                      linkUrl="detail"
-                      offerText="65% off | Use Coupon OSAHAN50"
-                      time="15–25 min"
-                      price="$100 FOR TWO"
-                      showPromoted={true}
-                      promotedVariant="dark"
-                      favIcoIconColor="text-danger"
-                      rating="3.1 (300+)"
-                    />
-                  </Col>
-                  <Col md={4} sm={6} className="mb-4 pb-2">
-                    <CardItem
-                      title="Bite Me Sandwiches"
-                      subTitle="North Indian • American • Pure veg"
-                      imageAlt="Product"
-                      image="img/list/5.png"
-                      imageClass="img-fluid item-img"
-                      linkUrl="detail"
-                      offerText="65% off | Use Coupon OSAHAN50"
-                      time="15–25 min"
-                      price="$100 FOR TWO"
-                      showPromoted={true}
-                      promotedVariant="dark"
-                      favIcoIconColor="text-danger"
-                      rating="3.1 (300+)"
-                    />
-                  </Col>
-                  <Col md={4} sm={6} className="mb-4 pb-2">
-                    <CardItem
-                      title="Bite Me Sandwiches"
-                      subTitle="North Indian • American • Pure veg"
-                      imageAlt="Product"
-                      image="img/list/6.png"
-                      imageClass="img-fluid item-img"
-                      linkUrl="detail"
-                      offerText="65% off | Use Coupon OSAHAN50"
-                      time="15–25 min"
-                      price="$100 FOR TWO"
-                      showPromoted={true}
-                      promotedVariant="dark"
-                      favIcoIconColor="text-danger"
-                      rating="3.1 (300+)"
-                    />
-                  </Col>
-                  <Col md={4} sm={6} className="mb-4 pb-2">
-                    <CardItem
-                      title="Bite Me Sandwiches"
-                      subTitle="North Indian • American • Pure veg"
-                      imageAlt="Product"
-                      image="img/list/7.png"
-                      imageClass="img-fluid item-img"
-                      linkUrl="detail"
-                      offerText="65% off | Use Coupon OSAHAN50"
-                      time="15–25 min"
-                      price="$100 FOR TWO"
-                      showPromoted={true}
-                      promotedVariant="dark"
-                      favIcoIconColor="text-danger"
-                      rating="3.1 (300+)"
-                    />
-                  </Col>
-                  <Col md={4} sm={6} className="mb-4 pb-2">
-                    <CardItem
-                      title="Bite Me Sandwiches"
-                      subTitle="North Indian • American • Pure veg"
-                      imageAlt="Product"
-                      image="img/list/8.png"
-                      imageClass="img-fluid item-img"
-                      linkUrl="detail"
-                      offerText="65% off | Use Coupon OSAHAN50"
-                      time="15–25 min"
-                      price="$100 FOR TWO"
-                      showPromoted={true}
-                      promotedVariant="dark"
-                      favIcoIconColor="text-danger"
-                      rating="3.1 (300+)"
-                    />
-                  </Col>
-                  <Col md={4} sm={6} className="mb-4 pb-2">
-                    <CardItem
-                      title="Bite Me Sandwiches"
-                      subTitle="North Indian • American • Pure veg"
-                      imageAlt="Product"
-                      image="img/list/9.png"
-                      imageClass="img-fluid item-img"
-                      linkUrl="detail"
-                      offerText="65% off | Use Coupon OSAHAN50"
-                      time="15–25 min"
-                      price="$100 FOR TWO"
-                      showPromoted={true}
-                      promotedVariant="dark"
-                      favIcoIconColor="text-danger"
-                      rating="3.1 (300+)"
-                    />
-                  </Col>
-                  <Col md={12} className="text-center load-more">
-                    <Button variant="primary" type="button" disabled="">
-                      <Spinner animation="grow" size="sm" className="mr-1" />
-                      Loading...
-                    </Button>
-                  </Col>
-                </Row>
+                {this.props.restaurants.map((restaurant, i) => {
+                  return (
+                    <Row key={i}>
+                      <Col md={4} sm={6} className="mb-4 pb-2">
+                        <CardItem
+                          title={restaurant.name}
+                          subTitle={restaurant.city}
+                          imageAlt="Product"
+                          image={restaurant.logoUrl}
+                          imageClass="img-fluid item-img"
+                          linkUrl="detail"
+                          offerText="65% off | Use Coupon OSAHAN50"
+                          time={`${restaurant.minWaitTime} - ${restaurant.maxWaitTime} minutes`}
+                          phoneNumber={restaurant.phone}
+                          showPromoted={false}
+                          promotedVariant="dark"
+                          favIcoIconColor="text-danger"
+                        />
+                      </Col>
+                    </Row>
+                  );
+                })}
               </Col>
             </Row>
           </Container>
@@ -520,6 +380,7 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return { restaurants: state.restaurants };
 };
 
