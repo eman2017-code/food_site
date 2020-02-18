@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { registerUser } from "../actions";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Row, Col, Container, Form } from "react-bootstrap";
 
 class Register extends React.Component {
   constructor(props) {
-    console.log(props);
     super(props);
 
     this.state = {
@@ -31,6 +31,17 @@ class Register extends React.Component {
   };
 
   render() {
+    if (this.props.isLoggedIn === true) {
+      return (
+        <Redirect
+          to={{
+            pathname: "/listing",
+            // passing props
+            state: { loggedInUser: this.state.loggedInUser }
+          }}
+        />
+      );
+    }
     return (
       <Container fluid className="bg-white">
         <Row>
@@ -45,50 +56,46 @@ class Register extends React.Component {
                       <div className="form-label-group">
                         <Form.Control
                           type="text"
-                          id="inputEmail"
+                          id="fname"
                           placeholder="First Name"
                           value={this.state.first_name}
                           onChange={this.handleChange}
                           name="first_name"
                         />
-                        <Form.Label htmlFor="inputEmail">First Name</Form.Label>
+                        <Form.Label htmlFor="fname">First Name</Form.Label>
                       </div>
                       <div className="form-label-group">
                         <Form.Control
                           type="text"
-                          id="inputEmail"
+                          id="lname"
                           placeholder="Last Name"
                           value={this.state.last_name}
                           onChange={this.handleChange}
                           name="last_name"
                         />
-                        <Form.Label htmlFor="inputEmail">Last Name</Form.Label>
+                        <Form.Label htmlFor="lname">Last Name</Form.Label>
                       </div>
                       <div className="form-label-group">
                         <Form.Control
                           type="email"
-                          id="inputEmail"
+                          id="email"
                           placeholder="Email address"
                           value={this.state.email}
                           onChange={this.handleChange}
                           name="email"
                         />
-                        <Form.Label htmlFor="inputEmail">
-                          Email address
-                        </Form.Label>
+                        <Form.Label htmlFor="email">Email address</Form.Label>
                       </div>
                       <div className="form-label-group">
                         <Form.Control
                           type="password"
-                          id="inputPassword"
+                          id="password"
                           placeholder="Password"
                           value={this.state.password}
                           onChange={this.handleChange}
                           name="password"
                         />
-                        <Form.Label htmlFor="inputPassword">
-                          Password
-                        </Form.Label>
+                        <Form.Label htmlFor="password">Password</Form.Label>
                       </div>
                       <button
                         type="submit"
@@ -114,8 +121,16 @@ class Register extends React.Component {
   }
 }
 
+Register.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  registerUser: PropTypes.func
+};
+
 const mapStateToProps = state => {
-  return { isLoggedIn: state.user.isLoggedIn };
+  return {
+    isLoggedIn: state.user.isLoggedIn,
+    userInfo: state.user.userInfo
+  };
 };
 
 export default connect(mapStateToProps, { registerUser })(Register);

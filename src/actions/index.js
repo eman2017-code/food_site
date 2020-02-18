@@ -1,44 +1,35 @@
 import _ from "lodash";
 import apiConnector from "../apis/apiConnector";
 
-// login user
-export const loginUser = user => {
-  return {
-    type: "LOGIN_USER",
-    payload: user
-  };
-};
+/* memoized */
+const _registerUser = _.memoize(async (registrationInfo, dispatch) => {
+  const response = await apiConnector.registerUser(registrationInfo);
+  console.log("response:", response);
+  const userInfo = response.data;
+  if (response.status.code === 201)
+    dispatch({ type: "REGISTER_USER", payload: userInfo });
+});
 
-// register user
-export const registerUser = registrationInfo => async dispatch => {
-  // makes the api call to register
-  const registrationResponse = await apiConnector.registerUser(
-    registrationInfo
-  );
-  console.log("registrationResponse:", registrationResponse);
-  const userInfo = registrationResponse.data;
-  console.log("userInfo:", userInfo);
+const _listRestaurants = _.memoize(async dispatch => {
+  const response = await apiConnector.getAllRestaurants();
+  dispatch({ type: "LIST_RESTAURANTS", payload: response });
+});
 
-  if (registrationResponse.status.code === 201) {
-    dispatch({
-      type: "REGISTER_USER",
-      payload: userInfo
-    });
-  }
-};
+/* functions being imported that execute */
+export const listRestaurants = () => dispatch => _listRestaurants(dispatch);
 
-// logout user
+export const registerUser = registrationInfo => dispatch =>
+  _registerUser(registrationInfo, dispatch);
+
 export const logoutUser = user => {
   return {
     type: "LOGOUT_USER",
     payload: user
   };
 };
-
-/* memoized --> This function will only be called once. */
-const _listRestaurants = _.memoize(async dispatch => {
-  const response = await apiConnector.getAllRestaurants();
-  dispatch({ type: "LIST_RESTAURANTS", payload: response });
-});
-// list all restaurants
-export const listRestaurants = () => dispatch => _listRestaurants(dispatch);
+export const loginUser = user => {
+  return {
+    type: "LOGIN_USER",
+    payload: user
+  };
+};

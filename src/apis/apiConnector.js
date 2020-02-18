@@ -15,21 +15,24 @@ let apiURL = "http://localhost:8000/api/v1/";
 export default {
   // register route
   registerUser: async registrationInfo => {
+    console.log("registrationInfo:", registrationInfo);
     try {
       const response = await fetch(apiURL + "users/register", {
         method: "POST",
         body: JSON.stringify(registrationInfo),
-        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         }
       });
       console.log("response:", response);
-      // const parsedResponse = await response.json();
-      // console.log("parsedResponse:", parsedResponse);
-      // return parsedResponse;
-    } catch (error) {}
+      const parsedResponse = await response.json();
+      console.log("parsedResponse.data:", parsedResponse.data);
+      return parsedResponse;
+    } catch (error) {
+      console.log("error:", error);
+    }
   },
+
   // login route
 
   // index (restaurants) route
