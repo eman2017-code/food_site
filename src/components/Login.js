@@ -20,10 +20,10 @@ class Login extends React.Component {
 	                     <Row>
 	                        <Col md={9} lg={8} className="mx-auto pl-5 pr-5">
 	                           <h3 className="login-heading mb-4">Welcome back!</h3>
-	                           <Form>
+	                           <Form >
 	                              <div className="form-label-group">
 	                                 <Form.Control type="email" id="inputEmail" placeholder="Email address" />
-	                                 <Form.Label htmlFor="inputEmail">Email address / Mobile</Form.Label>
+	                                 <Form.Label htmlFor="inputEmail">Email address</Form.Label>
 	                              </div>
 	                              <div className="form-label-group">
 	                                 <Form.Control type="password" id="inputPassword" placeholder="Password" />
@@ -31,12 +31,17 @@ class Login extends React.Component {
 	                              </div>
 	                              <Form.Check  
 	                              	className='mb-3'
-							        custom
-							        type="checkbox"
-							        id="custom-checkbox"
-							        label="Remember password"
-							      />
-	                              <Link to="/" className="btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold mb-2">Sign in</Link>
+							        						custom
+							        						type="checkbox"
+							        						id="custom-checkbox"
+							        						label="Remember password"
+							      						/>
+																<button 
+																	className="btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+																	type="submit">
+																		Sign In
+																</button>
+	                              <Link to="/" >Sign in</Link>
 	                              <div className="text-center pt-3">
 	                                 Don’t have an account? <Link className="font-weight-bold" to="/register">Sign Up</Link>
 	                              </div>
@@ -62,7 +67,7 @@ class Login extends React.Component {
     }
 }
 
-Login.PropTypes = {
+Login.propTypes = {
 	isLoggedIn: PropTypes.bool.isRequired,
   	loginUser: PropTypes.func
 }
@@ -74,4 +79,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default Login;
+export default connect(mapStateToProps, { loginUser })(Login);
