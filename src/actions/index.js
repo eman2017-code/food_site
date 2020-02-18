@@ -10,11 +10,21 @@ export const loginUser = user => {
 };
 
 // register user
-export const registerUser = user => {
-  return {
-    type: "REGISTER_USER",
-    payload: user
-  };
+export const registerUser = registrationInfo => async dispatch => {
+  // makes the api call to register
+  const registrationResponse = await apiConnector.registerUser(
+    registrationInfo
+  );
+  console.log("registrationResponse:", registrationResponse);
+  const userInfo = registrationResponse.data;
+  console.log("userInfo:", userInfo);
+
+  if (registrationResponse.status.code === 201) {
+    dispatch({
+      type: "REGISTER_USER",
+      payload: userInfo
+    });
+  }
 };
 
 // logout user
@@ -25,7 +35,7 @@ export const logoutUser = user => {
   };
 };
 
-/* memoized --> This function will only be called once. O(n) */
+/* memoized --> This function will only be called once. */
 const _listRestaurants = _.memoize(async dispatch => {
   const response = await apiConnector.getAllRestaurants();
   dispatch({ type: "LIST_RESTAURANTS", payload: response });

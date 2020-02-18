@@ -46,12 +46,9 @@ class List extends React.Component {
                     <Dropdown.Item href="#/rating">Rating</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-                {/* <h4 className="font-weight-bold mt-0 mb-3">
-                  OFFERS{" "} */}
                 <small className="h6 mb-0 ml-2">
                   {`${this.props.restaurants.length} Restaurants!`}
                 </small>
-                {/* </h4> */}
               </Col>
             </Row>
             <Row>

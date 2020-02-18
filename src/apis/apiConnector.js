@@ -16,7 +16,7 @@ export default {
   // register route
   registerUser: async registrationInfo => {
     try {
-      const response = await fetch(apiURL + "users/register/", {
+      const response = await fetch(apiURL + "users/register", {
         method: "POST",
         body: JSON.stringify(registrationInfo),
         credentials: "include",
@@ -24,13 +24,15 @@ export default {
           "Content-Type": "application/json"
         }
       });
-      const parsedResponse = await response.json();
-      console.log("parsedResponse:", parsedResponse);
-      return parsedResponse;
+      console.log("response:", response);
+      // const parsedResponse = await response.json();
+      // console.log("parsedResponse:", parsedResponse);
+      // return parsedResponse;
     } catch (error) {}
   },
   // login route
-  // index route (restaurants)
+
+  // index (restaurants) route
   getAllRestaurants: async () => {
     const response = await fetch(apiURL + "restaurants/");
     const parsedResponse = await response.json();

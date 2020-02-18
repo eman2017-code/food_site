@@ -3,19 +3,19 @@ const initialState = {
   userInfo: {}
 };
 
-export default function(state = initialState, action) {
+export default function usersReducer(state = initialState, action) {
   switch (action.type) {
     case "LOGIN_USER":
       return {
         ...state,
         isLoggedIn: true,
-        userInfo: action.userInfo
+        userInfo: action.payload
       };
     case "REGISTER_USER":
       return {
         ...state,
         isLoggedIn: true,
-        userInfo: action.userInfo
+        userInfo: action.payload
       };
     case "LOGOUT_USER":
       return {

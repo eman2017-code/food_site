@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { loginUser } from "../../actions";
 import {
   Navbar,
   Nav,
@@ -16,9 +15,8 @@ import CartDropdownItem from "../cart/CartDropdownItem";
 import Icofont from "react-icofont";
 
 class Header extends React.Component {
-  constructor(props) {
-    console.log("props in Header Component:", props);
-    super(props);
+  constructor() {
+    super();
     this.state = {
       isNavExpanded: false
     };
@@ -257,7 +255,11 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { isLoggedIn: state.user.isLoggedIn };
+  console.log("state:", state);
+  return {
+    isLoggedIn: state.user.isLoggedIn,
+    userInfo: state.user.userInfo
+  };
 };
 
-export default connect(mapStateToProps, { loginUser })(Header);
+export default connect(mapStateToProps)(Header);
