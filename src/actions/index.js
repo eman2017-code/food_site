@@ -1,11 +1,13 @@
 import _ from "lodash";
 import apiConnector from "../apis/apiConnector";
 
+
 /* memoized */
 const _registerUser = _.memoize(async (registrationInfo, dispatch) => {
   const response = await apiConnector.registerUser(registrationInfo);
   console.log("response:", response);
   const userInfo = response.data;
+
   if (response.status.code === 201)
     dispatch({ type: "REGISTER_USER", payload: userInfo });
 });
@@ -16,10 +18,11 @@ const _listRestaurants = _.memoize(async dispatch => {
 });
 
 /* functions being imported that execute */
-export const listRestaurants = () => dispatch => _listRestaurants(dispatch);
 
-export const registerUser = registrationInfo => dispatch =>
-  _registerUser(registrationInfo, dispatch);
+export const registerUser = registrationInfo => dispatch => 
+_registerUser(registrationInfo, dispatch);
+
+export const listRestaurants = () => dispatch => _listRestaurants(dispatch);
 
 export const logoutUser = user => {
   return {
@@ -27,7 +30,10 @@ export const logoutUser = user => {
     payload: user
   };
 };
+
 export const loginUser = user => {
+    
+
   return {
     type: "LOGIN_USER",
     payload: user

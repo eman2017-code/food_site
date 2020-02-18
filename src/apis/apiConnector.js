@@ -13,6 +13,7 @@ let apiURL = "http://localhost:8000/api/v1/";
 // }
 
 export default {
+
   // register route
   registerUser: async registrationInfo => {
     console.log("registrationInfo:", registrationInfo);
@@ -33,7 +34,12 @@ export default {
     }
   },
 
-  // login route
+  // login api call
+  loginUser: async loginInfo => {
+    console.log('in the login api call');
+    
+  },
+
 
   // index (restaurants) route
   getAllRestaurants: async () => {

@@ -1,7 +1,11 @@
 import React from 'react';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { loginUser } from "../actions";
 import {Link} from 'react-router-dom';
 import {Row,Col,Container,Form,Button} from 'react-bootstrap';
 import FontAwesome from './common/FontAwesome';
+
 
 class Login extends React.Component {
 
@@ -56,6 +60,11 @@ class Login extends React.Component {
 	      </Container>
     	);
     }
+}
+
+Login.PropTypes = {
+	isLoggedIn: PropTypes.bool.isRequired,
+  	loginUser: PropTypes.func
 }
 
 
