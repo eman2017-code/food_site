@@ -25,6 +25,7 @@ import Icofont from "react-icofont";
 
 class Detail extends React.Component {
   constructor(props, context) {
+    console.log("props:", props);
     super(props, context);
 
     this.state = {
@@ -55,13 +56,9 @@ class Detail extends React.Component {
   }
 
   hideAddressModal = () => this.setState({ showAddressModal: false });
-  getQty = ({ id, quantity }) => {
-    //console.log(id);
-    //console.log(quantity);
-  };
+  getQty = ({ id, quantity }) => {};
   getStarValue = ({ value }) => {
     console.log(value);
-    //console.log(quantity);
   };
 
   render() {
@@ -794,7 +791,7 @@ class Detail extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state in Detail Component:", state);
+  console.log("state in Detail Component:", state.restaurants.apiKey);
   return { restaurant: state };
 };
 

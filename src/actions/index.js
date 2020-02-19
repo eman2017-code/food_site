@@ -17,14 +17,12 @@ const _fetchSingleRestaurant = _.memoize(
     const response = await apiConnector.getIndividualRestaurant(
       restaurant_api_key
     );
-    const restaurantResponse = response.data;
-
-    if (response.staus.code === 200) {
-      dispatch({
-        type: "RECIEVE_SINGLE_RESTAURANT",
-        payload: restaurantResponse
-      });
-    }
+    const restaurantResponse = response.restaurant;
+    console.log("restaurantResponse:", restaurantResponse);
+    dispatch({
+      type: "RECIEVE_SINGLE_RESTAURANT",
+      payload: restaurantResponse
+    });
   }
 );
 

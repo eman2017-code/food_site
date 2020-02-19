@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { fetchSingleRestaurant } from "../../actions";
 import { Link } from "react-router-dom";
 import { Image, Badge } from "react-bootstrap";
 import PropTypes from "prop-types";
@@ -6,7 +8,6 @@ import Icofont from "react-icofont";
 
 class CardItem extends React.Component {
   render() {
-    console.log("this.props in CardItem:", this.props);
     return (
       <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
         <div className="list-card-image">
@@ -22,11 +23,15 @@ class CardItem extends React.Component {
           <div
             className={`favourite-heart position-absolute ${this.props.favIcoIconColor}`}
           >
-            <Link to={this.props.linkUrl}>
-              <Icofont icon="heart" />
-            </Link>
+            {/* -- include a toast message telling user that they favorited a restaurant */}
+            <Icofont icon="heart" />
           </div>
-          <Link to={this.props.linkUrl}>
+          <Link
+            to={`detail/${this.props.apiKey}`}
+            onClick={() => {
+              this.props.fetchSingleRestaurant(this.props.apiKey);
+            }}
+          >
             <Image
               src={this.props.image}
               className={this.props.imageClass}
@@ -37,7 +42,7 @@ class CardItem extends React.Component {
         <div className="p-3 position-relative">
           <div className="list-card-body">
             <h6 className="mb-1">
-              <Link to={this.props.linkUrl} className="text-black">
+              <Link to={`detail/${this.props.apiKey}`} className="text-black">
                 {this.props.title}
               </Link>
             </h6>
@@ -88,7 +93,6 @@ CardItem.propTypes = {
   imageAlt: PropTypes.string,
   image: PropTypes.string.isRequired,
   imageClass: PropTypes.string,
-  linkUrl: PropTypes.string.isRequired,
   offerText: PropTypes.string,
   offerColor: PropTypes.string,
   subTitle: PropTypes.string,
@@ -112,4 +116,7 @@ CardItem.defaultProps = {
   rating: ""
 };
 
-export default CardItem;
+const mapStateToProps = state => {
+  return { isLoggedIn: state.user.isLoggedIn };
+};
+export default connect(mapStateToProps, { fetchSingleRestaurant })(CardItem);

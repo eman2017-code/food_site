@@ -360,7 +360,6 @@ class List extends React.Component {
                           imageAlt="Product"
                           image={restaurant.logoUrl}
                           imageClass="img-fluid item-img"
-                          linkUrl="detail"
                           offerText="65% off | Use Coupon OSAHAN50"
                           time={`${restaurant.minWaitTime} - ${restaurant.maxWaitTime} minutes`}
                           phoneNumber={restaurant.phone}
@@ -388,7 +387,6 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state in List Component:", state);
   return { restaurants: state.restaurants };
 };
 

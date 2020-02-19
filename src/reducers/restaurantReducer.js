@@ -1,4 +1,5 @@
 export default function restaurantReducer(state = [], action) {
+  console.log("action:", action);
   switch (action.type) {
     case "LIST_RESTAURANTS":
       return action.payload;
