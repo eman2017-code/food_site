@@ -81,7 +81,7 @@ export const getRestaurantsNearBy = address => async dispatch => {
 export const setFoodTypeFilters = foodType => dispatch => {
   console.log('food types in action:', foodType);
   dispatch({
-    type: 'SET_FOOD_TYPE_FILTERS',
+    type: 'SET_FOOD_TYPE_FILTER',
     payload: foodType
   });
 }

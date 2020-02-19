@@ -26,11 +26,27 @@ class List extends React.Component {
   // when a cuisine type checkbox is this function adds it the the filtersReducer
   handleCuisineTypeClicked = (e) => {
     const foodType = e.target.name;
-    this.props.setFoodTypeFilters(foodType);
+
+    // if the checkbox is already clicked
+    if (this.props.filters.foodTypes.includes(foodType)) {
+      console.log('filter already exists');
+
+      // removes the food type from the foodTypes filter
+
+    // otherise if the checkbox is not already clicked
+    } else {
+      console.log('filter does not already exists');
+
+      // adds the food type to the foodTypes filter
+      this.props.setFoodTypeFilters(foodType);
+    }
   }
 
   render() {
+    console.log('current food type filters:', this.props.filters.foodTypes);
+
     const { restaurants } = this.props;
+
     return (
       <>
         <PageTitle
