@@ -16,7 +16,7 @@ export default function filtersReducer(state = initialState, action) {
 
         // removes a food type from the array of food types the user wants to filter restaurants by
         case 'REMOVE_FOOD_TYPE_FILTER':
-            const newFoodTypes = state.foodTypes.filter.filter(foodType => foodType != action.foodType);
+            const newFoodTypes = state.foodTypes.filter(foodType => foodType != action.payload);
             return {
                 ...state,
                 foodTypes: newFoodTypes

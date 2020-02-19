@@ -29,15 +29,10 @@ class List extends React.Component {
 
     // if the checkbox is already clicked
     if (this.props.filters.foodTypes.includes(foodType)) {
-      console.log('filter already exists');
-
-      // removes the food type from the foodTypes filter
+      this.props.removeFoodTypeFilter(foodType);
 
     // otherise if the checkbox is not already clicked
     } else {
-      console.log('filter does not already exists');
-
-      // adds the food type to the foodTypes filter
       this.props.setFoodTypeFilter(foodType);
     }
   }
@@ -382,4 +377,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, { listRestaurants, setFoodTypeFilter })(List);
+export default connect(mapStateToProps, { listRestaurants, setFoodTypeFilter, removeFoodTypeFilter })(List);
