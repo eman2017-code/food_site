@@ -354,6 +354,7 @@ class List extends React.Component {
                     <div className="grid-container" key={i}>
                       <div className="grid-item">
                         <CardItem
+                          apiKey={restaurant.apiKey}
                           title={restaurant.name}
                           subTitle={restaurant.city}
                           imageAlt="Product"
@@ -387,6 +388,7 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log("state in List Component:", state);
   return { restaurants: state.restaurants };
 };
 

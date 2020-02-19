@@ -6,6 +6,7 @@ import Icofont from "react-icofont";
 
 class CardItem extends React.Component {
   render() {
+    console.log("this.props in CardItem:", this.props);
     return (
       <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
         <div className="list-card-image">
@@ -25,13 +26,6 @@ class CardItem extends React.Component {
               <Icofont icon="heart" />
             </Link>
           </div>
-          {this.props.showPromoted ? (
-            <div className="member-plan position-absolute">
-              <Badge variant={this.props.promotedVariant}>Promoted</Badge>
-            </div>
-          ) : (
-            ""
-          )}
           <Link to={this.props.linkUrl}>
             <Image
               src={this.props.image}
@@ -89,6 +83,7 @@ class CardItem extends React.Component {
 }
 
 CardItem.propTypes = {
+  apiKey: PropTypes.string,
   title: PropTypes.string.isRequired,
   imageAlt: PropTypes.string,
   image: PropTypes.string.isRequired,
