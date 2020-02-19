@@ -9,14 +9,39 @@ import FontAwesome from './common/FontAwesome';
 
 class Login extends React.Component {
 
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			// i create a formData object in state so the form data can be submitted to the 
+			// login action easily as one entire object
+			formData: {
+				email: '',
+				password: '',
+			},
+			isLoading: ''
+		}
+	}
+
+	// handles changes to the forms inputs 
+	handleChange = (e) => {
+		this.setState({
+			formData: {
+				...this.state.formData,
+				[e.target.name]: e.target.value
+			}
+		});
+		console.log(this.state.formData);
+	}
+
 	handleSubmit = (e) => {
 		e.preventDefault();
 		console.log('Login form submitted');
+
+		this.props.loginUser(this.state.formData);
 	}
 
 	render() {
-
-
     	return (
     	  <Container fluid className='bg-white'>
 	         <Row>
@@ -29,11 +54,23 @@ class Login extends React.Component {
 	                           <h3 className="login-heading mb-4">Welcome back!</h3>
 	                           <Form onSubmit={this.handleSubmit}>
 	                              <div className="form-label-group">
-	                                 <Form.Control type="email" id="inputEmail" placeholder="Email address" />
+																	 <Form.Control 
+																		 value={this.state.formData.email}
+																		 onChange={this.handleChange}
+																		 name="email"
+																		 type="email"
+																		 id="inputEmail" 
+																		 placeholder="Email address" />
 	                                 <Form.Label htmlFor="inputEmail">Email address</Form.Label>
 	                              </div>
 	                              <div className="form-label-group">
-	                                 <Form.Control type="password" id="inputPassword" placeholder="Password" />
+																	 <Form.Control 
+																	   value={this.state.formData.password}
+																		 onChange={this.handleChange}
+																		 name="password"
+																		 type="password" 
+																		 id="inputPassword" 
+																		 placeholder="Password" />
 	                                 <Form.Label htmlFor="inputPassword">Password</Form.Label>
 	                              </div>
 	                              <Form.Check  
@@ -76,7 +113,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
 	isLoggedIn: PropTypes.bool.isRequired,
-  	loginUser: PropTypes.func
+  loginUser: PropTypes.func
 }
 
 const mapStateToProps = state => {
