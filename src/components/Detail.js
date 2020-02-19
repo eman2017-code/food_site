@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { fetchSingleRestaurantMenu } from "../actions";
 import {
   Row,
   Col,
@@ -777,4 +778,4 @@ const mapStateToProps = state => {
   return { restaurant: state.restaurants };
 };
 
-export default connect(mapStateToProps)(Detail);
+export default connect(mapStateToProps, { fetchSingleRestaurantMenu })(Detail);
