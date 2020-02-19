@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { loginUser } from "../actions";
 import { Link, Redirect } from 'react-router-dom';
-import { Row, Col, Container, Form, Button } from 'react-bootstrap';
+import { Row, Col, Container, Form, Button, Spinner } from 'react-bootstrap';
 import FontAwesome from './common/FontAwesome';
 
 
@@ -13,13 +13,13 @@ class Login extends React.Component {
 		super(props);
 
 		this.state = {
-			// i create a formData object in state so the form data can be submitted to the 
+			// created a formData object in state so the form data can be submitted to the 
 			// login action easily as one entire object
 			formData: {
 				email: '',
 				password: '',
 			},
-			isLoading: ''
+			isLoading: false
 		}
 	}
 
@@ -33,21 +33,54 @@ class Login extends React.Component {
 		});
 	}
 
-	handleSubmit = (e) => {
+	// handles the login form submission
+	handleSubmit = async (e) => {
 		e.preventDefault();
 
+		// shows the loading icon
+		this.setState({ isLoading: true });
+
 		// calls the action to log in the user
-		this.props.loginUser(this.state.formData);
+		await this.props.loginUser(this.state.formData);
+
+		// hides the loading icon after the login response is received
+		this.setState({ isLoading: false });
 	}
 
 	render() {
 
-			// if the user logs in successfully, then redirect them
+			// if the user logs in successfully, then redirect they are redirected
 			if (this.props.isLoggedIn) {
 				return (
 					<Redirect to='/listing' />
 				)
 			}
+
+				// if the form was submitted and the app is waiting for the api respoonse,
+				// then this button will a loading icon will be rendered		
+				let signInButton;		
+				if (this.state.isLoading) {
+						signInButton = 
+						<button 
+							className="btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+							type="submit">
+								<Spinner
+      						as="span"
+      						animation="border"
+      						size="sm"
+      						role="status"
+      						aria-hidden="true"
+    						/>
+						</button>
+				// if the form is not waiting for the api response, then the normal button will be rendered
+				} else {
+					signInButton = 
+						<button 
+							className="btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+							type="submit">
+								Sign In
+						</button>
+				}
 
     	return (
     	  <Container fluid className='bg-white'>
@@ -87,12 +120,9 @@ class Login extends React.Component {
 							        						id="custom-checkbox"
 							        						label="Remember password"
 							      						/>
-																<button 
-																	className="btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
-																	type="submit">
-																		Sign In
-																</button>
-	                              <Link to="/" >Sign in</Link>
+
+																{ signInButton }
+
 	                              <div className="text-center pt-3">
 	                                 Don’t have an account? <Link className="font-weight-bold" to="/register">Sign Up</Link>
 	                              </div>

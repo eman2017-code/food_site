@@ -44,7 +44,6 @@ export default {
       }
     });
     const parsedLoginResponse = await loginResponse.json();
-    
     return parsedLoginResponse;
   },
 
