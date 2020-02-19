@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { getRestaurantsNearBy } from "../../actions";
 import { Link } from "react-router-dom";
 import { Row, Col, Container, Form, Button } from "react-bootstrap";
 import Icofont from "react-icofont";
@@ -29,7 +30,7 @@ class TopSearch extends React.Component {
   // handles the form submission 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('form submitted');
+    this.props.getRestaurantsNearBy(this.state.address);
   }
 
   render() {
@@ -155,4 +156,4 @@ const options2 = {
 
 
 
-export default connect(null, {})(TopSearch);
+export default connect(null, { getRestaurantsNearBy })(TopSearch);
