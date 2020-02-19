@@ -29,7 +29,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <ToastContainer autoClose={2000} position={toast.POSITION.CENTER_TOP} />
+        <ToastContainer autoClose={2000} position={toast.POSITION.TOP_CENTER} />
         {this.props.location.pathname !== "/login" &&
         this.props.location.pathname !== "/register" ? (
           <Header />

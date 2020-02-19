@@ -32,6 +32,8 @@ export const logoutUser = user => {
   };
 };
 
+
+// actions for loggin in a user
 export const loginUser = loginInfo => async dispatch => {
   const loginResponse = await apiConnector.loginUser(loginInfo);
 
@@ -43,14 +45,11 @@ export const loginUser = loginInfo => async dispatch => {
     });
 
     // notifies the user with a welcome message
-    console.log('login response data:', loginResponse.data)
-    const firstName = loginResponse.data.first_name;
-    toast.info('Welcome,', firstName);
+    const toastMessage = 'Welcome back, ' + loginResponse.data.first_name;
+    toast(toastMessage);
 
   // otherwise if the login failed
   } else {
-    console.log('login failed');
-    
     // * TODO: Somehow show a notification to the user that the login failed 
     toast.error('Email or password is incorrect', {
       position: toast.POSITION.TOP_CENTER
