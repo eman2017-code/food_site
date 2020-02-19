@@ -23,6 +23,7 @@ class List extends React.Component {
   }
 
   render() {
+    const { restaurants } = this.props;
     return (
       <>
         <PageTitle
@@ -387,7 +388,7 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { restaurants: state.restaurants };
+  return { restaurants: state.restaurants.restaurants };
 };
 
 export default connect(mapStateToProps, { listRestaurants })(List);

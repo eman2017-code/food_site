@@ -62,6 +62,7 @@ class Detail extends React.Component {
 
   render() {
     const { restaurant } = this.props;
+    console.log("this.props in Detail Component:", restaurant);
     return (
       <>
         <section className="restaurant-detailed-banner">
@@ -774,6 +775,7 @@ class Detail extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log("state in Detail Component:", state);
   return { restaurant: state.restaurants };
 };
 
