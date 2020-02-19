@@ -51,6 +51,9 @@ export default {
   getAllRestaurants: async () => {
     const response = await fetch(apiURL + "restaurants/");
     const parsedResponse = await response.json();
+    console.log("parsedResponse:", parsedResponse);
     return parsedResponse.data;
   }
+
+  // show (individual) restaurant route
 };
