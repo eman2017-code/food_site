@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Row, Col, Container, Form, Button } from "react-bootstrap";
 import Icofont from "react-icofont";
@@ -28,7 +30,6 @@ class TopSearch extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     console.log('form submitted');
-        
   }
 
   render() {
@@ -152,4 +153,6 @@ const options2 = {
   autoplayHoverPause: true
 };
 
-export default TopSearch;
+
+
+export default connect(null, {})(TopSearch);
