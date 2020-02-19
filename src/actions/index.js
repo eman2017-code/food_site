@@ -47,12 +47,6 @@ export const loginUser = loginInfo => async dispatch => {
     // notifies the user with a welcome message
     const toastMessage = 'Welcome back, ' + loginResponse.data.first_name;
     toast(toastMessage);
-
-  // otherwise if the login failed
-  } else {
-    // * TODO: Somehow show a notification to the user that the login failed 
-    toast.error('Email or password is incorrect', {
-      position: toast.POSITION.TOP_CENTER
-    });
-  }
+  } 
+  return loginResponse;
 };

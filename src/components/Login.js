@@ -41,14 +41,17 @@ class Login extends React.Component {
 		this.setState({ isLoading: true });
 
 		// calls the action to log in the user
-		await this.props.loginUser(this.state.formData);
+		this.props.loginUser(this.state.formData).then(loginResponse => {
+			if (loginResponse.status.code !== 200) {
+				console.log('login failed');
+			}
+		});
 
 		// hides the loading icon after the login response is received
 		this.setState({ isLoading: false });
 	}
 
 	render() {
-
 			// if the user logs in successfully, then redirect they are redirected
 			if (this.props.isLoggedIn) {
 				return (
