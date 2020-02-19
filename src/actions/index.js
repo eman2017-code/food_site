@@ -31,11 +31,15 @@ export const logoutUser = user => {
   };
 };
 
-export const loginUser = user => {
-    
+export const loginUser = loginInfo => dispatch => {
+  console.log('in loginUser action');  
 
-  return {
-    type: "LOGIN_USER",
-    payload: user
-  };
+  // dispatch({
+
+  // })
+
+  // return {
+  //   type: "LOGIN_USER",
+  //   payload: user
+  // };
 };
