@@ -8,6 +8,15 @@ import ProductBox from "./ProductBox";
 import CategoriesCarousel from "../common/CategoriesCarousel";
 
 class TopSearch extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      address: ''
+    }
+  }
+
   render() {
     return (
       <section className="pt-5 pb-5 homepage-search-block position-relative">
@@ -30,6 +39,7 @@ class TopSearch extends React.Component {
                   <div className="form-row">
                     <Form.Group className="col-lg-7 col-md-7 col-sm-12">
                       <Form.Control
+                        value={this.state.address}
                         type="text"
                         placeholder="Enter your delivery location"
                         size="lg"
