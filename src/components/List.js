@@ -205,7 +205,9 @@ class List extends React.Component {
                               custom
                               type="checkbox"
                               id="custom-cb7"
+                              name="Pizza"
                               label="Pizza"
+                              onClick={this.handleCuisineTypeClicked}
                             />
 
                             <Form.Check
@@ -214,6 +216,7 @@ class List extends React.Component {
                               id="custom-cb8"
                               name="Healthy"
                               label="Healthy"
+                              onClick={this.handleCuisineTypeClicked}
                             />
 
                             <Form.Check
@@ -222,6 +225,7 @@ class List extends React.Component {
                               id="custom-cb9"
                               name="Vegetarian"
                               label="Vegetarian"
+                              onClick={this.handleCuisineTypeClicked}
                             />
 
                             <Form.Check
@@ -230,6 +234,7 @@ class List extends React.Component {
                               id="custom-cb10"
                               name="Chinese"
                               label="Chinese"
+                              onClick={this.handleCuisineTypeClicked}
                             />
 
                             <Form.Check
@@ -238,6 +243,7 @@ class List extends React.Component {
                               id="custom-cb11"
                               name="Hamburgers"
                               label="Hamburgers"
+                              onClick={this.handleCuisineTypeClicked}
                             />
 
                             <Form.Check
@@ -246,6 +252,7 @@ class List extends React.Component {
                               id="custom-cb12"
                               name="Dessert"
                               label="Dessert"
+                              onClick={this.handleCuisineTypeClicked}
                             />
 
                             <Form.Check
@@ -254,6 +261,7 @@ class List extends React.Component {
                               id="custom-cb13"
                               name="Chicken"
                               label="Chicken"
+                              onClick={this.handleCuisineTypeClicked}
                             />
 
                             <Form.Check
@@ -262,6 +270,7 @@ class List extends React.Component {
                               id="custom-cb14"
                               name="Indian"
                               label="Indian"
+                              onClick={this.handleCuisineTypeClicked}
                             />
                             <div className="mt-2">
                               <Link to="#" className="link">
