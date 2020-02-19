@@ -36,7 +36,6 @@ export default {
 
   // makes an api call to attempt to login a user
   loginUser: async loginInfo => {
-    console.log('in the login api call');
     const loginResponse = await fetch(apiURL + 'users/login', {
       method: 'POST',
       body: JSON.stringify(loginInfo),
@@ -45,7 +44,6 @@ export default {
       }
     });
     const parsedLoginResponse = await loginResponse.json();
-    console.log('login response in apiConnector:', parsedLoginResponse);
     
     return parsedLoginResponse;
   },

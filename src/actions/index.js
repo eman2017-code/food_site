@@ -32,9 +32,6 @@ export const logoutUser = user => {
 };
 
 export const loginUser = loginInfo => async dispatch => {
-  console.log('in loginUser action');  
-
   const loginResponse = await apiConnector.loginUser(loginInfo);
-  console.log('login response in the action:', loginResponse);
-
+  
 };

@@ -31,7 +31,6 @@ class Login extends React.Component {
 				[e.target.name]: e.target.value
 			}
 		});
-		console.log(this.state.formData);
 	}
 
 	handleSubmit = (e) => {
