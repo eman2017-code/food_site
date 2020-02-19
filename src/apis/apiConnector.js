@@ -46,7 +46,12 @@ export default {
     const response = await fetch(apiURL + "restaurants/");
     const parsedResponse = await response.json();
     return parsedResponse.data;
-  }
+  },
 
   // show (individual) restaurant route
+  getIndividualRestaurant: async restaurant_api_key => {
+    const response = await fetch(apiURL + `restaurants/${restaurant_api_key}`);
+    const parsedResponse = await response.json();
+    return parsedResponse.data;
+  }
 };
