@@ -10,14 +10,12 @@ const _registerUser = _.memoize(async (registrationInfo, dispatch) => {
     dispatch({ type: "REGISTER_USER", payload: userInfo });
 });
 
-const _listRestaurants = _.memoize(async dispatch => {
+export const listRestaurants = () => async dispatch => {
   const response = await apiConnector.getAllRestaurants();
   dispatch({ type: "LIST_RESTAURANTS", payload: response });
-});
+};
 
-/* functions being imported that execute */
-export const listRestaurants = () => dispatch => _listRestaurants(dispatch);
-
+/* functions that execute */
 export const registerUser = registrationInfo => dispatch =>
   _registerUser(registrationInfo, dispatch);
 
