@@ -75,3 +75,13 @@ export const getRestaurantsNearBy = address => async dispatch => {
     payload: foundRestaurants
   });
 }
+
+
+// action for applying food type filters to restaurants
+export const setFoodTypeFilters = foodType => dispatch => {
+  console.log('food types in action:', foodType);
+  dispatch({
+    type: 'SET_FOOD_TYPE_FILTERS',
+    payload: foodType
+  });
+}

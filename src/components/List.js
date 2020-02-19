@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { listRestaurants } from "../actions";
+import { listRestaurants, setFoodTypeFilters } from "../actions";
 import { Link } from "react-router-dom";
 import {
   Row,
@@ -23,9 +23,10 @@ class List extends React.Component {
     this.props.listRestaurants();
   }
 
+  // when a cuisine type checkbox is this function adds it the the filtersReducer
   handleCuisineTypeClicked = (e) => {
-    console.log('cuisine type clicked');
-    console.log('cuisine type label:', e.target.name);
+    const foodType = e.target.name;
+    this.props.setFoodTypeFilters(foodType);
   }
 
   render() {
@@ -358,4 +359,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, { listRestaurants })(List);
+export default connect(mapStateToProps, { listRestaurants, setFoodTypeFilters })(List);
