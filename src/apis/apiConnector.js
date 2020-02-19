@@ -13,10 +13,8 @@ let apiURL = "http://localhost:8000/api/v1/";
 // }
 
 export default {
-
   // register route
   registerUser: async registrationInfo => {
-    console.log("registrationInfo:", registrationInfo);
     try {
       const response = await fetch(apiURL + "users/register", {
         method: "POST",
@@ -25,22 +23,18 @@ export default {
           "Content-Type": "application/json"
         }
       });
-      console.log("response:", response);
       const parsedResponse = await response.json();
-      console.log("parsedResponse.data:", parsedResponse.data);
       return parsedResponse;
-    } catch (error) {
-      console.log("error:", error);
-    }
+    } catch (error) {}
   },
 
   // makes an api call to attempt to login a user
   loginUser: async loginInfo => {
-    const loginResponse = await fetch(apiURL + 'users/login', {
-      method: 'POST',
+    const loginResponse = await fetch(apiURL + "users/login", {
+      method: "POST",
       body: JSON.stringify(loginInfo),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     });
     const parsedLoginResponse = await loginResponse.json();
@@ -51,7 +45,6 @@ export default {
   getAllRestaurants: async () => {
     const response = await fetch(apiURL + "restaurants/");
     const parsedResponse = await response.json();
-    console.log("parsedResponse:", parsedResponse);
     return parsedResponse.data;
   }
 

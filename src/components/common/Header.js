@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link, Redirect } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Navbar,
@@ -255,7 +255,6 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state:", state);
   return {
     isLoggedIn: state.user.isLoggedIn,
     userInfo: state.user.userInfo
