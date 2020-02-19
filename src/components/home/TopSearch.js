@@ -43,6 +43,7 @@ class TopSearch extends React.Component {
 
   render() {
 
+    // redirects user to listing page after form submission to show restaurants near by
     if (this.state.formSubmitted) {
       return (
         <Redirect to='/listing' />

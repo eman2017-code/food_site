@@ -73,6 +73,5 @@ export const getRestaurantsNearBy = address => async dispatch => {
   dispatch({
     type: "LIST_RESTAURANTS",
     payload: foundRestaurants
-  })
-
+  });
 }

@@ -18,6 +18,15 @@ import CardItem from "./common/CardItem";
 import CategoriesCarousel from "./common/CategoriesCarousel";
 
 class List extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      
+    }
+  }
+
   componentDidMount() {
     this.props.listRestaurants();
   }
@@ -160,6 +169,8 @@ class List extends React.Component {
                             </Accordion.Toggle>
                           </h6>
                         </div>
+                        
+                        {/* --- Food Type Filters --- */}
 
                         <Accordion.Collapse eventKey="1">
                           <div className="filters-card-body card-shop-filters">
