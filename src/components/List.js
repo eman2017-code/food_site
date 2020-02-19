@@ -350,7 +350,7 @@ class List extends React.Component {
               </Col>
               <Col md={9}>
                 <CategoriesCarousel />
-                {this.props.restaurants.map((restaurant, i) => {
+                {restaurants.map((restaurant, i) => {
                   return (
                     <div className="grid-container" key={i}>
                       <div className="grid-item">
