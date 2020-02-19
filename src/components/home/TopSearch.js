@@ -17,6 +17,15 @@ class TopSearch extends React.Component {
     }
   }
 
+  // handles form input change
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+
+
   render() {
     return (
       <section className="pt-5 pb-5 homepage-search-block position-relative">
@@ -40,6 +49,8 @@ class TopSearch extends React.Component {
                     <Form.Group className="col-lg-7 col-md-7 col-sm-12">
                       <Form.Control
                         value={this.state.address}
+                        onChange={this.handleChange}
+                        name="address"
                         type="text"
                         placeholder="Enter your delivery location"
                         size="lg"
