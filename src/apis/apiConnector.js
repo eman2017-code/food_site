@@ -34,12 +34,21 @@ export default {
     }
   },
 
-  // login api call
+  // makes an api call to attempt to login a user
   loginUser: async loginInfo => {
     console.log('in the login api call');
+    const loginResponse = await fetch(apiURL + 'users/login', {
+      method: 'POST',
+      body: JSON.stringify(loginInfo),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const parsedLoginResponse = await loginResponse.json();
+    console.log('login response in apiConnector:', parsedLoginResponse);
     
+    return parsedLoginResponse;
   },
-
 
   // index (restaurants) route
   getAllRestaurants: async () => {

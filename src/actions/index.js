@@ -31,15 +31,10 @@ export const logoutUser = user => {
   };
 };
 
-export const loginUser = loginInfo => dispatch => {
+export const loginUser = loginInfo => async dispatch => {
   console.log('in loginUser action');  
 
-  // dispatch({
+  const loginResponse = await apiConnector.loginUser(loginInfo);
+  console.log('login response in the action:', loginResponse);
 
-  // })
-
-  // return {
-  //   type: "LOGIN_USER",
-  //   payload: user
-  // };
 };
