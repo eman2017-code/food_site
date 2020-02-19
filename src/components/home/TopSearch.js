@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Container, Form } from "react-bootstrap";
+import { Row, Col, Container, Form, Button } from "react-bootstrap";
 import Icofont from "react-icofont";
 import OwlCarousel from "react-owl-carousel3";
 import ProductBox from "./ProductBox";
@@ -21,10 +21,15 @@ class TopSearch extends React.Component {
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
-    })
+    });
   }
 
-
+  // handles the form submission 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('form submitted');
+        
+  }
 
   render() {
     return (
@@ -60,12 +65,13 @@ class TopSearch extends React.Component {
                       </Link>
                     </Form.Group>
                     <Form.Group className="col-lg-2 col-md-2 col-sm-12">
-                      <Link
-                        to="listing"
+                      <Button
+                        onClick={this.handleSubmit}
+                        type="submit"
                         className="btn btn-primary btn-block btn-lg btn-gradient"
                       >
                         Search
-                      </Link>
+                      </Button>
                     </Form.Group>
                   </div>
                 </Form>
