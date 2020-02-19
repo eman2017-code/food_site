@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { listRestaurants, setFoodTypeFilters } from "../actions";
+import { listRestaurants, setFoodTypeFilter, removeFoodTypeFilter } from "../actions";
 import { Link } from "react-router-dom";
 import {
   Row,
@@ -38,7 +38,7 @@ class List extends React.Component {
       console.log('filter does not already exists');
 
       // adds the food type to the foodTypes filter
-      this.props.setFoodTypeFilters(foodType);
+      this.props.setFoodTypeFilter(foodType);
     }
   }
 
@@ -382,4 +382,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, { listRestaurants, setFoodTypeFilters })(List);
+export default connect(mapStateToProps, { listRestaurants, setFoodTypeFilter })(List);

@@ -76,12 +76,20 @@ export const getRestaurantsNearBy = address => async dispatch => {
   });
 }
 
-
-// action for applying food type filters to restaurants
-export const setFoodTypeFilters = foodType => dispatch => {
-  console.log('food types in action:', foodType);
+// action for applying food type filters to filter restaurants
+export const setFoodTypeFilter = foodType => dispatch => {
   dispatch({
     type: 'SET_FOOD_TYPE_FILTER',
     payload: foodType
   });
 }
+
+// action for removing food type filters to filter restaurants
+export const removeFoodTypeFilter = foodType => dispatch => {
+  dispatch({
+    type: 'REMOVE_FOOD_TYPE_FILTER',
+    payload: foodType
+  });
+}
+
+
