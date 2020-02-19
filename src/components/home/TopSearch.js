@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getRestaurantsNearBy } from "../../actions";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Row, Col, Container, Form, Button } from "react-bootstrap";
 import Icofont from "react-icofont";
 import OwlCarousel from "react-owl-carousel3";
@@ -16,7 +16,8 @@ class TopSearch extends React.Component {
     super(props);
 
     this.state = {
-      address: ''
+      address: '',
+      formSubmitted: false
     }
   }
 
@@ -28,12 +29,26 @@ class TopSearch extends React.Component {
   }
 
   // handles the form submission 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    this.props.getRestaurantsNearBy(this.state.address);
+
+    // calls the action to get restaurants near the users location
+    await this.props.getRestaurantsNearBy(this.state.address);
+
+    // this causes the user to be redirected to the restaurant listing page
+    this.setState({
+      formSubmitted: true
+    });
   }
 
   render() {
+
+    if (this.state.formSubmitted) {
+      return (
+        <Redirect to='/listing' />
+      )
+    }
+
     return (
       <section className="pt-5 pb-5 homepage-search-block position-relative">
         <div className="banner-overlay"></div>
