@@ -61,7 +61,7 @@ class Detail extends React.Component {
   };
 
   render() {
-    const { restaurant } = this.props;
+    const { restaurant } = this.props.restaurant;
     return (
       <>
         <section className="restaurant-detailed-banner">
@@ -69,7 +69,7 @@ class Detail extends React.Component {
             <Image
               fluid
               className="cover"
-              src="/img/mall-dedicated-banner.png"
+              src={"/img/mall-dedicated-banner.png"}
             />
           </div>
           <div className="restaurant-detailed-header">
@@ -81,7 +81,7 @@ class Detail extends React.Component {
                       fluid
                       className="mr-3 float-left"
                       alt="osahan"
-                      src="/img/1.jpg"
+                      src={restaurant.logoUrl}
                     />
                     <h2 className="text-white">{restaurant.name}</h2>
                     <p className="text-white mb-1">

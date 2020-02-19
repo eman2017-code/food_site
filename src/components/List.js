@@ -23,6 +23,7 @@ class List extends React.Component {
   }
 
   render() {
+    const { restaurants } = this.props;
     return (
       <>
         <PageTitle
@@ -349,7 +350,7 @@ class List extends React.Component {
               </Col>
               <Col md={9}>
                 <CategoriesCarousel />
-                {this.props.restaurants.map((restaurant, i) => {
+                {restaurants.map((restaurant, i) => {
                   return (
                     <div className="grid-container" key={i}>
                       <div className="grid-item">
@@ -387,7 +388,7 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { restaurants: state.restaurants };
+  return { restaurants: state.restaurants.restaurants };
 };
 
 export default connect(mapStateToProps, { listRestaurants })(List);
