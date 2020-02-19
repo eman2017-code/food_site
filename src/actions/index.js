@@ -67,10 +67,12 @@ export const loginUser = loginInfo => async dispatch => {
 
 // action for getting all of the restaurants near a certain delivery address
 export const getRestaurantsNearBy = address => async dispatch => {
-  console.log('in getRestaurantsNearMe action');       
-
   const response = await apiConnector.getRestaurantsNearBy(address);
-
+  const foundRestaurants = response.restaurants;
   
+  dispatch({
+    type: "LIST_RESTAURANTS",
+    payload: foundRestaurants
+  })
 
 }
