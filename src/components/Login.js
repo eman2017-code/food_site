@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { loginUser } from "../actions";
-import {Link} from 'react-router-dom';
-import {Row,Col,Container,Form,Button} from 'react-bootstrap';
+import { Link, Redirect } from 'react-router-dom';
+import { Row, Col, Container, Form, Button } from 'react-bootstrap';
 import FontAwesome from './common/FontAwesome';
 
 
@@ -38,10 +38,17 @@ class Login extends React.Component {
 
 		// calls the action to log in the user
 		this.props.loginUser(this.state.formData);
-		console.log('after api call:', this.props.isLoggedIn)
 	}
 
 	render() {
+
+			// if the user logs in successfully, then redirect them
+			if (this.props.isLoggedIn) {
+				return (
+					<Redirect to='/listing' />
+				)
+			}
+
     	return (
     	  <Container fluid className='bg-white'>
 	         <Row>
