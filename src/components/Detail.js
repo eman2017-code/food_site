@@ -25,7 +25,6 @@ import Icofont from "react-icofont";
 
 class Detail extends React.Component {
   constructor(props, context) {
-    console.log("props:", props);
     super(props, context);
 
     this.state = {
@@ -62,6 +61,7 @@ class Detail extends React.Component {
   };
 
   render() {
+    const { restaurant } = this.props;
     return (
       <>
         <section className="restaurant-detailed-banner">
@@ -791,7 +791,6 @@ class Detail extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state in Detail Component:", state.restaurants.apiKey);
   return { restaurant: state };
 };
 

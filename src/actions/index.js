@@ -18,7 +18,6 @@ const _fetchSingleRestaurant = _.memoize(
       restaurant_api_key
     );
     const restaurantResponse = response.restaurant;
-    console.log("restaurantResponse:", restaurantResponse);
     dispatch({
       type: "RECIEVE_SINGLE_RESTAURANT",
       payload: restaurantResponse
