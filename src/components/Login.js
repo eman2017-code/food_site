@@ -19,7 +19,9 @@ class Login extends React.Component {
 				email: '',
 				password: '',
 			},
-			isLoading: false
+			isLoading: false,
+			formError: false,
+			formErrorMsg: ''
 		}
 	}
 
@@ -41,14 +43,18 @@ class Login extends React.Component {
 		this.setState({ isLoading: true });
 
 		// calls the action to log in the user
-		this.props.loginUser(this.state.formData).then(loginResponse => {
-			if (loginResponse.status.code !== 200) {
-				console.log('login failed');
-			}
-		});
+		const loginResponse = await this.props.loginUser(this.state.formData);
 
 		// hides the loading icon after the login response is received
 		this.setState({ isLoading: false });
+
+		// if there was an error logging in then show the error on the form
+		if (loginResponse.status.code !== 200) {
+			this.setState({
+				formError: true,
+				formErrorMsg: loginResponse.status.message
+			})	
+		}
 	}
 
 	render() {
@@ -96,6 +102,10 @@ class Login extends React.Component {
 	                        <Col md={9} lg={8} className="mx-auto pl-5 pr-5">
 	                           <h3 className="login-heading mb-4">Welcome back!</h3>
 	                           <Form onSubmit={this.handleSubmit}>
+
+																{/* form error message which is show if there are any errors */}
+																{ this.state.formError ? <p className="text-danger">{this.state.formErrorMsg}</p> : null }
+																
 	                              <div className="form-label-group">
 																	 <Form.Control 
 																		 value={this.state.formData.email}
