@@ -201,6 +201,7 @@ class List extends React.Component {
                               custom
                               type="checkbox"
                               id="custom-cb8"
+                              name="Healthy"
                               label="Healthy"
                             />
 
@@ -208,6 +209,7 @@ class List extends React.Component {
                               custom
                               type="checkbox"
                               id="custom-cb9"
+                              name="Vegetarian"
                               label="Vegetarian"
                             />
 
@@ -215,6 +217,7 @@ class List extends React.Component {
                               custom
                               type="checkbox"
                               id="custom-cb10"
+                              name="Chinese"
                               label="Chinese"
                             />
 
@@ -222,6 +225,7 @@ class List extends React.Component {
                               custom
                               type="checkbox"
                               id="custom-cb11"
+                              name="Hamburgers"
                               label="Hamburgers"
                             />
 
@@ -229,6 +233,7 @@ class List extends React.Component {
                               custom
                               type="checkbox"
                               id="custom-cb12"
+                              name="Dessert"
                               label="Dessert"
                             />
 
@@ -236,6 +241,7 @@ class List extends React.Component {
                               custom
                               type="checkbox"
                               id="custom-cb13"
+                              name="Chicken"
                               label="Chicken"
                             />
 
@@ -243,6 +249,7 @@ class List extends React.Component {
                               custom
                               type="checkbox"
                               id="custom-cb14"
+                              name="Indian"
                               label="Indian"
                             />
                             <div className="mt-2">
