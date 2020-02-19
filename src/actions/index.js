@@ -13,7 +13,6 @@ const _registerUser = _.memoize(async (registrationInfo, dispatch) => {
   if (response.status.code === 201)
     dispatch({ type: "REGISTER_USER", payload: userInfo });
 });
-
 export const registerUser = registrationInfo => dispatch =>
   _registerUser(registrationInfo, dispatch);
 
@@ -63,11 +62,12 @@ const _fetchSingleRestaurant = _.memoize(
     });
   }
 );
-
 export const fetchSingleRestaurant = restaurant_api_key => async dipatch => {
   _fetchSingleRestaurant(restaurant_api_key, dipatch);
 };
 
+// this is good to memoize the function because we are dealing with 30,000 + restaurants
+// this could ultimately end up becoming an expensive function to run once the data set grows
 const _fetchSingleRestaurantMenu = _.memoize(
   async (restaurant_api_key, dispatch) => {
     const response = await apiConnector.getIndividualRestaurantMenu(
@@ -80,7 +80,6 @@ const _fetchSingleRestaurantMenu = _.memoize(
     });
   }
 );
-
 export const fetchSingleRestaurantMenu = restaurant_api_key => async dispatch => {
   _fetchSingleRestaurantMenu(restaurant_api_key, dispatch);
 };
