@@ -83,30 +83,22 @@ class Detail extends React.Component {
                       alt="osahan"
                       src="/img/1.jpg"
                     />
-                    <h2 className="text-white">Spice Hut Indian Restaurant</h2>
+                    <h2 className="text-white">{restaurant.name}</h2>
                     <p className="text-white mb-1">
-                      <Icofont icon="location-pin" /> 2036 2ND AVE, NEW YORK, NY
-                      10029 <Badge variant="success">OPEN</Badge>
+                      <Icofont icon="location-pin" /> {restaurant.streetAddress}{" "}
+                      <Badge variant="success">OPEN</Badge>
                     </p>
                     <p className="text-white mb-0">
-                      <Icofont icon="food-cart" /> North Indian, Chinese, Fast
-                      Food, South Indian
+                      <Icofont icon="food-cart" /> {restaurant.foodTypes}
                     </p>
                   </div>
                 </Col>
                 <Col md={4}>
                   <div className="restaurant-detailed-header-right text-right">
                     <Button variant="success" type="button">
-                      <Icofont icon="clock-time" /> 25–35 min
+                      <Icofont icon="clock-time" />
+                      {`${restaurant.minWaitTime} - ${restaurant.maxWaitTime} minutes`}
                     </Button>
-                    <h6 className="text-white mb-0 restaurant-detailed-ratings">
-                      <span className="generator-bg rounded text-white">
-                        <Icofont icon="star" /> 3.1
-                      </span>{" "}
-                      23 Ratings
-                      <Icofont icon="speech-comments" className="ml-3" /> 91
-                      reviews
-                    </h6>
                   </div>
                 </Col>
               </Row>
@@ -128,15 +120,6 @@ class Detail extends React.Component {
                     >
                       <Icofont icon="heart" className="text-danger" /> Mark as
                       Favourite
-                    </Button>
-                    <Button
-                      variant="light"
-                      size="sm"
-                      className="border-light-btn mr-1"
-                      type="button"
-                    >
-                      <Icofont icon="cauli-flower" className="text-success" />{" "}
-                      Pure Veg
                     </Button>
                     <Button variant="outline-danger" size="sm" type="button">
                       <Icofont icon="sale-discount" /> OFFERS
@@ -791,7 +774,7 @@ class Detail extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { restaurant: state };
+  return { restaurant: state.restaurants };
 };
 
 export default connect(mapStateToProps)(Detail);
