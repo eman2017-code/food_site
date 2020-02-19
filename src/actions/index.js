@@ -33,5 +33,19 @@ export const logoutUser = user => {
 
 export const loginUser = loginInfo => async dispatch => {
   const loginResponse = await apiConnector.loginUser(loginInfo);
-  
+
+  // if the user successfully logged in
+  if (loginResponse.status.code === 200) {
+    dispatch({
+      type: 'LOGIN_USER',
+      payload: loginResponse.data
+    });
+
+  // otherwise if the login failed
+  } else {
+    console.log('login failed');
+    
+    // * TODO: Somehow show a notification to the user that the login failed 
+
+  }
 };

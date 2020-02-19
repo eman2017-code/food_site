@@ -38,6 +38,7 @@ class Login extends React.Component {
 
 		// calls the action to log in the user
 		this.props.loginUser(this.state.formData);
+		console.log('after api call:', this.props.isLoggedIn)
 	}
 
 	render() {
