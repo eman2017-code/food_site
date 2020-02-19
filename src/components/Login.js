@@ -9,7 +9,14 @@ import FontAwesome from './common/FontAwesome';
 
 class Login extends React.Component {
 
+	handleSubmit = (e) => {
+		e.preventDefault();
+		console.log('Login form submitted');
+	}
+
 	render() {
+
+
     	return (
     	  <Container fluid className='bg-white'>
 	         <Row>
@@ -20,7 +27,7 @@ class Login extends React.Component {
 	                     <Row>
 	                        <Col md={9} lg={8} className="mx-auto pl-5 pr-5">
 	                           <h3 className="login-heading mb-4">Welcome back!</h3>
-	                           <Form >
+	                           <Form onSubmit={this.handleSubmit}>
 	                              <div className="form-label-group">
 	                                 <Form.Control type="email" id="inputEmail" placeholder="Email address" />
 	                                 <Form.Label htmlFor="inputEmail">Email address</Form.Label>
