@@ -15,15 +15,21 @@ import TrackOrder from "./components/TrackOrder";
 import Invoice from "./components/Invoice";
 import Checkout from "./components/Checkout";
 import Detail from "./components/Detail";
+import { ToastContainer, toast } from 'react-toastify';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import "react-select2-wrapper/css/select2.css";
+import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
+
+
+toast.configure()
 
 class App extends React.Component {
   render() {
     return (
-      <>
+      <div>
+        <ToastContainer autoClose={2000} position={toast.POSITION.CENTER_TOP} />
         {this.props.location.pathname !== "/login" &&
         this.props.location.pathname !== "/register" ? (
           <Header />
@@ -52,7 +58,7 @@ class App extends React.Component {
         ) : (
           ""
         )}
-      </>
+      </div>
     );
   }
 }
