@@ -23,6 +23,11 @@ class List extends React.Component {
     this.props.listRestaurants();
   }
 
+  handleCuisineTypeClicked = (e) => {
+    console.log('cuisine type clicked');
+    console.log('cuisine type label:', e.target.name);
+  }
+
   render() {
     const { restaurants } = this.props;
     return (
@@ -178,110 +183,66 @@ class List extends React.Component {
                             <Form.Check
                               custom
                               type="checkbox"
-                              defaultChecked={true}
                               id="custom-cb6"
-                              label={
-                                <React.Fragment>
-                                  American{" "}
-                                  <small className="text-black-50">156</small>
-                                </React.Fragment>
-                              }
+                              name="American"
+                              label="American"
+                              onClick={this.handleCuisineTypeClicked}
                             />
 
                             <Form.Check
                               custom
                               type="checkbox"
                               id="custom-cb7"
-                              label={
-                                <React.Fragment>
-                                  Pizza{" "}
-                                  <small className="text-black-50">120</small>
-                                </React.Fragment>
-                              }
+                              label="Pizza"
                             />
 
                             <Form.Check
                               custom
                               type="checkbox"
                               id="custom-cb8"
-                              label={
-                                <React.Fragment>
-                                  Healthy{" "}
-                                  <small className="text-black-50">130</small>
-                                </React.Fragment>
-                              }
+                              label="Healthy"
                             />
 
                             <Form.Check
                               custom
                               type="checkbox"
                               id="custom-cb9"
-                              label={
-                                <React.Fragment>
-                                  Vegetarian{" "}
-                                  <small className="text-black-50">120</small>
-                                </React.Fragment>
-                              }
+                              label="Vegetarian"
                             />
 
                             <Form.Check
                               custom
                               type="checkbox"
                               id="custom-cb10"
-                              label={
-                                <React.Fragment>
-                                  Chinese{" "}
-                                  <small className="text-black-50">111</small>
-                                </React.Fragment>
-                              }
+                              label="Chinese"
                             />
 
                             <Form.Check
                               custom
                               type="checkbox"
                               id="custom-cb11"
-                              label={
-                                <React.Fragment>
-                                  Hamburgers{" "}
-                                  <small className="text-black-50">95</small>
-                                </React.Fragment>
-                              }
+                              label="Hamburgers"
                             />
 
                             <Form.Check
                               custom
                               type="checkbox"
                               id="custom-cb12"
-                              label={
-                                <React.Fragment>
-                                  Dessert{" "}
-                                  <small className="text-black-50">50</small>
-                                </React.Fragment>
-                              }
+                              label="Dessert"
                             />
 
                             <Form.Check
                               custom
                               type="checkbox"
                               id="custom-cb13"
-                              label={
-                                <React.Fragment>
-                                  Chicken{" "}
-                                  <small className="text-black-50">32</small>
-                                </React.Fragment>
-                              }
+                              label="Chicken"
                             />
 
                             <Form.Check
                               custom
                               type="checkbox"
                               id="custom-cb14"
-                              label={
-                                <React.Fragment>
-                                  Indian{" "}
-                                  <small className="text-black-50">156</small>
-                                </React.Fragment>
-                              }
+                              label="Indian"
                             />
                             <div className="mt-2">
                               <Link to="#" className="link">
