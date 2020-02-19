@@ -19,14 +19,6 @@ import CategoriesCarousel from "./common/CategoriesCarousel";
 
 class List extends React.Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      
-    }
-  }
-
   componentDidMount() {
     this.props.listRestaurants();
   }
@@ -399,7 +391,10 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { restaurants: state.restaurants.restaurants };
+  return { 
+    restaurants: state.restaurants.restaurants,
+    filters: state.filters
+  }
 };
 
 export default connect(mapStateToProps, { listRestaurants })(List);
