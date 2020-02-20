@@ -20,8 +20,19 @@ import CategoriesCarousel from "./common/CategoriesCarousel";
 
 class List extends React.Component {
 
-  componentDidMount() {
-    this.props.listRestaurants();
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoading: true
+    }
+  }
+
+  async componentDidMount() {
+    await this.props.listRestaurants();
+    
+    // hides loading icon after request to get all restaurants is finished 
+    this.setState({isLoading: false});
   }
 
   // when a cuisine type checkbox is this function adds it the the filtersReducer
@@ -36,11 +47,15 @@ class List extends React.Component {
     } else {
       this.props.setFoodTypeFilter(foodType);
     }
+
+    // shows the loading icon for 1 second while the restaurants are being filtered
+    this.setState({ isLoading: true });
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+    }, 1000);
   }
 
   render() {
-    console.log('current food type filters:', this.props.filters.foodTypes);
-
     const { restaurants } = this.props;
 
     return (
@@ -334,7 +349,15 @@ class List extends React.Component {
               </Col>
               <Col md={9}>
                 <CategoriesCarousel />
-                {restaurants.map((restaurant, i) => {
+                {
+                this.state.isLoading 
+                ? 
+
+                <p className="text-center">Loading...</p>
+                
+                :
+
+                restaurants.map((restaurant, i) => {
                   return (
                     <div className="grid-container" key={i}>
                       <div className="grid-item">
@@ -355,7 +378,32 @@ class List extends React.Component {
                       </div>
                     </div>
                   );
-                })}
+                })
+                }
+
+                {/* {restaurants.map((restaurant, i) => {
+                  return (
+                    <div className="grid-container" key={i}>
+                      <div className="grid-item">
+                        <CardItem
+                          apiKey={restaurant.apiKey}
+                          title={restaurant.name}
+                          subTitle={restaurant.city}
+                          imageAlt="Product"
+                          image={restaurant.logoUrl}
+                          imageClass="img-fluid item-img"
+                          offerText="65% off | Use Coupon OSAHAN50"
+                          time={`${restaurant.minWaitTime} - ${restaurant.maxWaitTime} minutes`}
+                          phoneNumber={restaurant.phone}
+                          showPromoted={false}
+                          promotedVariant="dark"
+                          favIcoIconColor="text-danger"
+                        />
+                      </div>
+                    </div>
+                  );
+                })} */}
+
               </Col>
               <Col md={12} className="text-center load-more">
                 <Button variant="primary" type="button" disabled="">

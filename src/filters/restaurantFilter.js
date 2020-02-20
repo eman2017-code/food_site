@@ -17,14 +17,13 @@ export const restaurantFilter = (restaurants, filters) => {
         // incase, for some reason, foodTypes is a field in the restaurant object
         if (restaurant.foodTypes) {
             for (let i=0; i < foodTypes.length; i++) {
-                if (foodTypes.includes(foodTypes[i])) {
+                if (restaurant.foodTypes.includes(foodTypes[i])) {
                     return restaurant;
                 }
             }
         }
 
     });
-  
     return filteredRestaurants;
 }
 
