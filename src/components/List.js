@@ -384,12 +384,6 @@ class List extends React.Component {
                 }
 
               </Col>
-              <Col md={12} className="text-center load-more">
-                <Button variant="primary" type="button" disabled="">
-                  <Spinner animation="grow" size="sm" className="mr-1" />
-                  Loading...
-                </Button>
-              </Col>
             </Row>
           </Container>
         </section>
