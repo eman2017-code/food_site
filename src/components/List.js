@@ -350,13 +350,15 @@ class List extends React.Component {
               <Col md={9}>
                 <CategoriesCarousel />
                 {
+                /* shows a loading spinner if the icon restaurants are loading */
                 this.state.isLoading 
                 ? 
 
-                <p className="text-center">Loading...</p>
+                <Spinner animation="border" variant="primary"/>
                 
                 :
 
+                /* once done loading the restuarants are displayed */  
                 restaurants.map((restaurant, i) => {
                   return (
                     <div className="grid-container" key={i}>
@@ -380,29 +382,6 @@ class List extends React.Component {
                   );
                 })
                 }
-
-                {/* {restaurants.map((restaurant, i) => {
-                  return (
-                    <div className="grid-container" key={i}>
-                      <div className="grid-item">
-                        <CardItem
-                          apiKey={restaurant.apiKey}
-                          title={restaurant.name}
-                          subTitle={restaurant.city}
-                          imageAlt="Product"
-                          image={restaurant.logoUrl}
-                          imageClass="img-fluid item-img"
-                          offerText="65% off | Use Coupon OSAHAN50"
-                          time={`${restaurant.minWaitTime} - ${restaurant.maxWaitTime} minutes`}
-                          phoneNumber={restaurant.phone}
-                          showPromoted={false}
-                          promotedVariant="dark"
-                          favIcoIconColor="text-danger"
-                        />
-                      </div>
-                    </div>
-                  );
-                })} */}
 
               </Col>
               <Col md={12} className="text-center load-more">
