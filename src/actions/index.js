@@ -73,7 +73,7 @@ const _fetchSingleRestaurantMenu = _.memoize(
     const response = await apiConnector.getIndividualRestaurantMenu(
       restaurant_api_key
     );
-    const restaurantMenuResponse = response.restaurant;
+    const restaurantMenuResponse = response;
     dispatch({
       type: "RECIEVE_RESTAURANT_MENU",
       payload: restaurantMenuResponse

@@ -51,7 +51,8 @@ class Detail extends React.Component {
           image: "/img/user/4.png",
           url: "#"
         }
-      ]
+      ],
+      restaurant_api_key: this.props.match.params.restaurant_api_key
     };
   }
 
@@ -61,8 +62,14 @@ class Detail extends React.Component {
     console.log(value);
   };
 
+  componentDidMount() {
+    this.props.fetchSingleRestaurantMenu(this.state.restaurant_api_key);
+  }
+
   render() {
     const { restaurant } = this.props.restaurant;
+    const restaurantMenu = this.props.restaurant.restaurantMenu;
+
     return (
       <>
         <section className="restaurant-detailed-banner">
@@ -779,3 +786,4 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { fetchSingleRestaurantMenu })(Detail);
+// export default connect(mapStateToProps)(Detail);
