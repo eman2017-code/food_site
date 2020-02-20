@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { listRestaurants, setFoodTypeFilter, removeFoodTypeFilter } from "../actions";
+import { restaurantFilter } from "../filters/restaurantFilter.js";
 import { Link } from "react-router-dom";
 import {
   Row,
@@ -381,7 +382,7 @@ class List extends React.Component {
 
 const mapStateToProps = state => {
   return { 
-    restaurants: state.restaurants.restaurants,
+    restaurants: restaurantFilter(state.restaurants.restaurants, state.filters),
     filters: state.filters
   }
 };
