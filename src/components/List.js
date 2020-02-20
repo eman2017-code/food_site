@@ -353,9 +353,9 @@ class List extends React.Component {
                 /* shows a loading spinner if the icon restaurants are loading */
                 this.state.isLoading 
                 ? 
-
-                <Spinner animation="border" variant="primary"/>
-                
+                <div className="text-center mt-4 pt-4">
+                  <Spinner animation="border" variant="primary"/>
+                </div>
                 :
 
                 /* once done loading the restuarants are displayed */  
