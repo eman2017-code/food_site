@@ -2,7 +2,9 @@ import _ from "lodash";
 import apiConnector from "../apis/apiConnector";
 import { toast } from "react-toastify";
 
-/* --- memoized functions --- */
+/* ----------------------
+    user api calls 
+  ----------------------- */
 
 const _registerUser = _.memoize(async (registrationInfo, dispatch) => {
   const response = await apiConnector.registerUser(registrationInfo);
@@ -11,42 +13,10 @@ const _registerUser = _.memoize(async (registrationInfo, dispatch) => {
   if (response.status.code === 201)
     dispatch({ type: "REGISTER_USER", payload: userInfo });
 });
-
-const _fetchSingleRestaurant = _.memoize(
-  async (restaurant_api_key, dispatch) => {
-    const response = await apiConnector.getIndividualRestaurant(
-      restaurant_api_key
-    );
-    const restaurantResponse = response.restaurant;
-    dispatch({
-      type: "RECIEVE_SINGLE_RESTAURANT",
-      payload: restaurantResponse
-    });
-  }
-);
-
-/* --- functions that execute --- */
-
-export const listRestaurants = () => async dispatch => {
-  const response = await apiConnector.getAllRestaurants();
-  dispatch({ type: "LIST_RESTAURANTS", payload: response });
-};
-
 export const registerUser = registrationInfo => dispatch =>
   _registerUser(registrationInfo, dispatch);
 
-export const fetchSingleRestaurant = restaurant_api_key => async dipatch => {
-  _fetchSingleRestaurant(restaurant_api_key, dipatch);
-};
-
-export const logoutUser = user => {
-  return {
-    type: "LOGOUT_USER",
-    payload: user
-  };
-};
-
-// actions for loggin in a user
+// actions for login in a user
 export const loginUser = loginInfo => async dispatch => {
   const loginResponse = await apiConnector.loginUser(loginInfo);
 
@@ -62,6 +32,56 @@ export const loginUser = loginInfo => async dispatch => {
     toast(toastMessage);
   }
   return loginResponse;
+};
+
+export const logoutUser = user => {
+  return {
+    type: "LOGOUT_USER",
+    payload: user
+  };
+};
+
+/* ----------------------
+    restaurant api calls 
+  ----------------------- */
+
+export const listRestaurants = () => async dispatch => {
+  const response = await apiConnector.getAllRestaurants();
+  dispatch({ type: "LIST_RESTAURANTS", payload: response });
+};
+
+const _fetchSingleRestaurant = _.memoize(
+  async (restaurant_api_key, dispatch) => {
+    const response = await apiConnector.getIndividualRestaurant(
+      restaurant_api_key
+    );
+    const restaurantResponse = response.restaurant;
+    dispatch({
+      type: "RECIEVE_SINGLE_RESTAURANT",
+      payload: restaurantResponse
+    });
+  }
+);
+export const fetchSingleRestaurant = restaurant_api_key => async dipatch => {
+  _fetchSingleRestaurant(restaurant_api_key, dipatch);
+};
+
+// this is good to memoize the function because we are dealing with 30,000 + restaurants
+// this could ultimately end up becoming an expensive function to run once the data set grows
+const _fetchSingleRestaurantMenu = _.memoize(
+  async (restaurant_api_key, dispatch) => {
+    const response = await apiConnector.getIndividualRestaurantMenu(
+      restaurant_api_key
+    );
+    const restaurantMenuResponse = response;
+    dispatch({
+      type: "RECIEVE_RESTAURANT_MENU",
+      payload: restaurantMenuResponse
+    });
+  }
+);
+export const fetchSingleRestaurantMenu = restaurant_api_key => async dispatch => {
+  _fetchSingleRestaurantMenu(restaurant_api_key, dispatch);
 };
 
 

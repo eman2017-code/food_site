@@ -49,18 +49,28 @@ export default {
   },
 
   // makes api call to get restaurants near a address
-  getRestaurantsNearBy: async (address, pickupRadius=25, searchTerm="") => {
+  getRestaurantsNearBy: async (address, pickupRadius = 25, searchTerm = "") => {
     const response = await fetch(
-      apiURL + `restaurants/search?street_address=${address}&pickup_radius=${pickupRadius}&search_term=${searchTerm}`
+      apiURL +
+        `restaurants/search?street_address=${address}&pickup_radius=${pickupRadius}&search_term=${searchTerm}`
     );
     const parsedResponse = await response.json();
-    console.log('response:', response);
+    console.log("response:", response);
     return parsedResponse;
   },
 
-  // show (individual) restaurant route
+  // restaurant show route
   getIndividualRestaurant: async restaurant_api_key => {
     const response = await fetch(apiURL + `restaurants/${restaurant_api_key}`);
+    const parsedResponse = await response.json();
+    return parsedResponse.data;
+  },
+
+  // restaurant menu show route
+  getIndividualRestaurantMenu: async restaurant_api_key => {
+    const response = await fetch(
+      apiURL + `restaurants/${restaurant_api_key}/menu`
+    );
     const parsedResponse = await response.json();
     return parsedResponse.data;
   }

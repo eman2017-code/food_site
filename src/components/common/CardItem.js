@@ -42,7 +42,14 @@ class CardItem extends React.Component {
         <div className="p-3 position-relative">
           <div className="list-card-body">
             <h6 className="mb-1">
-              <Link to={`detail/${this.props.apiKey}`} className="text-black">
+              <Link
+                to={{
+                  pathname: `detail/${this.props.apiKey}`,
+                  // pass the apiKey in props
+                  state: { apiKey: this.props.apiKey }
+                }}
+                className="text-black"
+              >
                 {this.props.title}
               </Link>
             </h6>

@@ -1,6 +1,7 @@
 const initialState = {
   restaurants: [],
-  restaurant: {}
+  restaurant: {},
+  restaurantMenu: {}
 };
 
 export default function restaurantReducer(state = initialState, action) {
@@ -14,6 +15,11 @@ export default function restaurantReducer(state = initialState, action) {
       return {
         ...state,
         restaurant: action.payload
+      };
+    case "RECIEVE_RESTAURANT_MENU":
+      return {
+        ...state,
+        restaurantMenu: action.payload
       };
     default:
       return state;
