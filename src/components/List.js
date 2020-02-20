@@ -215,17 +215,8 @@ class List extends React.Component {
                               custom
                               type="checkbox"
                               id="custom-cb8"
-                              name="Healthy"
-                              label="Healthy"
-                              onClick={this.handleCuisineTypeClicked}
-                            />
-
-                            <Form.Check
-                              custom
-                              type="checkbox"
-                              id="custom-cb9"
-                              name="Vegetarian"
-                              label="Vegetarian"
+                              name="Mexican"
+                              label="Mexican"
                               onClick={this.handleCuisineTypeClicked}
                             />
 
@@ -242,8 +233,8 @@ class List extends React.Component {
                               custom
                               type="checkbox"
                               id="custom-cb11"
-                              name="Hamburgers"
-                              label="Hamburgers"
+                              name="Fast Food"
+                              label="Fast Food"
                               onClick={this.handleCuisineTypeClicked}
                             />
 
@@ -259,9 +250,9 @@ class List extends React.Component {
                             <Form.Check
                               custom
                               type="checkbox"
-                              id="custom-cb13"
-                              name="Chicken"
-                              label="Chicken"
+                              id="custom-cb9"
+                              name="Vegetarian"
+                              label="Vegetarian"
                               onClick={this.handleCuisineTypeClicked}
                             />
 
