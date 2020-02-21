@@ -1,25 +1,72 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import thunk from "redux-thunk";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-// css
+// css imports
 import "./index.css";
+import "./App.css";
 
-// imported components
-import App from "./App";
-import reducers from "./reducers";
+// redux store (saves/updates localStorage from browser)
+import store from "./store";
 
-// store for redux
-const store = createStore(reducers, applyMiddleware(thunk));
+// component imports
+import { ToastContainer, toast } from "react-toastify";
+import Index from "./components/Index";
+import Offers from "./components/Offers";
+import MyAccount from "./components/MyAccount";
+import List from "./components/List";
+import NotFound from "./components/NotFound";
+import Thanks from "./components/Thanks";
+import Extra from "./components/Extra";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import TrackOrder from "./components/TrackOrder";
+import Invoice from "./components/Invoice";
+import Checkout from "./components/Checkout";
+import Detail from "./components/Detail";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "font-awesome/css/font-awesome.min.css";
+import "react-select2-wrapper/css/select2.css";
+import "react-toastify/dist/ReactToastify.css";
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <Route path="/" component={App} />
-    </Router>
-  </Provider>,
-  document.getElementById("root")
-);
+// const middleWare = applyMiddleware(thunk);
+toast.configure();
+
+class RootContainer extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <BrowserRouter basename={"/"}>
+          <ToastContainer
+            autoClose={2000}
+            position={toast.POSITION.TOP_CENTER}
+          />
+          <Switch>
+            <Route path="/" exact component={Index} />
+            <Route path="/offers" exact component={Offers} />
+            <Route path="/listing" exact component={List} />
+            <Route path="/myaccount" component={MyAccount} />
+            <Route path="/404" exact component={NotFound} />
+            <Route path="/extra" exact component={Extra} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/register" exact component={Register} />
+            <Route path="/track-order" exact component={TrackOrder} />
+            <Route path="/invoice" exact component={Invoice} />
+            <Route path="/checkout" exact component={Checkout} />
+            <Route path="/thanks" exact component={Thanks} />
+
+            <Route
+              path="/detail/:restaurant_api_key"
+              exact
+              component={Detail}
+            />
+            <Route exact component={NotFound} />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
+    );
+  }
+}
+
+ReactDOM.render(<RootContainer />, document.getElementById("root"));

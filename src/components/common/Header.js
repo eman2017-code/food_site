@@ -45,7 +45,6 @@ class Header extends React.Component {
     document.removeEventListener("click", this.handleClick, false);
   }
   render() {
-    console.log("this.props in Header:", this.props);
     return (
       <div ref={node => (this.node = node)}>
         <Navbar
@@ -256,7 +255,6 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state in Header:", state);
   return {
     isLoggedIn: state.user.isLoggedIn,
     userInfo: state.user.userInfo

@@ -15,14 +15,9 @@ import {
   Badge
 } from "react-bootstrap";
 import ItemsCarousel from "./common/ItemsCarousel";
-import GalleryCarousel from "./common/GalleryCarousel";
-import CheckoutItem from "./common/CheckoutItem";
-import BestSeller from "./common/BestSeller";
 import QuickBite from "./common/QuickBite";
-import StarRating from "./common/StarRating";
-import RatingBar from "./common/RatingBar";
-import Review from "./common/Review";
 import Icofont from "react-icofont";
+import Header from "./common/Header";
 
 class Detail extends React.Component {
   constructor(props, context) {
@@ -54,15 +49,24 @@ class Detail extends React.Component {
     restaurantMenu.map(item => {
       const itemObject = item.items;
       menuItems.push(itemObject);
-      menuItems.map(item => {
-        item.map(thing => {
-          items.push(thing);
-        });
+      return menuItems;
+    });
+    menuItems.map(item => {
+      item.map(thing => {
+        items.push(thing);
+        return items;
       });
+      return items;
     });
 
     return (
       <>
+        {this.props.location.pathname !== "/login" &&
+        this.props.location.pathname !== "/register" ? (
+          <Header />
+        ) : (
+          ""
+        )}
         <section className="restaurant-detailed-banner">
           <div className="text-center">
             <Image

@@ -15,6 +15,8 @@ import ChooseAddressCard from "./common/ChooseAddressCard";
 import CheckoutItem from "./common/CheckoutItem";
 import AddAddressModal from "./modals/AddAddressModal";
 import Icofont from "react-icofont";
+import Header from "./common/Header";
+import Footer from "./common/Footer";
 
 class Checkout extends React.Component {
   constructor(props, context) {
@@ -31,6 +33,12 @@ class Checkout extends React.Component {
   render() {
     return (
       <section className="offer-dedicated-body mt-4 mb-4 pt-2 pb-2">
+        {this.props.location.pathname !== "/login" &&
+        this.props.location.pathname !== "/register" ? (
+          <Header />
+        ) : (
+          ""
+        )}
         <AddAddressModal
           show={this.state.showAddressModal}
           onHide={this.hideAddressModal}
@@ -310,6 +318,12 @@ class Checkout extends React.Component {
             </Col>
           </Row>
         </Container>
+        {this.props.location.pathname !== "/login" &&
+        this.props.location.pathname !== "/register" ? (
+          <Footer />
+        ) : (
+          ""
+        )}
       </section>
     );
   }

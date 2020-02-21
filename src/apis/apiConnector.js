@@ -24,7 +24,6 @@ export default {
         }
       });
       const parsedResponse = await response.json();
-      console.log("parsedResponse:", parsedResponse);
       return parsedResponse;
     } catch (error) {}
   },
@@ -56,7 +55,6 @@ export default {
         `restaurants/search?street_address=${address}&pickup_radius=${pickupRadius}&search_term=${searchTerm}`
     );
     const parsedResponse = await response.json();
-    console.log("response:", response);
     return parsedResponse;
   },
 

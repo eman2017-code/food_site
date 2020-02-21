@@ -21,6 +21,8 @@ import Icofont from "react-icofont";
 import PageTitle from "./common/PageTitle";
 import CardItem from "./common/CardItem";
 import CategoriesCarousel from "./common/CategoriesCarousel";
+import Header from "./common/Header";
+import Footer from "./common/Footer";
 
 class List extends React.Component {
   constructor(props) {
@@ -59,11 +61,16 @@ class List extends React.Component {
   };
 
   render() {
-    console.log("this.props in List:", this.props);
     const { restaurants } = this.props;
 
     return (
       <>
+        {this.props.location.pathname !== "/login" &&
+        this.props.location.pathname !== "/register" ? (
+          <Header />
+        ) : (
+          ""
+        )}
         <PageTitle
           title="Restaurant Listings"
           subTitle="Best deals at your favourite restaurants"
@@ -387,6 +394,12 @@ class List extends React.Component {
               </Col>
             </Row>
           </Container>
+          {this.props.location.pathname !== "/login" &&
+          this.props.location.pathname !== "/register" ? (
+            <Footer />
+          ) : (
+            ""
+          )}
         </section>
       </>
     );
@@ -394,10 +407,10 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state in List:", state);
   return {
-    restaurants: restaurantFilter(state.restaurants.restaurants, state.filters),
-    filters: state.filters
+    // restaurants: restaurantFilter(state.restaurants.restaurants, state.filters),
+    restaurants: state.restaurants.restaurants
+    // filters: state.filters
   };
 };
 

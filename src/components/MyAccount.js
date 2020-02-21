@@ -8,6 +8,8 @@ import Favourites from "./myaccount/Favourites";
 import Payments from "./myaccount/Payments";
 import Addresses from "./myaccount/Addresses";
 import EditProfileModal from "./modals/EditProfileModal";
+import Header from "./common/Header";
+import Footer from "./common/Footer";
 
 class MyAccount extends React.Component {
   constructor(props, context) {
@@ -22,6 +24,12 @@ class MyAccount extends React.Component {
   render() {
     return (
       <>
+        {this.props.location.pathname !== "/login" &&
+        this.props.location.pathname !== "/register" ? (
+          <Header />
+        ) : (
+          ""
+        )}
         <EditProfileModal
           show={this.state.showEditProfile}
           onHide={this.hideEditProfile}
@@ -116,6 +124,12 @@ class MyAccount extends React.Component {
               </Col>
             </Row>
           </Container>
+          {this.props.location.pathname !== "/login" &&
+          this.props.location.pathname !== "/register" ? (
+            <Footer />
+          ) : (
+            ""
+          )}
         </section>
       </>
     );

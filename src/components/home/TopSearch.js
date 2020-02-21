@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { getRestaurantsNearBy } from "../../actions";
 import { Link, Redirect } from "react-router-dom";
 import { Row, Col, Container, Form, Button } from "react-bootstrap";
@@ -11,25 +10,24 @@ import ProductBox from "./ProductBox";
 import CategoriesCarousel from "../common/CategoriesCarousel";
 
 class TopSearch extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      address: '',
+      address: "",
       formSubmitted: false
-    }
+    };
   }
 
   // handles form input change
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
-  }
+  };
 
-  // handles the form submission 
-  handleSubmit = async (e) => {
+  // handles the form submission
+  handleSubmit = async e => {
     e.preventDefault();
 
     // calls the action to get restaurants near the users location
@@ -39,15 +37,12 @@ class TopSearch extends React.Component {
     this.setState({
       formSubmitted: true
     });
-  }
+  };
 
   render() {
-
     // redirects user to listing page after form submission to show restaurants near by
     if (this.state.formSubmitted) {
-      return (
-        <Redirect to='/listing' />
-      )
+      return <Redirect to="/listing" />;
     }
 
     return (
@@ -169,7 +164,5 @@ const options2 = {
   ],
   autoplayHoverPause: true
 };
-
-
 
 export default connect(null, { getRestaurantsNearBy })(TopSearch);

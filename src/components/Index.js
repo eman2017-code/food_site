@@ -7,11 +7,20 @@ import ProductBox from "./home/ProductBox";
 import CardItem from "./common/CardItem";
 import SectionHeading from "./common/SectionHeading";
 import FontAwesome from "./common/FontAwesome";
+import Header from "./common/Header";
+import Footer from "./common/Footer";
 
 class Index extends React.Component {
   render() {
     return (
       <>
+        {this.props.location.pathname !== "/login" &&
+        this.props.location.pathname !== "/register" ? (
+          <Header />
+        ) : (
+          ""
+        )}
+        {/* <Header /> */}
         <TopSearch />
         <section className="section pt-5 pb-5 bg-white homepage-add-section">
           <Container>
@@ -154,6 +163,12 @@ class Index extends React.Component {
             </Row>
           </Container>
         </section>
+        {this.props.location.pathname !== "/login" &&
+        this.props.location.pathname !== "/register" ? (
+          <Footer />
+        ) : (
+          ""
+        )}
       </>
     );
   }

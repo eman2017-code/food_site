@@ -2,11 +2,19 @@ import React from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import PageTitle from "./common/PageTitle";
 import CouponCard from "./common/CouponCard";
+import Header from "./common/Header";
+import Footer from "./common/Footer";
 
 class Offers extends React.Component {
   render() {
     return (
       <>
+        {this.props.location.pathname !== "/login" &&
+        this.props.location.pathname !== "/register" ? (
+          <Header />
+        ) : (
+          ""
+        )}
         <PageTitle
           title="Offers for you"
           subTitle="Explore top deals and offers exclusively for you!"
@@ -75,6 +83,12 @@ class Offers extends React.Component {
               </Col>
             </Row>
           </Container>
+          {this.props.location.pathname !== "/login" &&
+          this.props.location.pathname !== "/register" ? (
+            <Footer />
+          ) : (
+            ""
+          )}
         </section>
       </>
     );
