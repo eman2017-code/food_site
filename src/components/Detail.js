@@ -47,10 +47,10 @@ class Detail extends React.Component {
   render() {
     const { restaurant } = this.props.restaurant;
     const restaurantMenu = this.props.restaurant.restaurantMenu;
-    const menuItems = [];
-    const items = [];
 
     // this brings each item in down to its most reduced form
+    const menuItems = [];
+    const items = [];
     restaurantMenu.map(item => {
       const itemObject = item.items;
       menuItems.push(itemObject);
@@ -129,9 +129,6 @@ class Detail extends React.Component {
                       <Nav.Link eventKey="first">Order Online</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="second">Gallery</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
                       <Nav.Link eventKey="third">Restaurant Info</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
@@ -199,11 +196,6 @@ class Detail extends React.Component {
                         </Row>
                         <Row></Row>
                       </Tab.Pane>
-                      <Tab.Pane eventKey="second">
-                        <div className="position-relative">
-                          <GalleryCarousel />
-                        </div>
-                      </Tab.Pane>
                       <Tab.Pane eventKey="third">
                         <div
                           id="restaurant-info"
@@ -227,17 +219,9 @@ class Detail extends React.Component {
                             </div>
                           </div>
                           <h5 className="mb-4">Restaurant Info</h5>
-                          <p className="mb-3">
-                            Jagjit Nagar, Near Railway Crossing,
-                            <br /> Near Model Town, Ludhiana, PUNJAB
-                          </p>
                           <p className="mb-2 text-black">
                             <Icofont icon="phone-circle text-primary mr-2" />{" "}
                             {restaurant.phone}
-                          </p>
-                          <p className="mb-2 text-black">
-                            <Icofont icon="email text-primary mr-2" />{" "}
-                            iamosahan@gmail.com, osahaneat@gmail.com
                           </p>
                           <p className="mb-2 text-black">
                             <Icofont icon="clock-time text-primary mr-2" />{" "}
@@ -248,65 +232,7 @@ class Detail extends React.Component {
                             </Badge>
                           </p>
                           <hr className="clearfix" />
-                          <p className="text-black mb-0">
-                            You can also check the 3D view by using our menue
-                            map clicking here &nbsp;&nbsp;&nbsp;{" "}
-                            <Link className="text-info font-weight-bold" to="#">
-                              Venue Map
-                            </Link>
-                          </p>
                           <hr className="clearfix" />
-                          <h5 className="mt-4 mb-4">More Info</h5>
-                          <p className="mb-3">
-                            Dal Makhani, Panneer Butter Masala, Kadhai Paneer,
-                            Raita, Veg Thali, Laccha Paratha, Butter Naan
-                          </p>
-                          <div className="border-btn-main mb-4">
-                            <Link
-                              className="border-btn text-success mr-2"
-                              to="#"
-                            >
-                              <Icofont icon="check-circled" /> Breakfast
-                            </Link>
-                            <Link
-                              className="border-btn text-danger mr-2"
-                              to="#"
-                            >
-                              <Icofont icon="close-circled" /> No Alcohol
-                              Available
-                            </Link>
-                            <Link
-                              className="border-btn text-success mr-2"
-                              to="#"
-                            >
-                              <Icofont icon="check-circled" /> Vegetarian Only
-                            </Link>
-                            <Link
-                              className="border-btn text-success mr-2"
-                              to="#"
-                            >
-                              <Icofont icon="check-circled" /> Indoor Seating
-                            </Link>
-                            <Link
-                              className="border-btn text-success mr-2"
-                              to="#"
-                            >
-                              <Icofont icon="check-circled" /> Breakfast
-                            </Link>
-                            <Link
-                              className="border-btn text-danger mr-2"
-                              to="#"
-                            >
-                              <Icofont icon="close-circled" /> No Alcohol
-                              Available
-                            </Link>
-                            <Link
-                              className="border-btn text-success mr-2"
-                              to="#"
-                            >
-                              <Icofont icon="check-circled" /> Vegetarian Only
-                            </Link>
-                          </div>
                         </div>
                       </Tab.Pane>
                       <Tab.Pane eventKey="fourth">
