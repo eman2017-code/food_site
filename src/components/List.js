@@ -1,6 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { listRestaurants, setFoodTypeFilter, removeFoodTypeFilter } from "../actions";
+import {
+  listRestaurants,
+  setFoodTypeFilter,
+  removeFoodTypeFilter
+} from "../actions";
 import { restaurantFilter } from "../filters/restaurantFilter.js";
 import { Link } from "react-router-dom";
 import {
@@ -19,31 +23,30 @@ import CardItem from "./common/CardItem";
 import CategoriesCarousel from "./common/CategoriesCarousel";
 
 class List extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       isLoading: true
-    }
+    };
   }
 
   async componentDidMount() {
     await this.props.listRestaurants();
-    
-    // hides loading icon after request to get all restaurants is finished 
-    this.setState({isLoading: false});
+
+    // hides loading icon after request to get all restaurants is finished
+    this.setState({ isLoading: false });
   }
 
   // when a cuisine type checkbox is this function adds it the the filtersReducer
-  handleCuisineTypeClicked = (e) => {
+  handleCuisineTypeClicked = e => {
     const foodType = e.target.name;
 
     // if the checkbox is already clicked
     if (this.props.filters.foodTypes.includes(foodType)) {
       this.props.removeFoodTypeFilter(foodType);
 
-    // otherise if the checkbox is not already clicked
+      // otherise if the checkbox is not already clicked
     } else {
       this.props.setFoodTypeFilter(foodType);
     }
@@ -53,9 +56,10 @@ class List extends React.Component {
     setTimeout(() => {
       this.setState({ isLoading: false });
     }, 1000);
-  }
+  };
 
   render() {
+    console.log("this.props in List:", this.props);
     const { restaurants } = this.props;
 
     return (
@@ -194,7 +198,7 @@ class List extends React.Component {
                             </Accordion.Toggle>
                           </h6>
                         </div>
-                        
+
                         {/* --- Food Type Filters --- */}
 
                         <Accordion.Collapse eventKey="1">
@@ -349,40 +353,37 @@ class List extends React.Component {
               </Col>
               <Col md={9}>
                 <CategoriesCarousel />
-                {
-                /* shows a loading spinner if the icon restaurants are loading */
-                this.state.isLoading 
-                ? 
-                <div className="text-center mt-4 pt-4">
-                  <Spinner animation="border" variant="primary"/>
-                </div>
-                :
+                {/* shows a loading spinner if the icon restaurants are loading */
+                this.state.isLoading ? (
+                  <div className="text-center mt-4 pt-4">
+                    <Spinner animation="border" variant="primary" />
+                  </div>
+                ) : (
+                  /* once done loading the restuarants are displayed */
 
-                /* once done loading the restuarants are displayed */  
-                restaurants.map((restaurant, i) => {
-                  return (
-                    <div className="grid-container" key={i}>
-                      <div className="grid-item">
-                        <CardItem
-                          apiKey={restaurant.apiKey}
-                          title={restaurant.name}
-                          subTitle={restaurant.city}
-                          imageAlt="Product"
-                          image={restaurant.logoUrl}
-                          imageClass="img-fluid item-img"
-                          offerText="65% off | Use Coupon OSAHAN50"
-                          time={`${restaurant.minWaitTime} - ${restaurant.maxWaitTime} minutes`}
-                          phoneNumber={restaurant.phone}
-                          showPromoted={false}
-                          promotedVariant="dark"
-                          favIcoIconColor="text-danger"
-                        />
+                  restaurants.map((restaurant, i) => {
+                    return (
+                      <div className="grid-container" key={i}>
+                        <div className="grid-item">
+                          <CardItem
+                            apiKey={restaurant.apiKey}
+                            title={restaurant.name}
+                            subTitle={restaurant.city}
+                            imageAlt="Product"
+                            image={restaurant.logoUrl}
+                            imageClass="img-fluid item-img"
+                            offerText="65% off | Use Coupon OSAHAN50"
+                            time={`${restaurant.minWaitTime} - ${restaurant.maxWaitTime} minutes`}
+                            phoneNumber={restaurant.phone}
+                            showPromoted={false}
+                            promotedVariant="dark"
+                            favIcoIconColor="text-danger"
+                          />
+                        </div>
                       </div>
-                    </div>
-                  );
-                })
-                }
-
+                    );
+                  })
+                )}
               </Col>
             </Row>
           </Container>
@@ -393,10 +394,15 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { 
+  console.log("state in List:", state);
+  return {
     restaurants: restaurantFilter(state.restaurants.restaurants, state.filters),
     filters: state.filters
-  }
+  };
 };
 
-export default connect(mapStateToProps, { listRestaurants, setFoodTypeFilter, removeFoodTypeFilter })(List);
+export default connect(mapStateToProps, {
+  listRestaurants,
+  setFoodTypeFilter,
+  removeFoodTypeFilter
+})(List);

@@ -17,12 +17,6 @@ export default function usersReducer(state = initialState, action) {
         isLoggedIn: true,
         userInfo: action.payload
       };
-    // case "LOGOUT_USER":
-    //   return {
-    //     ...state,
-    //     isLoggedIn: false,
-    //     userInfo: {}
-    //   };
     default:
       return state;
   }

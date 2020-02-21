@@ -127,6 +127,7 @@ Register.propTypes = {
 };
 
 const mapStateToProps = state => {
+  console.log("state in Register:", state);
   return {
     isLoggedIn: state.user.isLoggedIn,
     userInfo: state.user.userInfo

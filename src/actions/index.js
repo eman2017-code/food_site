@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 const _registerUser = _.memoize(async (registrationInfo, dispatch) => {
   const response = await apiConnector.registerUser(registrationInfo);
   const userInfo = response.data;
+  console.log("userInfo:", userInfo);
 
   if (response.status.code === 201)
     dispatch({ type: "REGISTER_USER", payload: userInfo });
