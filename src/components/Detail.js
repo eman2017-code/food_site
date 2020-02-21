@@ -72,6 +72,8 @@ class Detail extends React.Component {
     const { restaurant } = this.props.restaurant;
     const restaurantMenu = this.props.restaurant.restaurantMenu;
     console.log("restaurantMenu:", restaurantMenu);
+    // console.log("restaurantMenu[0]", restaurantMenu[0]);
+    // console.log("restaurantMenu[0].name", restaurantMenu[0].name);
     const menuItems = [];
     let items = [];
 
@@ -85,6 +87,7 @@ class Detail extends React.Component {
         });
       });
     });
+
     return (
       <>
         <section className="restaurant-detailed-banner">
