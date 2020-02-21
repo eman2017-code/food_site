@@ -1,7 +1,7 @@
 const initialState = {
   restaurants: [],
   restaurant: {},
-  restaurantMenu: {}
+  restaurantMenu: []
 };
 
 export default function restaurantReducer(state = initialState, action) {

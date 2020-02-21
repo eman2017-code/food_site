@@ -66,50 +66,40 @@ export const fetchSingleRestaurant = restaurant_api_key => async dipatch => {
   _fetchSingleRestaurant(restaurant_api_key, dipatch);
 };
 
-// this is good to memoize the function because we are dealing with 30,000 + restaurants
-// this could ultimately end up becoming an expensive function to run once the data set grows
-const _fetchSingleRestaurantMenu = _.memoize(
-  async (restaurant_api_key, dispatch) => {
-    const response = await apiConnector.getIndividualRestaurantMenu(
-      restaurant_api_key
-    );
-    const restaurantMenuResponse = response;
-    dispatch({
-      type: "RECIEVE_RESTAURANT_MENU",
-      payload: restaurantMenuResponse
-    });
-  }
-);
 export const fetchSingleRestaurantMenu = restaurant_api_key => async dispatch => {
-  _fetchSingleRestaurantMenu(restaurant_api_key, dispatch);
+  const response = await apiConnector.getIndividualRestaurantMenu(
+    restaurant_api_key
+  );
+  const foundRestaurantMenu = response;
+  dispatch({
+    type: "RECIEVE_RESTAURANT_MENU",
+    payload: foundRestaurantMenu
+  });
 };
-
 
 // action for getting all of the restaurants near a certain delivery address
 export const getRestaurantsNearBy = address => async dispatch => {
   const response = await apiConnector.getRestaurantsNearBy(address);
   const foundRestaurants = response.data.restaurants;
-  
+
   dispatch({
     type: "LIST_RESTAURANTS",
     payload: foundRestaurants
   });
-}
+};
 
 // action for applying food type filters to filter restaurants
 export const setFoodTypeFilter = foodType => dispatch => {
   dispatch({
-    type: 'SET_FOOD_TYPE_FILTER',
+    type: "SET_FOOD_TYPE_FILTER",
     payload: foodType
   });
-}
+};
 
 // action for removing food type filters to filter restaurants
 export const removeFoodTypeFilter = foodType => dispatch => {
   dispatch({
-    type: 'REMOVE_FOOD_TYPE_FILTER',
+    type: "REMOVE_FOOD_TYPE_FILTER",
     payload: foodType
   });
-}
-
-
+};

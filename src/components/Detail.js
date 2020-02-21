@@ -52,8 +52,10 @@ class Detail extends React.Component {
           url: "#"
         }
       ],
-      restaurant_api_key: this.props.match.params.restaurant_api_key
+      restaurant_api_key: this.props.match.params.restaurant_api_key,
+      items: []
     };
+    console.log("this.state:", this.state);
   }
 
   hideAddressModal = () => this.setState({ showAddressModal: false });
@@ -69,7 +71,20 @@ class Detail extends React.Component {
   render() {
     const { restaurant } = this.props.restaurant;
     const restaurantMenu = this.props.restaurant.restaurantMenu;
+    console.log("restaurantMenu:", restaurantMenu);
+    const menuItems = [];
+    let items = [];
 
+    // this brings each item in down to its most reduced form
+    restaurantMenu.map(item => {
+      const itemObject = item.items;
+      menuItems.push(itemObject);
+      menuItems.map(item => {
+        item.map(thing => {
+          items.push(thing);
+        });
+      });
+    });
     return (
       <>
         <section className="restaurant-detailed-banner">
@@ -189,7 +204,7 @@ class Detail extends React.Component {
                           <Col md={4} sm={6} className="mb-4">
                             <BestSeller
                               id={1}
-                              title="World Famous"
+                              title={"World Famous"}
                               subTitle="North Indian • American • Pure veg"
                               imageAlt="Product"
                               image="img/list/1.png"
@@ -782,8 +797,9 @@ class Detail extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { restaurant: state.restaurants };
+  return {
+    restaurant: state.restaurants
+  };
 };
 
 export default connect(mapStateToProps, { fetchSingleRestaurantMenu })(Detail);
-// export default connect(mapStateToProps)(Detail);
