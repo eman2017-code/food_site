@@ -3,14 +3,14 @@
 /* This is where all of the api calls are made to talk to the API */
 
 /* This allows us to switch url for production and testing purposes */
-// const debug = true;
+const debug = false;
 
-let apiURL = "http://localhost:8000/api/v1/";
-// if (debug) {
-//   apiURL = "http://localhost:8000/api/v1/";
-// } else {
-//   apiURL = "http://35.222.68.3:8000/api/v1/";
-// }
+let apiURL;
+if (debug) {
+  apiURL = "http://localhost:8000/api/v1/";
+} else {
+  apiURL = "http://35.222.49.55:8000/api/v1/";
+}
 
 export default {
   // register route
