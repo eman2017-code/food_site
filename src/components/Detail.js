@@ -30,32 +30,8 @@ class Detail extends React.Component {
 
     this.state = {
       showAddressModal: false,
-      users: [
-        {
-          name: "Osahan Singh",
-          image: "/img/user/5.png",
-          url: "#"
-        },
-        {
-          name: "Gurdeep Osahan",
-          image: "/img/user/2.png",
-          url: "#"
-        },
-        {
-          name: "Askbootstrap",
-          image: "/img/user/3.png",
-          url: "#"
-        },
-        {
-          name: "Osahan Singh",
-          image: "/img/user/4.png",
-          url: "#"
-        }
-      ],
-      restaurant_api_key: this.props.match.params.restaurant_api_key,
-      items: []
+      restaurant_api_key: this.props.match.params.restaurant_api_key
     };
-    console.log("this.state:", this.state);
   }
 
   hideAddressModal = () => this.setState({ showAddressModal: false });
@@ -71,11 +47,8 @@ class Detail extends React.Component {
   render() {
     const { restaurant } = this.props.restaurant;
     const restaurantMenu = this.props.restaurant.restaurantMenu;
-    console.log("restaurantMenu:", restaurantMenu);
-    // console.log("restaurantMenu[0]", restaurantMenu[0]);
-    // console.log("restaurantMenu[0].name", restaurantMenu[0].name);
     const menuItems = [];
-    let items = [];
+    const items = [];
 
     // this brings each item in down to its most reduced form
     restaurantMenu.map(item => {
@@ -164,9 +137,6 @@ class Detail extends React.Component {
                     <Nav.Item>
                       <Nav.Link eventKey="fourth">Book A Table</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="fifth">Ratings & Reviews</Nav.Link>
-                    </Nav.Item>
                   </Nav>
                 </Col>
               </Row>
@@ -201,209 +171,33 @@ class Detail extends React.Component {
                           </Badge>
                         </h6>
                         <ItemsCarousel />
-
-                        <Row>
-                          <h5 className="mb-4 mt-3 col-md-12">Best Sellers</h5>
-                          <Col md={4} sm={6} className="mb-4">
-                            <BestSeller
-                              id={1}
-                              title={"World Famous"}
-                              subTitle="North Indian • American • Pure veg"
-                              imageAlt="Product"
-                              image="img/list/1.png"
-                              imageClass="img-fluid item-img"
-                              price={250}
-                              priceUnit="$"
-                              isNew={true}
-                              showPromoted={true}
-                              promotedVariant="dark"
-                              favIcoIconColor="text-danger"
-                              rating="3.1 (300+)"
-                              getValue={this.getQty}
-                            />
-                          </Col>
-
-                          <Col md={4} sm={6} className="mb-4">
-                            <BestSeller
-                              id={2}
-                              title="The osahan Restaurant"
-                              subTitle="North Indian • American • Pure veg"
-                              imageAlt="Product"
-                              image="img/list/6.png"
-                              imageClass="img-fluid item-img"
-                              price={250}
-                              priceUnit="$"
-                              qty={1}
-                              showPromoted={true}
-                              promotedVariant="dark"
-                              favIcoIconColor="text-danger"
-                              rating="3.1 (300+)"
-                              getValue={this.getQty}
-                            />
-                          </Col>
-
-                          <Col md={4} sm={6} className="mb-4">
-                            <BestSeller
-                              id={3}
-                              title="Bite Me Sandwiches"
-                              subTitle="North Indian • American • Pure veg"
-                              imageAlt="Product"
-                              image="img/list/3.png"
-                              imageClass="img-fluid item-img"
-                              price={250}
-                              priceUnit="$"
-                              showPromoted={true}
-                              promotedVariant="dark"
-                              favIcoIconColor="text-danger"
-                              rating="3.1 (300+)"
-                              getValue={this.getQty}
-                            />
-                          </Col>
-                        </Row>
                         <Row>
                           <h5 className="mb-4 mt-3 col-md-12">
-                            Quick Bites{" "}
-                            <small className="h6 text-black-50">3 ITEMS</small>
+                            Food Options -
+                            <small className="h6 text-black-50">
+                              {items.length}
+                            </small>
                           </h5>
                           <Col md={12}>
-                            <div className="bg-white rounded border shadow-sm mb-4">
-                              <QuickBite
-                                id={1}
-                                title="Chicken Tikka Sub"
-                                price={250}
-                                priceUnit="$"
-                                getValue={this.getQty}
-                              />
-                              <QuickBite
-                                id={2}
-                                title="Cheese corn Roll"
-                                price={600}
-                                showBadge={true}
-                                badgeText="BEST SELLER"
-                                qty={1}
-                                priceUnit="$"
-                                getValue={this.getQty}
-                              />
-                              <QuickBite
-                                id={3}
-                                title="Chicken Tikka Sub"
-                                price={250}
-                                showBadge={true}
-                                badgeText="Pure Veg"
-                                badgeVariant="success"
-                                qty={2}
-                                priceUnit="$"
-                                getValue={this.getQty}
-                              />
-                            </div>
+                            {items.map((foodItem, i) => {
+                              return (
+                                <div
+                                  className="bg-white rounded border shadow-sm mb-4"
+                                  key={i}
+                                >
+                                  <QuickBite
+                                    id={Number(foodItem.apiKey)}
+                                    title={foodItem.name}
+                                    price={foodItem.basePrice}
+                                    description={foodItem.description}
+                                    getValue={this.getQty}
+                                  />
+                                </div>
+                              );
+                            })}
                           </Col>
                         </Row>
-                        <Row>
-                          <h5 className="mb-4 mt-3 col-md-12">
-                            Starters{" "}
-                            <small className="h6 text-black-50">3 ITEMS</small>
-                          </h5>
-                          <Col md={12}>
-                            <div className="bg-white rounded border shadow-sm mb-4">
-                              <QuickBite
-                                id={1}
-                                itemClass="menu-list"
-                                image="/img/5.jpg"
-                                title="Chicken Tikka Sub"
-                                price={250}
-                                priceUnit="$"
-                                getValue={this.getQty}
-                              />
-                              <QuickBite
-                                id={2}
-                                itemClass="menu-list"
-                                title="Cheese corn Roll"
-                                image="/img/2.jpg"
-                                price={600}
-                                showBadge={true}
-                                badgeText="BEST SELLER"
-                                qty={1}
-                                priceUnit="$"
-                                getValue={this.getQty}
-                              />
-                              <QuickBite
-                                id={3}
-                                itemClass="menu-list"
-                                image="/img/3.jpg"
-                                title="Chicken Tikka Sub"
-                                price={250}
-                                showBadge={true}
-                                badgeText="Pure Veg"
-                                badgeVariant="success"
-                                priceUnit="$"
-                                getValue={this.getQty}
-                              />
-                            </div>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <h5 className="mb-4 mt-3 col-md-12">
-                            Soups{" "}
-                            <small className="h6 text-black-50">8 ITEMS</small>
-                          </h5>
-                          <Col md={12}>
-                            <div className="bg-white rounded border shadow-sm">
-                              <QuickBite
-                                id={1}
-                                title="Chicken Tikka Sub"
-                                price={250}
-                                priceUnit="$"
-                                getValue={this.getQty}
-                              />
-                              <QuickBite
-                                id={2}
-                                title="Cheese corn Roll"
-                                price={600}
-                                showBadge={true}
-                                badgeText="BEST SELLER"
-                                qty={1}
-                                priceUnit="$"
-                                getValue={this.getQty}
-                              />
-                              <QuickBite
-                                id={3}
-                                title="Chicken Tikka Sub"
-                                price={250}
-                                showBadge={true}
-                                badgeText="Pure Veg"
-                                badgeVariant="success"
-                                priceUnit="$"
-                                getValue={this.getQty}
-                              />
-                              <QuickBite
-                                id={1}
-                                title="Chicken Tikka Sub"
-                                price={250}
-                                priceUnit="$"
-                                getValue={this.getQty}
-                              />
-                              <QuickBite
-                                id={2}
-                                title="Cheese corn Roll"
-                                price={600}
-                                showBadge={true}
-                                badgeText="BEST SELLER"
-                                priceUnit="$"
-                                getValue={this.getQty}
-                              />
-                              <QuickBite
-                                id={3}
-                                title="Chicken Tikka Sub"
-                                price={250}
-                                showBadge={true}
-                                badgeText="Pure Veg"
-                                badgeVariant="success"
-                                priceUnit="$"
-                                getValue={this.getQty}
-                              />
-                            </div>
-                          </Col>
-                        </Row>
+                        <Row></Row>
                       </Tab.Pane>
                       <Tab.Pane eventKey="second">
                         <div className="position-relative">
@@ -439,7 +233,7 @@ class Detail extends React.Component {
                           </p>
                           <p className="mb-2 text-black">
                             <Icofont icon="phone-circle text-primary mr-2" />{" "}
-                            +91 01234-56789, +91 01234-56789
+                            {restaurant.phone}
                           </p>
                           <p className="mb-2 text-black">
                             <Icofont icon="email text-primary mr-2" />{" "}
@@ -571,120 +365,6 @@ class Detail extends React.Component {
                           </Form>
                         </div>
                       </Tab.Pane>
-                      <Tab.Pane eventKey="fifth">
-                        <div
-                          id="ratings-and-reviews"
-                          className="bg-white rounded shadow-sm p-4 mb-4 clearfix restaurant-detailed-star-rating"
-                        >
-                          <div className="star-rating float-right">
-                            <StarRating
-                              fontSize={26}
-                              star={5}
-                              getValue={this.getStarValue}
-                            />
-                          </div>
-                          <h5 className="mb-0 pt-1">Rate this Place</h5>
-                        </div>
-                        <div className="bg-white rounded shadow-sm p-4 mb-4 clearfix graph-star-rating">
-                          <h5 className="mb-0 mb-4">Ratings and Reviews</h5>
-                          <div className="graph-star-rating-header">
-                            <div className="star-rating">
-                              <StarRating
-                                fontSize={18}
-                                disabled={true}
-                                star={5}
-                                getValue={this.getStarValue}
-                              />
-                              <b className="text-black ml-2">334</b>
-                            </div>
-                            <p className="text-black mb-4 mt-2">
-                              Rated 3.5 out of 5
-                            </p>
-                          </div>
-                          <div className="graph-star-rating-body">
-                            <RatingBar leftText="5 Star" barValue={56} />
-                            <RatingBar leftText="4 Star" barValue={23} />
-                            <RatingBar leftText="3 Star" barValue={11} />
-                            <RatingBar leftText="2 Star" barValue={6} />
-                            <RatingBar leftText="1 Star" barValue={4} />
-                          </div>
-                          <div className="graph-star-rating-footer text-center mt-3 mb-3">
-                            <Button
-                              type="button"
-                              variant="outline-primary"
-                              size="sm"
-                            >
-                              Rate and Review
-                            </Button>
-                          </div>
-                        </div>
-                        <div className="bg-white rounded shadow-sm p-4 mb-4 restaurant-detailed-ratings-and-reviews">
-                          <Link
-                            to="#"
-                            className="btn btn-outline-primary btn-sm float-right"
-                          >
-                            Top Rated
-                          </Link>
-                          <h5 className="mb-1">All Ratings and Reviews</h5>
-                          <Review
-                            image="/img/user/1.png"
-                            ImageAlt=""
-                            ratingStars={5}
-                            Name="Singh Osahan"
-                            profileLink="#"
-                            reviewDate="Tue, 20 Mar 2020"
-                            reviewText="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classNameical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classNameical literature, discovered the undoubtable source. Lorem Ipsum comes from sections"
-                            likes="856M"
-                            dislikes="158K"
-                            otherUsers={this.state.users}
-                          />
-                          <hr />
-                          <Review
-                            image="/img/user/6.png"
-                            ImageAlt=""
-                            ratingStars={5}
-                            Name="Gurdeep Osahan"
-                            profileLink="#"
-                            reviewDate="Tue, 20 Mar 2020"
-                            reviewText="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
-                            likes="88K"
-                            dislikes="1K"
-                            otherUsers={this.state.users}
-                          />
-                          <hr />
-                          <Link
-                            className="text-center w-100 d-block mt-4 font-weight-bold"
-                            to="#"
-                          >
-                            See All Reviews
-                          </Link>
-                        </div>
-                        <div className="bg-white rounded shadow-sm p-4 mb-5 rating-review-select-page">
-                          <h5 className="mb-4">Leave Comment</h5>
-                          <p className="mb-2">Rate the Place</p>
-                          <div className="mb-4">
-                            <div className="star-rating">
-                              <StarRating
-                                fontSize={26}
-                                star={5}
-                                getValue={this.getStarValue}
-                              />
-                            </div>
-                          </div>
-                          <Form>
-                            <Form.Group>
-                              <Form.Label>Your Comment</Form.Label>
-                              <Form.Control as="textarea" />
-                            </Form.Group>
-                            <Form.Group>
-                              <Button variant="primary" size="sm" type="button">
-                                {" "}
-                                Submit Comment{" "}
-                              </Button>
-                            </Form.Group>
-                          </Form>
-                        </div>
-                      </Tab.Pane>
                     </Tab.Content>
                   </div>
                 </Col>
@@ -713,63 +393,7 @@ class Detail extends React.Component {
                     <p className="mb-4 text-white">
                       # of items in cart go here
                     </p>
-                    {/* <div className="bg-white rounded shadow-sm mb-2">
-                      <CheckoutItem
-                        itemName="Chicken Tikka Sub"
-                        price={314}
-                        priceUnit="$"
-                        id={1}
-                        qty={2}
-                        show={true}
-                        minValue={0}
-                        maxValue={7}
-                        getValue={this.getQty}
-                      />
-                      <CheckoutItem
-                        itemName="Cheese corn Roll"
-                        price={260}
-                        priceUnit="$"
-                        id={2}
-                        qty={1}
-                        show={true}
-                        minValue={0}
-                        maxValue={7}
-                        getValue={this.getQty}
-                      />
-                      <CheckoutItem
-                        itemName="Mixed Veg"
-                        price={122}
-                        priceUnit="$"
-                        id={3}
-                        qty={1}
-                        show={true}
-                        minValue={0}
-                        maxValue={7}
-                        getValue={this.getQty}
-                      />
-                      <CheckoutItem
-                        itemName="Black Dal Makhani"
-                        price={652}
-                        priceUnit="$"
-                        id={1}
-                        qty={1}
-                        show={true}
-                        minValue={0}
-                        maxValue={7}
-                        getValue={this.getQty}
-                      />
-                      <CheckoutItem
-                        itemName="Mixed Veg"
-                        price={122}
-                        priceUnit="$"
-                        id={4}
-                        qty={1}
-                        show={true}
-                        minValue={0}
-                        maxValue={7}
-                        getValue={this.getQty}
-                      />
-                    </div> */}
+
                     <div className="mb-2 bg-white rounded p-2 clearfix">
                       <Image
                         fluid
