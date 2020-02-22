@@ -43,20 +43,16 @@ class Detail extends React.Component {
     const { restaurant } = this.props.restaurant;
     const restaurantMenu = this.props.restaurant.restaurantMenu;
 
-    // this brings each item in down to its most reduced form
-    const menuItems = [];
-    const items = [];
+    let menuItems = [];
+    const allItems = [];
     restaurantMenu.map(item => {
       const itemObject = item.items;
       menuItems.push(itemObject);
-      return menuItems;
     });
     menuItems.map(item => {
-      item.map(thing => {
-        items.push(thing);
-        return items;
+      item.map(singeItem => {
+        allItems.push(singeItem);
       });
-      return items;
     });
 
     return (
@@ -176,11 +172,11 @@ class Detail extends React.Component {
                           <h5 className="mb-4 mt-3 col-md-12">
                             Food Options -
                             <small className="h6 text-black-50">
-                              {items.length}
+                              {allItems.length}
                             </small>
                           </h5>
                           <Col md={12}>
-                            {items.map((foodItem, i) => {
+                            {allItems.map((foodItem, i) => {
                               return (
                                 <div
                                   className="bg-white rounded border shadow-sm mb-4"
