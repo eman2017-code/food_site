@@ -13,6 +13,7 @@ import DropDownTitle from "../common/DropDownTitle";
 import CartDropdownHeader from "../cart/CartDropdownHeader";
 import CartDropdownItem from "../cart/CartDropdownItem";
 import Icofont from "react-icofont";
+import { logoutUser } from "../../actions";
 
 class Header extends React.Component {
   constructor() {
@@ -146,6 +147,15 @@ class Header extends React.Component {
                     >
                       <Icofont icon="location-pin" /> Addresses
                     </NavDropdown.Item>
+                    {/* <NavDropdown.Item
+                      eventKey={4.5}
+                      // as={NavLink}
+                      activeclassname="active"
+                      // to="/myaccount/addresses"
+                      onClick={logoutUser()}
+                    >
+                      <Icofont icon="location-pin" /> Logout
+                    </NavDropdown.Item> */}
                   </NavDropdown>
                 ) : (
                   <NavDropdown title="Login/Register" alignRight>
@@ -261,4 +271,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { logoutUser })(Header);

@@ -41,6 +41,21 @@ export default {
     return parsedLoginResponse;
   },
 
+  // makes an api call to logout user
+  logoutUser: async () => {
+    try {
+      const response = await fetch(apiURL + "users/logout", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      const parsedResponse = await response.json();
+      return parsedResponse;
+    } catch (error) {}
+  },
+
   // index (restaurants) route
   getAllRestaurants: async () => {
     const response = await fetch(apiURL + "restaurants/");

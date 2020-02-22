@@ -34,11 +34,9 @@ export const loginUser = loginInfo => async dispatch => {
   return loginResponse;
 };
 
-export const logoutUser = user => {
-  return {
-    type: "LOGOUT_USER",
-    payload: user
-  };
+export const logoutUser = userInfo => async dispatch => {
+  const response = await apiConnector.logoutUser();
+  dispatch({ type: "LOGOUT_USER", payload: userInfo });
 };
 
 /* ----------------------
