@@ -13,11 +13,21 @@ class Addresses extends React.Component {
 	    this.state = {
 	      showDeleteModal: false,
       	  showAddressModal: false,
-	    };
+		};
+		console.log('initial addresses props:', this.props.deliveryAddresses);
 	}
 
-    hideDeleteModal = () => this.setState({ showDeleteModal: false });
-    hideAddressModal = () => this.setState({ showAddressModal: false });
+	// opens up the modal to create or edit a delivery address
+	showAddressModal = () => this.setState({ showAddressModal: true });
+	
+	// hides the modal to create or edit a delivery address
+	hideAddressModal = () => this.setState({ showAddressModal: false });
+
+	// opens up the modal to delete a delivery address
+	showDeleteModal = () => this.setState({ showDeleteModal: true });
+
+	// hides the modal to delete a delivery address
+	hideDeleteModal = () => this.setState({ showDeleteModal: false });
 
 	render() {
     	return (
@@ -28,8 +38,14 @@ class Addresses extends React.Component {
               <Row>
                <Col md={12}>
                   <h4 className="font-weight-bold mt-0 mb-3">Manage Addresses</h4>
+				  <button 
+					type="button" 
+					className="btn btn-primary"
+					onClick={this.showAddressModal}>
+						Add Delivery Address
+					</button>
                </Col>
-               <Col md={6}>
+               {/* <Col md={6}>
                	  <AddressCard 
                	  	  boxClass="border border-primary shadow"
 					  title= 'Home'
@@ -39,7 +55,7 @@ class Addresses extends React.Component {
 					  onEditClick= {() => this.setState({ showAddressModal: true })}
 					  onDeleteClick={() => this.setState({ showDeleteModal: true })}
                	  />
-               </Col>
+               </Col> */}
               </Row>
 		    </div>
 	      </>
