@@ -8,5 +8,5 @@ export default combineReducers({
   user: userReducer,
   restaurants: restaurantReducer,
   filters: filtersReducer,
-  address: addressReducer
+  addresses: addressReducer
 });

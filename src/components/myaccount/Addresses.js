@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import {Row,Col} from 'react-bootstrap';
 import AddAddressModal from '../modals/AddAddressModal';
 import DeleteAddressModal from '../modals/DeleteAddressModal';
@@ -44,4 +46,17 @@ class Addresses extends React.Component {
     	);
     }
 }
-export default Addresses;
+
+Addresses.propTypes = {
+	isLoggedIn: PropTypes.bool.isRequired,
+  	deliveryAddresses: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => {
+	return {
+		isLoggedIn: state.user.isLoggedIn,
+		deliveryAddresses: state.addresses.deliveryAddresses
+	}
+}
+
+export default connect(mapStateToProps, {})(Addresses);
