@@ -147,7 +147,7 @@ class Header extends React.Component {
                     >
                       <Icofont icon="location-pin" /> Addresses
                     </NavDropdown.Item>
-                    {/* <NavDropdown.Item
+                    <NavDropdown.Item
                       eventKey={4.5}
                       // as={NavLink}
                       activeclassname="active"
@@ -155,7 +155,7 @@ class Header extends React.Component {
                       onClick={logoutUser()}
                     >
                       <Icofont icon="location-pin" /> Logout
-                    </NavDropdown.Item> */}
+                    </NavDropdown.Item> 
                   </NavDropdown>
                 ) : (
                   <NavDropdown title="Login/Register" alignRight>
