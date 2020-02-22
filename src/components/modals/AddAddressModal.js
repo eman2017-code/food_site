@@ -4,6 +4,16 @@ import Icofont from 'react-icofont';
 
 class AddAddressModal extends React.Component {
 
+	constructor(props) {
+		super(props);
+		
+		this.state = {
+			name: '',
+			address: '',			
+			instructions: ''	
+		}
+	} 
+
 	handleSubmit = () => {
 		console.log('form submitted');
 		this.props.onHide();
