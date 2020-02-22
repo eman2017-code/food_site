@@ -33,7 +33,10 @@ class Addresses extends React.Component {
 	render() {
     	return (
 	      <>
-	        <AddAddressModal show={this.state.showAddressModal} onHide={this.hideAddressModal}/>
+			<AddAddressModal 
+				show={this.state.showAddressModal}
+				onHide={this.hideAddressModal}  
+				addDeliveryAddress={this.props.addDeliveryAddress} />
 	        <DeleteAddressModal show={this.state.showDeleteModal} onHide={this.hideDeleteModal}/>
 		    <div className='p-4 bg-white shadow-sm'>
               <Row>

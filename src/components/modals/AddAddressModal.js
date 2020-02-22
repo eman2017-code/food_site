@@ -4,6 +4,11 @@ import Icofont from 'react-icofont';
 
 class AddAddressModal extends React.Component {
 
+	handleSubmit = () => {
+		console.log('form submitted');
+		this.props.onHide();
+	}
+
 	render() {
     	return (
 	        <Modal 
@@ -57,10 +62,17 @@ class AddAddressModal extends React.Component {
 
 			  <Modal.Footer>
 			    <Button type='button' onClick={this.props.onHide} variant="outline-primary" className="d-flex w-50 text-center justify-content-center">CANCEL</Button>
-			    <Button type='button' variant="primary" className='d-flex w-50 text-center justify-content-center'>SUBMIT</Button>
+				<Button 
+					type='button' 
+					variant="primary" 
+					className='d-flex w-50 text-center justify-content-center'
+					onClick={this.handleSubmit}>
+						SUBMIT
+					</Button>
 			  </Modal.Footer>
 			</Modal>
     	);
     }
 }
+
 export default AddAddressModal;
