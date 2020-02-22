@@ -33,39 +33,27 @@ class AddAddressModal extends React.Component {
 			  <Modal.Body>
   				<Form>
              <div className="form-row">
-                <Form.Group className="col-md-12">
-                   <Form.Label>Delivery Area</Form.Label>
-                   <InputGroup>
-                      <Form.Control type="text" placeholder="Delivery Area" />
-                      <InputGroup.Append>
-                         <Button variant="outline-secondary" type="button" id="button-addon2"><Icofont icon="ui-pointer"/></Button>
-                      </InputGroup.Append>
-                   </InputGroup>
+
+				<Form.Group className="col-md-12">
+                   <Form.Label>Name</Form.Label>
+                   <Form.Control type="text" placeholder="Provide a name for this delivery address" />
                 </Form.Group>
+
                 <Form.Group className="col-md-12">
                    <Form.Label>Complete Address</Form.Label>
-                   <Form.Control type="text" placeholder="Complete Address e.g. house number, street name, landmark" />
+				   <InputGroup>
+				   		<Form.Control type="text" placeholder="Complete Address e.g. house number, street name, landmark" />
+				   		<InputGroup.Append>
+                        	<Button variant="outline-secondary" type="button" id="button-addon2"><Icofont icon="ui-pointer"/></Button>
+                      	</InputGroup.Append>
+				   </InputGroup>
                 </Form.Group>
+
                 <Form.Group className="col-md-12">
                    <Form.Label>Delivery Instructions</Form.Label>
                    <Form.Control type="text" placeholder="Delivery Instructions e.g. Opposite Gold Souk Mall" />
                 </Form.Group>
-                <Form.Group className="mb-0 col-md-12">
-                   <Form.Label>Nickname</Form.Label>
-                   <ButtonToolbar>
-                      <ToggleButtonGroup className="d-flex w-100" type="radio" name="options" defaultValue={1}>
-    							    <ToggleButton variant='info' value={1}>
-    							      Home
-    							    </ToggleButton>
-    							    <ToggleButton variant='info' value={2}>
-    							      Work
-    							    </ToggleButton>
-    							    <ToggleButton variant='info' value={3}>
-    							      Other
-    							    </ToggleButton>
-        					    </ToggleButtonGroup>
-    						  </ButtonToolbar>
-                </Form.Group>
+
              </div>
           </Form>      
 			  </Modal.Body>
