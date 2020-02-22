@@ -149,10 +149,10 @@ class Header extends React.Component {
                     </NavDropdown.Item>
                     <NavDropdown.Item
                       eventKey={4.5}
-                      // as={NavLink}
+                      as={NavLink}
                       activeclassname="active"
-                      // to="/myaccount/addresses"
-                      onClick={logoutUser()}
+                      to="/"
+                      onClick={this.props.logoutUser}
                     >
                       <Icofont icon="location-pin" /> Logout
                     </NavDropdown.Item> 
