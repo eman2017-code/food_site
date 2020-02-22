@@ -38,61 +38,6 @@ class Addresses extends React.Component {
 					  onDeleteClick={() => this.setState({ showDeleteModal: true })}
                	  />
                </Col>
-               <Col md={6}>
-               	  <AddressCard 
-               	  	  boxClass="shadow-sm"
-					  title= 'Work'
-					  icoIcon= 'briefcase'
-					  iconclassName= 'icofont-3x'
-					  address= 'NCC, Model Town Rd, Pritm Nagar, Model Town, Ludhiana, Punjab 141002, India'
-					  onEditClick= {() => this.setState({ showAddressModal: true })}
-					  onDeleteClick={() => this.setState({ showDeleteModal: true })}
-               	  />
-               </Col>
-               <Col md={6}>
-               	  <AddressCard 
-               	  	  boxClass="shadow-sm"
-					  title= 'Other'
-					  icoIcon= 'location-pin'
-					  iconclassName= 'icofont-3x'
-					  address= 'Delhi Bypass Rd, Jawaddi Taksal, Ludhiana, Punjab 141002, India'
-					  onEditClick= {() => this.setState({ showAddressModal: true })}
-					  onDeleteClick={() => this.setState({ showDeleteModal: true })}
-               	  />
-               </Col>
-               <Col md={6}>
-               	  <AddressCard 
-               	  	  boxClass="shadow-sm"
-					  title= 'Other'
-					  icoIcon= 'location-pin'
-					  iconclassName= 'icofont-3x'
-					  address= 'MT, Model Town Rd, Pritm Nagar, Model Town, Ludhiana, Punjab 141002, India'
-					  onEditClick= {() => this.setState({ showAddressModal: true })}
-					  onDeleteClick={() => this.setState({ showDeleteModal: true })}
-               	  />
-               </Col>
-               <Col md={6}>
-               	  <AddressCard 
-               	  	  boxClass="shadow-sm"
-					  title= 'Other'
-					  icoIcon= 'location-pin'
-					  iconclassName= 'icofont-3x'
-					  address= 'GNE Rd, Jawaddi Taksal, Ludhiana, Punjab 141002, India'
-					  onEditClick= {() => this.setState({ showAddressModal: true })}
-					  onDeleteClick={() => this.setState({ showDeleteModal: true })}
-               	  />
-               </Col>
-               <Col md={6}>
-               	  <AddressCard 
-               	  	  boxClass="shadow-sm"
-					  title= 'Other'
-					  icoIcon= 'location-pin'
-					  iconclassName= 'icofont-3x'
-					  address= 'GTTT, Model Town Rd, Pritm Nagar, Model Town, Ludhiana, Punjab 141002, India'
-					  onEditClick= {() => this.setState({ showAddressModal: true })}
-					  onDeleteClick={() => this.setState({ showDeleteModal: true })}
-               	  />
-               </Col>
               </Row>
 		    </div>
 	      </>
