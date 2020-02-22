@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { addDeliveryAddress } from '../../actions';
 import {Row,Col} from 'react-bootstrap';
 import AddAddressModal from '../modals/AddAddressModal';
 import DeleteAddressModal from '../modals/DeleteAddressModal';
@@ -75,4 +76,4 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps, {})(Addresses);
+export default connect(mapStateToProps, { addDeliveryAddress })(Addresses);

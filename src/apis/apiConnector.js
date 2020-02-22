@@ -87,5 +87,26 @@ export default {
     );
     const parsedResponse = await response.json();
     return parsedResponse.data;
+  },
+
+  // creates a delivery address for the user
+  addDeliveryAddress: async deliveryAddress => {
+    const response = await fetch(apiURL + 'addresses/', {
+      method: 'POST',
+      credentials: "include",
+      body: JSON.stringify(deliveryAddress),
+      headers: {
+        'Content-type': 'application/json'
+      }
+    });
+    const parsedResponse = await response.json();
+    console.log('response in api connector:', parsedResponse);
+
+    return parsedResponse;
   }
+
 };
+
+
+
+
