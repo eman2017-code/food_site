@@ -14,6 +14,12 @@ class AddAddressModal extends React.Component {
 		}
 	} 
 
+	handleChange = e => {
+		this.setState({
+			[e.target.name]: e.target.value
+		})
+	}
+
 	handleSubmit = () => {
 		console.log('form submitted');
 		this.props.onHide();
@@ -36,13 +42,23 @@ class AddAddressModal extends React.Component {
 
 				<Form.Group className="col-md-12">
                    <Form.Label>Name</Form.Label>
-                   <Form.Control type="text" placeholder="Provide a name for this delivery address" />
+				   <Form.Control 
+					   type="text"
+					   name="name"
+					   value={this.state.name}
+					   onChange={this.handleChange} 
+					   placeholder="Provide a name for this delivery address" />
                 </Form.Group>
 
                 <Form.Group className="col-md-12">
                    <Form.Label>Complete Address</Form.Label>
 				   <InputGroup>
-				   		<Form.Control type="text" placeholder="Complete Address e.g. house number, street name, landmark" />
+						<Form.Control 
+						   type="text" 
+						   name="address"
+						   value={this.state.address}
+						   onChange={this.handleChange}
+						   placeholder="Complete Address e.g. house number, street name, landmark" />
 				   		<InputGroup.Append>
                         	<Button variant="outline-secondary" type="button" id="button-addon2"><Icofont icon="ui-pointer"/></Button>
                       	</InputGroup.Append>
@@ -51,7 +67,12 @@ class AddAddressModal extends React.Component {
 
                 <Form.Group className="col-md-12">
                    <Form.Label>Delivery Instructions</Form.Label>
-                   <Form.Control type="text" placeholder="Delivery Instructions e.g. Opposite Gold Souk Mall" />
+				   <Form.Control 
+					    type="text"
+					    name="instructions"
+					    value={this.state.instructions}
+						onChange={this.handleChange}
+				        placeholder="Delivery Instructions e.g. Opposite Gold Souk Mall" />
                 </Form.Group>
 
              </div>
