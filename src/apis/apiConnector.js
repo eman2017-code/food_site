@@ -91,6 +91,16 @@ export default {
     return parsedResponse.data;
   },
 
+  // gets all of the users delivery addresses
+  getUsersDeliveryAddresses: async () => {
+    const response = await fetch(apiURL + 'addresses/', {
+      method: 'GET',
+      credentials: 'include'
+    });
+    const parsedResponse = await response.json();
+    return parsedResponse;
+  },
+
   // creates a delivery address for the user
   addDeliveryAddress: async deliveryAddress => {
     const response = await fetch(apiURL + 'addresses/', {

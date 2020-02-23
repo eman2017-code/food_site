@@ -103,11 +103,20 @@ export const removeFoodTypeFilter = foodType => dispatch => {
   });
 };
 
+// action for getting all of the users delivery addresses
+export const getUsersDeliveryAddresses = () => async dispatch => {
+  const response = await apiConnector.getUsersDeliveryAddresses();
+
+  dispatch({
+    type: 'SET_DELIVERY_ADDRESSES',
+    payload: response.data
+  });
+}
+
 
 // action for adding a new delivery address
 export const addDeliveryAddress = deliveryAddress => async dispatch => {
   const response = await apiConnector.addDeliveryAddress(deliveryAddress);
-  console.log('add delivery address response in action:', response);
 
   if (response.status.code === 201) {
     dispatch({

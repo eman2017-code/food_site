@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { addDeliveryAddress } from '../../actions';
+import { getUsersDeliveryAddresses, addDeliveryAddress } from '../../actions';
 import {Row,Col} from 'react-bootstrap';
 import AddAddressModal from '../modals/AddAddressModal';
 import DeleteAddressModal from '../modals/DeleteAddressModal';
@@ -15,7 +15,10 @@ class Addresses extends React.Component {
 	      showDeleteModal: false,
       	  showAddressModal: false,
 		};
-		console.log('initial addresses props:', this.props.deliveryAddresses);
+	}
+
+	componentDidMount() {
+		this.props.getUsersDeliveryAddresses();
 	}
 
 	// opens up the modal to create or edit a delivery address
@@ -98,4 +101,4 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps, { addDeliveryAddress })(Addresses);
+export default connect(mapStateToProps, { getUsersDeliveryAddresses, addDeliveryAddress })(Addresses);
