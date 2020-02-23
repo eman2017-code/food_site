@@ -26,10 +26,18 @@ class Addresses extends React.Component {
 	}
 
 	// opens up the modal to create or edit a delivery address
-	showAddressModal = () => this.setState({ showAddressModal: true });
+	showAddressModal = () => {
+		this.setState({ 
+			showAddressModal: true 
+		});
+	}
 	
 	// hides the modal to create or edit a delivery address
-	hideAddressModal = () => this.setState({ showAddressModal: false });
+	hideAddressModal = () => {
+		this.setState({ 
+			showAddressModal: false 
+		});
+	}
 
 	// opens up the modal to delete a delivery address
 	showDeleteModal = (addressId) => {
@@ -40,7 +48,12 @@ class Addresses extends React.Component {
 	}
 
 	// hides the modal to delete a delivery address
-	hideDeleteModal = () => this.setState({ showDeleteModal: false });
+	hideDeleteModal = () => {
+		this.setState({ 
+			addressToDelete: 0,
+			showDeleteModal: false 
+		});
+	}
 
 
 	// opens the modal to edit an address
