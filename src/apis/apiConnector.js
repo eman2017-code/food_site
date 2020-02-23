@@ -117,7 +117,7 @@ export default {
 
   // deletes a users delivery address
   deleteDeliveryAddress: async addressId => {
-    const response = await fetch(apiURL + 'addresses/' + addressId + '/', {
+    const response = await fetch(apiURL + 'addresses/' + addressId, {
       method: 'DELETE',
       credentials: 'include'
     })

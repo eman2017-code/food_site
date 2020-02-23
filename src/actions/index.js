@@ -130,7 +130,12 @@ export const deleteDeliveryAddress = (addressId) => async dispatch => {
   const response = await apiConnector.deleteDeliveryAddress(addressId);
   console.log('response:', response);
 
-  dispatch({});
+  if (response.status.code === 204) {
+    dispatch({
+      type: 'DELETE_DELIVERY_ADDRESS',
+      payload: response.data
+    });
+  }
 }
 
 

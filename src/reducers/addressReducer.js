@@ -22,6 +22,14 @@ export default function addressReducer(state = initialState, action) {
                 deliveryAddresses: [...state.deliveryAddresses, action.payload]
             }
 
+        // deletes a single delivery address
+        case 'DELETE_DELIVERY_ADDRESS':
+            const newDeliveryAddresses = state.deliveryAddresses.filter(address => address.id != action.payload);
+            return {
+                ...state,
+                deliveryAddresses: newDeliveryAddresses
+            }
+
         default:
             return state;
     }
