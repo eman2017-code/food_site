@@ -155,7 +155,7 @@ class Header extends React.Component {
                       onClick={this.props.logoutUser}
                     >
                       <Icofont icon="location-pin" /> Logout
-                    </NavDropdown.Item> 
+                    </NavDropdown.Item>
                   </NavDropdown>
                 ) : (
                   <NavDropdown title="Login/Register" alignRight>

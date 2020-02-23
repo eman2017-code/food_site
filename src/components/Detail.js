@@ -18,6 +18,8 @@ import ItemsCarousel from "./common/ItemsCarousel";
 import QuickBite from "./common/QuickBite";
 import Icofont from "react-icofont";
 import Header from "./common/Header";
+import Checkout from "./Checkout";
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
 class Detail extends React.Component {
   constructor(props, context) {
@@ -314,31 +316,19 @@ class Detail extends React.Component {
                       <Icofont icon="sale-discount" />
                     </div>
                   </div>
-                  <div className="generator-bg rounded shadow-sm mb-4 p-4 osahan-cart-item">
-                    <h5 className="mb-1 text-white">Your Order</h5>
-                    <p className="mb-4 text-white">
-                      # of items in cart go here
-                    </p>
+                  {/* <div className="generator-bg rounded shadow-sm mb-4 p-4 osahan-cart-item"></div> */}
+                  <Map google={this.props.google} zoom={14}>
+                    <Marker
+                      onClick={this.onMarkerClick}
+                      name={"Current location"}
+                    />
 
-                    <div className="mb-2 bg-white rounded p-2 clearfix">
-                      <Image
-                        fluid
-                        className="float-left"
-                        src="/img/wallet-icon.png"
-                      />
-                      <h6 className="font-weight-bold text-right mb-2">
-                        Total :{" "}
-                        <span className="text-danger">input price here</span>
-                      </h6>
-                    </div>
-                    <Link
-                      to="/thanks"
-                      className="btn btn-success btn-block btn-lg"
-                    >
-                      Checkout
-                      <Icofont icon="long-arrow-right" />
-                    </Link>
-                  </div>
+                    <InfoWindow onClose={this.onInfoWindowClose}>
+                      {/* <div>
+                        <h1>{this.state.selectedPlace.name}</h1>
+                      </div> */}
+                    </InfoWindow>
+                  </Map>
                 </Col>
               </Row>
             </Container>
@@ -355,6 +345,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {
-  fetchSingleRestaurantMenu
-})(Detail);
+export default connect(mapStateToProps, { fetchSingleRestaurantMenu })(
+  GoogleApiWrapper({ apiKey: "AIzaSyAwys_T011D2gi6mub7ycQsfYKXHoh5HGA" })(
+    Detail
+  )
+);
