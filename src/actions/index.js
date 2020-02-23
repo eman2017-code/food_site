@@ -133,7 +133,7 @@ export const deleteDeliveryAddress = (addressId) => async dispatch => {
   if (response.status.code === 204) {
     dispatch({
       type: 'DELETE_DELIVERY_ADDRESS',
-      payload: response.data
+      payload: addressId
     });
   }
 }
