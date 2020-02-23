@@ -88,7 +88,7 @@ class Addresses extends React.Component {
 					onHide={this.hideEditAddressModal} 
 					addressToEdit={this.state.addressToEdit} />
 				:
-				<></>
+				null
 			}	
 			
 			<DeleteAddressModal 
@@ -123,20 +123,7 @@ class Addresses extends React.Component {
                			</Col>
 					)
 				})
-				
 				}
-
-               {/* <Col md={6}>
-               	  <AddressCard 
-               	  	  boxClass="border border-primary shadow"
-					  title= 'Home'
-					  icoIcon= 'ui-home'
-					  iconclassName= 'icofont-3x'
-					  address= 'Osahan House, Jawaddi Kalan, Ludhiana, Punjab 141002, India'
-					  onEditClick= {() => this.setState({ showAddressModal: true })}
-					  onDeleteClick={() => this.setState({ showDeleteModal: true })}
-               	  />
-               </Col> */}
               </Row>
 		    </div>
 	      </>

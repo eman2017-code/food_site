@@ -24,7 +24,7 @@ class EditAddressModal extends React.Component {
 	}
 
 	handleSubmit = () => {
-		this.props.addDeliveryAddress(this.state);
+		this.props.editDeliveryAddress(this.state);
 		this.props.onHide();
 	}
 

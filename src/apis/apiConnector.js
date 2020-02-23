@@ -115,12 +115,26 @@ export default {
     return parsedResponse;
   },
 
+  // updates a users delivery address
+  updateDeliveryAddress: async deliveryAddress => {
+    const response = await fetch(apiURL + 'addresses/' + deliveryAddress.id, {
+      method: 'PUT',
+      credentials: 'include',
+      body: JSON.stringify(deliveryAddress),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const parsedResponse = await response.json();
+    return parsedResponse;
+  },
+
   // deletes a users delivery address
   deleteDeliveryAddress: async addressId => {
     const response = await fetch(apiURL + 'addresses/' + addressId, {
       method: 'DELETE',
       credentials: 'include'
-    })
+    });
     const parsedResponse = await response.json();
     return parsedResponse;
   }
