@@ -16,7 +16,7 @@ class Addresses extends React.Component {
 	      showDeleteModal: false,
 		  showAddressModal: false,
 		  showEditAddressModal: false,
-		  addressToEdit: null,
+		  addressToEdit: undefined,
 		  addressToDelete: 0
 		};
 	}
@@ -65,10 +65,19 @@ class Addresses extends React.Component {
 			<AddAddressModal 
 				show={this.state.showAddressModal}
 				onHide={this.hideAddressModal}  />
-			<EditAddressModal 
-				show={this.state.showEditAddressModal}
-				onHide={this.hideEditAddressModal} 
-				addressToEdit={this.state.addressToEdit} />
+
+
+			{
+				this.state.showEditAddressModal 
+				?
+				<EditAddressModal 
+					show={this.state.showEditAddressModal}
+					onHide={this.hideEditAddressModal} 
+					addressToEdit={this.state.addressToEdit} />
+				:
+				<></>
+			}	
+			
 			<DeleteAddressModal 
 				show={this.state.showDeleteModal}
 				onHide={this.hideDeleteModal} 

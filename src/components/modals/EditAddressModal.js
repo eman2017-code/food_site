@@ -9,11 +9,11 @@ class EditAddressModal extends React.Component {
 
 	constructor(props) {
 		super(props);
-		
+	
 		this.state = {
-			name: '',
-			address: '',			
-			instructions: ''	
+			name: props.addressToEdit.name || '',
+			address: props.addressToEdit.address || '',			
+			instructions: props.addressToEdit.instructions || ''
 		}
 	} 
 
