@@ -62,8 +62,8 @@ class Addresses extends React.Component {
 					  			icoIcon= 'ui-home'
 					  			iconclassName= 'icofont-3x'
 					  			address={address.address}
-					  			onEditClick= {() => this.setState({ showAddressModal: true })}
-					  			onDeleteClick={() => this.setState({ showDeleteModal: true })}
+					  			onEditClick= {this.showAddressModal}
+					  			onDeleteClick={this.showDeleteModal}
                	  			/>
                			</Col>
 					)

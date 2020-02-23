@@ -113,6 +113,16 @@ export default {
     });
     const parsedResponse = await response.json();
     return parsedResponse;
+  },
+
+  // deletes a users delivery address
+  deleteDeliveryAddress: async addressId => {
+    const response = await fetch(apiURL + 'addresses/' + addressId + '/', {
+      method: 'DELETE',
+      credentials: 'include'
+    })
+    const parsedResponse = await response.json();
+    return parsedResponse;
   }
 
 };

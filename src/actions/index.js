@@ -113,7 +113,6 @@ export const getUsersDeliveryAddresses = () => async dispatch => {
   });
 }
 
-
 // action for adding a new delivery address
 export const addDeliveryAddress = deliveryAddress => async dispatch => {
   const response = await apiConnector.addDeliveryAddress(deliveryAddress);
@@ -124,6 +123,14 @@ export const addDeliveryAddress = deliveryAddress => async dispatch => {
       payload: response.data
     });
   }
+}
+
+// action for deleting a delivery address 
+export const deleteDeliveryAddress = (addressId) => async dispatch => {
+  const response = await apiConnector.deleteDeliveryAddress(addressId);
+  console.log('response:', response);
+
+  dispatch({});
 }
 
 

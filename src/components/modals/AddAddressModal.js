@@ -24,10 +24,7 @@ class AddAddressModal extends React.Component {
 	}
 
 	handleSubmit = () => {
-		console.log('form submitted');
-
 		this.props.addDeliveryAddress(this.state);
-
 		this.props.onHide();
 	}
 
