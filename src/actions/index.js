@@ -44,11 +44,6 @@ export const logoutUser = () => async dispatch => {
     restaurant api calls 
   ----------------------- */
 
-export const listRestaurants = () => async dispatch => {
-  const response = await apiConnector.getAllRestaurants();
-  dispatch({ type: "LIST_RESTAURANTS", payload: response });
-};
-
 const _fetchSingleRestaurant = _.memoize(
   async (restaurant_api_key, dispatch) => {
     const response = await apiConnector.getIndividualRestaurant(

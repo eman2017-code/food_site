@@ -42,7 +42,14 @@ class TopSearch extends React.Component {
   render() {
     // redirects user to listing page after form submission to show restaurants near by
     if (this.state.formSubmitted) {
-      return <Redirect to="/listing" />;
+      return (
+        <Redirect
+          to={{
+            pathname: "/listing",
+            state: { address: this.state.address }
+          }}
+        />
+      );
     }
 
     return (
@@ -73,9 +80,6 @@ class TopSearch extends React.Component {
                         placeholder="Enter your delivery location"
                         size="lg"
                       />
-                      <Link className="locate-me" to="#">
-                        <Icofont icon="ui-pointer" /> Locate Me
-                      </Link>
                     </Form.Group>
                     <Form.Group className="col-lg-2 col-md-2 col-sm-12">
                       <Button

@@ -1,5 +1,3 @@
-// import axios from "axios";
-
 /* This is where all of the api calls are made to talk to the API */
 
 /* This allows us to switch url for production and testing purposes */
@@ -54,13 +52,6 @@ export default {
       const parsedResponse = await response.json();
       return parsedResponse;
     } catch (error) {}
-  },
-
-  // index (restaurants) route
-  getAllRestaurants: async () => {
-    const response = await fetch(apiURL + "restaurants/");
-    const parsedResponse = await response.json();
-    return parsedResponse.data;
   },
 
   // makes api call to get restaurants near a address

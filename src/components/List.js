@@ -1,10 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  listRestaurants,
-  setFoodTypeFilter,
-  removeFoodTypeFilter
-} from "../actions";
+import { setFoodTypeFilter, removeFoodTypeFilter } from "../actions";
 import { restaurantFilter } from "../filters/restaurantFilter.js";
 import { Link } from "react-router-dom";
 import {
@@ -29,13 +25,12 @@ class List extends React.Component {
     super(props);
 
     this.state = {
-      isLoading: true
+      isLoading: true,
+      restaurants: this.props.restaurants
     };
   }
 
   async componentDidMount() {
-    await this.props.listRestaurants();
-
     // hides loading icon after request to get all restaurants is finished
     this.setState({ isLoading: false });
   }
@@ -61,8 +56,6 @@ class List extends React.Component {
   };
 
   render() {
-    const { restaurants } = this.props;
-
     return (
       <>
         {this.props.location.pathname !== "/login" &&
@@ -368,7 +361,7 @@ class List extends React.Component {
                 ) : (
                   /* once done loading the restuarants are displayed */
 
-                  restaurants.map((restaurant, i) => {
+                  this.state.restaurants.map((restaurant, i) => {
                     return (
                       <div className="grid-container" key={i}>
                         <div className="grid-item">
@@ -415,7 +408,6 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  listRestaurants,
   setFoodTypeFilter,
   removeFoodTypeFilter
 })(List);

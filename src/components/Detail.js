@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchSingleRestaurantMenu, setUserCart } from "../actions";
+import { fetchSingleRestaurantMenu } from "../actions";
 import {
   Row,
   Col,
@@ -37,7 +37,6 @@ class Detail extends React.Component {
 
   componentDidMount() {
     this.props.fetchSingleRestaurantMenu(this.state.restaurant_api_key);
-    this.props.setUserCart();
   }
 
   render() {
@@ -357,6 +356,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  fetchSingleRestaurantMenu,
-  setUserCart
+  fetchSingleRestaurantMenu
 })(Detail);

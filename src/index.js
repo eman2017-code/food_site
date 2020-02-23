@@ -30,7 +30,7 @@ import "font-awesome/css/font-awesome.min.css";
 import "react-select2-wrapper/css/select2.css";
 import "react-toastify/dist/ReactToastify.css";
 
-// const middleWare = applyMiddleware(thunk);
+// notifications
 toast.configure();
 
 class RootContainer extends React.Component {
@@ -38,10 +38,7 @@ class RootContainer extends React.Component {
     return (
       <Provider store={store}>
         <BrowserRouter basename={"/"}>
-          <ToastContainer
-            autoClose={2000}
-            position={toast.POSITION.TOP_CENTER}
-          />
+          <ToastContainer autoClose={2000} position={toast.POSITION.TOP_LEFT} />
           <Switch>
             <Route path="/" exact component={Index} />
             <Route path="/offers" exact component={Offers} />
