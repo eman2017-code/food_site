@@ -102,8 +102,6 @@ export default {
       }
     });
     const parsedResponse = await response.json();
-    console.log('response in api connector:', parsedResponse);
-
     return parsedResponse;
   }
 

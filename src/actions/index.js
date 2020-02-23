@@ -109,7 +109,12 @@ export const addDeliveryAddress = deliveryAddress => async dispatch => {
   const response = await apiConnector.addDeliveryAddress(deliveryAddress);
   console.log('add delivery address response in action:', response);
 
-  dispatch({});
+  if (response.status.code === 201) {
+    dispatch({
+      type: 'ADD_DELIVERY_ADDRESS',
+      payload: response.data
+    });
+  }
 }
 
 
