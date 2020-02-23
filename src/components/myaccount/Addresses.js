@@ -39,7 +39,7 @@ class Addresses extends React.Component {
 	        <DeleteAddressModal show={this.state.showDeleteModal} onHide={this.hideDeleteModal}/>
 		    <div className='p-4 bg-white shadow-sm'>
               <Row>
-               <Col md={12}>
+               <Col md={12} className="pb-4">
                   <h4 className="font-weight-bold mt-0 mb-3">Manage Addresses</h4>
 				  <button 
 					type="button" 
@@ -48,6 +48,26 @@ class Addresses extends React.Component {
 						Add Delivery Address
 					</button>
                </Col>
+
+				{
+				this.props.deliveryAddresses.map(address => {
+					return (
+						<Col md={6} key={address.id}>
+               	  			<AddressCard 
+               	  	  			boxClass="border border-primary shadow"
+					  			title={address.name}
+					  			icoIcon= 'ui-home'
+					  			iconclassName= 'icofont-3x'
+					  			address={address.address}
+					  			onEditClick= {() => this.setState({ showAddressModal: true })}
+					  			onDeleteClick={() => this.setState({ showDeleteModal: true })}
+               	  			/>
+               			</Col>
+					)
+				})
+				
+				}
+
                {/* <Col md={6}>
                	  <AddressCard 
                	  	  boxClass="border border-primary shadow"
