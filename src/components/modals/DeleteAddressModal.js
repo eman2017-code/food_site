@@ -1,7 +1,15 @@
 import React from 'react';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { deleteDeliveryAddress } from '../../actions';
 import {Modal,Button} from 'react-bootstrap';
 
 class DeleteAddressModal extends React.Component {
+
+
+	handleDeleteAddressClick = () => {
+
+	}
 
 	render() {
     	return (
@@ -20,11 +28,26 @@ class DeleteAddressModal extends React.Component {
 			  </Modal.Body>
 
 			  <Modal.Footer>
-			    <Button type='button' onClick={this.props.onHide} variant="outline-primary" className="d-flex w-50 text-center justify-content-center">CANCEL</Button>
-			    <Button type='button' variant="primary" className='d-flex w-50 text-center justify-content-center'>DELETE</Button>
+				<Button 
+					type='button' 
+					onClick={this.props.onHide} 
+					variant="outline-primary" 
+					className="d-flex w-50 text-center justify-content-center"
+				>
+					CANCEL
+				</Button>
+				<Button 
+					type='button' 
+					onClick={this.handleDeleteAddressClick}
+					variant="primary" 
+					className='d-flex w-50 text-center justify-content-center'
+				>
+					DELETE
+				</Button>
 			  </Modal.Footer>
 			</Modal>
     	);
     }
 }
-export default DeleteAddressModal;
+
+export default connect(null, { deleteDeliveryAddress })(DeleteAddressModal);
