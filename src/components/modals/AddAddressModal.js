@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { addDeliveryAddress } from '../../actions';
 import {Form,InputGroup,Modal,ButtonToolbar,Button,ToggleButton,ToggleButtonGroup} from 'react-bootstrap';
 import Icofont from 'react-icofont';
 
@@ -22,6 +25,9 @@ class AddAddressModal extends React.Component {
 
 	handleSubmit = () => {
 		console.log('form submitted');
+
+		this.props.addDeliveryAddress(this.state);
+
 		this.props.onHide();
 	}
 
@@ -94,4 +100,6 @@ class AddAddressModal extends React.Component {
     }
 }
 
-export default AddAddressModal;
+
+export default connect(null, { addDeliveryAddress })(AddAddressModal);
+

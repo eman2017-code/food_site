@@ -35,8 +35,7 @@ class Addresses extends React.Component {
 	      <>
 			<AddAddressModal 
 				show={this.state.showAddressModal}
-				onHide={this.hideAddressModal}  
-				addDeliveryAddress={this.props.addDeliveryAddress} />
+				onHide={this.hideAddressModal}  />
 	        <DeleteAddressModal show={this.state.showDeleteModal} onHide={this.hideDeleteModal}/>
 		    <div className='p-4 bg-white shadow-sm'>
               <Row>

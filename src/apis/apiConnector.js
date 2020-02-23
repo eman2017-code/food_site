@@ -18,6 +18,7 @@ export default {
     try {
       const response = await fetch(apiURL + "users/register", {
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify(registrationInfo),
         headers: {
           "Content-Type": "application/json"
@@ -32,6 +33,7 @@ export default {
   loginUser: async loginInfo => {
     const loginResponse = await fetch(apiURL + "users/login", {
       method: "POST",
+      credentials: 'include',
       body: JSON.stringify(loginInfo),
       headers: {
         "Content-Type": "application/json"
@@ -93,10 +95,10 @@ export default {
   addDeliveryAddress: async deliveryAddress => {
     const response = await fetch(apiURL + 'addresses/', {
       method: 'POST',
-      credentials: "include",
+      credentials: 'include',
       body: JSON.stringify(deliveryAddress),
       headers: {
-        'Content-type': 'application/json'
+        'Content-Type': 'application/json'
       }
     });
     const parsedResponse = await response.json();
