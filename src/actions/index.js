@@ -101,3 +101,9 @@ export const removeFoodTypeFilter = foodType => dispatch => {
 /* ----------------------
     cart api calls 
   ----------------------- */
+export const createUserCart = items => dispatch => {
+  dispatch({
+    type: "CREATE_USER_CART",
+    payload: items
+  });
+};
