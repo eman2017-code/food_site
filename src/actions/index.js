@@ -102,3 +102,12 @@ export const removeFoodTypeFilter = foodType => dispatch => {
     payload: foodType
   });
 };
+
+/* ----------------------
+    cart api calls 
+  ----------------------- */
+export const setUserCart = () => async dispatch => {
+  const response = await apiConnector.setUserCart();
+  console.log(response);
+  dispatch({ type: "SET_USERS_CART", payload: response });
+};
