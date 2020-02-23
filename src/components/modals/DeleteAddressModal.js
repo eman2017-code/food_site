@@ -8,7 +8,7 @@ class DeleteAddressModal extends React.Component {
 
 
 	handleDeleteAddressClick = () => {
-
+		console.log('address id:', this.props.addressToDelete);
 	}
 
 	render() {
@@ -24,7 +24,7 @@ class DeleteAddressModal extends React.Component {
 			  </Modal.Header>
 
 			  <Modal.Body>
-  				<p className="mb-0 text-black">Are you sure you want to delete this xxxxx?</p>   
+  				<p className="mb-0 text-black">Are you sure you want to delete this delivery address?</p>   
 			  </Modal.Body>
 
 			  <Modal.Footer>

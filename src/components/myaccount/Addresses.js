@@ -13,7 +13,8 @@ class Addresses extends React.Component {
 
 	    this.state = {
 	      showDeleteModal: false,
-      	  showAddressModal: false,
+		  showAddressModal: false,
+		  addressToDelete: 0
 		};
 	}
 
@@ -28,7 +29,13 @@ class Addresses extends React.Component {
 	hideAddressModal = () => this.setState({ showAddressModal: false });
 
 	// opens up the modal to delete a delivery address
-	showDeleteModal = () => this.setState({ showDeleteModal: true });
+	showDeleteModal = (addressId) => {
+		console.log('address id:', addressId);
+		this.setState({ 
+			addressToDelete: addressId,
+			showDeleteModal: true 
+		});
+	}
 
 	// hides the modal to delete a delivery address
 	hideDeleteModal = () => this.setState({ showDeleteModal: false });
@@ -39,7 +46,10 @@ class Addresses extends React.Component {
 			<AddAddressModal 
 				show={this.state.showAddressModal}
 				onHide={this.hideAddressModal}  />
-	        <DeleteAddressModal show={this.state.showDeleteModal} onHide={this.hideDeleteModal}/>
+			<DeleteAddressModal 
+				show={this.state.showDeleteModal}
+				onHide={this.hideDeleteModal} 
+				addressToDelete={this.state.addressToDelete}/>
 		    <div className='p-4 bg-white shadow-sm'>
               <Row>
                <Col md={12} className="pb-4">
@@ -56,14 +66,14 @@ class Addresses extends React.Component {
 				this.props.deliveryAddresses.map(address => {
 					return (
 						<Col md={6} key={address.id}>
-               	  			<AddressCard 
+							<AddressCard  
                	  	  			boxClass="border border-primary shadow"
 					  			title={address.name}
 					  			icoIcon= 'ui-home'
 					  			iconclassName= 'icofont-3x'
 					  			address={address.address}
 					  			onEditClick= {this.showAddressModal}
-					  			onDeleteClick={this.showDeleteModal}
+					  			onDeleteClick={() => this.showDeleteModal(address.id)}
                	  			/>
                			</Col>
 					)
