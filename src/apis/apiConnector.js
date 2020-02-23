@@ -87,11 +87,5 @@ export default {
     );
     const parsedResponse = await response.json();
     return parsedResponse.data;
-  },
-
-  setUserCart: async () => {
-    const response = await fetch(apiURL + "carts/");
-    const parsedResponse = response.json();
-    return parsedResponse;
   }
 };
