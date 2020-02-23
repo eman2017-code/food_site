@@ -7,8 +7,8 @@ import {Modal,Button} from 'react-bootstrap';
 class DeleteAddressModal extends React.Component {
 
 
+	// calls the action to delete a delivery address
 	handleDeleteAddressClick = () => {
-		console.log('address id:', this.props.addressToDelete);
 		this.props.deleteDeliveryAddress(this.props.addressToDelete);
 		this.props.onHide();
 	}

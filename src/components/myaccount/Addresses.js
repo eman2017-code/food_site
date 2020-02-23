@@ -5,6 +5,7 @@ import { getUsersDeliveryAddresses, addDeliveryAddress } from '../../actions';
 import {Row,Col} from 'react-bootstrap';
 import AddAddressModal from '../modals/AddAddressModal';
 import DeleteAddressModal from '../modals/DeleteAddressModal';
+import EditAddressModal from '../modals/EditAddressModal';
 import AddressCard from '../common/AddressCard';
 
 class Addresses extends React.Component {
@@ -14,6 +15,8 @@ class Addresses extends React.Component {
 	    this.state = {
 	      showDeleteModal: false,
 		  showAddressModal: false,
+		  showEditAddressModal: false,
+		  addressToEdit: null,
 		  addressToDelete: 0
 		};
 	}
@@ -30,7 +33,6 @@ class Addresses extends React.Component {
 
 	// opens up the modal to delete a delivery address
 	showDeleteModal = (addressId) => {
-		console.log('address id:', addressId);
 		this.setState({ 
 			addressToDelete: addressId,
 			showDeleteModal: true 
@@ -40,12 +42,33 @@ class Addresses extends React.Component {
 	// hides the modal to delete a delivery address
 	hideDeleteModal = () => this.setState({ showDeleteModal: false });
 
+
+	// opens the modal to edit an address
+	showEditAddressModal = address => {
+		this.setState({
+			addressToEdit: address,
+			showEditAddressModal: true
+		});
+	}
+
+	// hides the edit adress modal
+	hideEditAddressModal = () => {
+		this.setState({
+			addressToEdit: null,
+			showEditAddressModal: false
+		});
+	}
+
 	render() {
     	return (
 	      <>
 			<AddAddressModal 
 				show={this.state.showAddressModal}
 				onHide={this.hideAddressModal}  />
+			<EditAddressModal 
+				show={this.state.showEditAddressModal}
+				onHide={this.hideEditAddressModal} 
+				addressToEdit={this.state.addressToEdit} />
 			<DeleteAddressModal 
 				show={this.state.showDeleteModal}
 				onHide={this.hideDeleteModal} 
@@ -72,7 +95,7 @@ class Addresses extends React.Component {
 					  			icoIcon= 'ui-home'
 					  			iconclassName= 'icofont-3x'
 					  			address={address.address}
-					  			onEditClick= {this.showAddressModal}
+					  			onEditClick= {() => this.showEditAddressModal(address)}
 					  			onDeleteClick={() => this.showDeleteModal(address.id)}
                	  			/>
                			</Col>

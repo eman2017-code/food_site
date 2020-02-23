@@ -125,10 +125,15 @@ export const addDeliveryAddress = deliveryAddress => async dispatch => {
   }
 }
 
+// action for editing a delivery address
+export const editDeliveryAddress = address => async dispatch => {
+  
+  dispatch({});
+}
+
 // action for deleting a delivery address 
 export const deleteDeliveryAddress = (addressId) => async dispatch => {
   const response = await apiConnector.deleteDeliveryAddress(addressId);
-  console.log('response:', response);
 
   if (response.status.code === 204) {
     dispatch({
