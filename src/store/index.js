@@ -28,6 +28,7 @@ function loadFromLocalStorage() {
 // this will be called when the site first loads
 const peristedState = loadFromLocalStorage();
 
+
 const store = createStore(
   reducers,
   peristedState,
@@ -35,7 +36,10 @@ const store = createStore(
     Expected the enhancer to be a function error will occur.
     Reducers are always the enhancer
   */
-  compose(applyMiddleware(thunkMiddleWare))
+  compose(
+    applyMiddleware(thunkMiddleWare),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    )
 );
 
 // this saves the state after the redux store changes

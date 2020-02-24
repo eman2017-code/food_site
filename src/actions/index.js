@@ -98,6 +98,13 @@ export const removeFoodTypeFilter = foodType => dispatch => {
   });
 };
 
+// clears all of the food type filters in the store
+export const clearFoodTypeFilters = () => dispatch => {
+  dispatch({
+    type: 'CLEAR_ALL_FOOD_TYPE_FILTERS'
+  });
+}
+
 /* ----------------------
     cart api calls 
   ----------------------- */
