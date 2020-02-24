@@ -20,37 +20,13 @@ class QuickBite extends React.Component {
     this.props.addToCart(foodItem);
   };
 
-  IncrementItem = () => {
-    if (this.state.quantity >= this.state.max) {
-    } else {
-      this.setState({
-        quantity: this.state.quantity + 1
-      });
-      this.props.getValue({
-        id: this.props.id,
-        quantity: this.state.quantity + 1
-      });
-    }
-  };
-  DecreaseItem = () => {
-    if (this.state.quantity <= this.state.min) {
-    } else {
-      this.setState({ quantity: this.state.quantity - 1 });
-      this.props.getValue({
-        id: this.props.id,
-        quantity: this.state.quantity - 1
-      });
-    }
-  };
-
   render() {
     const foodItem = this.props.foodItem;
-    console.log("foodItem:", foodItem);
     return (
       <div className={"p-3 border-bottom " + this.props.itemClass}>
         <span className="float-right">
           <Button
-            onClick={() => addToCart(foodItem)}
+            onClick={() => this.addToCart(foodItem)}
             variant="outline-secondary"
             size="sm"
           >

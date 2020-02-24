@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import {
   Row,
   Col,
@@ -20,6 +21,7 @@ import Footer from "./common/Footer";
 
 class Checkout extends React.Component {
   constructor(props, context) {
+    console.log("props:", props);
     super(props, context);
 
     this.state = {
@@ -31,6 +33,7 @@ class Checkout extends React.Component {
   getQty = ({ id, quantity }) => {};
 
   render() {
+    console.log("this.props:", this.props);
     return (
       <section className="offer-dedicated-body mt-4 mb-4 pt-2 pb-2">
         {this.props.location.pathname !== "/login" &&
@@ -329,4 +332,11 @@ class Checkout extends React.Component {
   }
 }
 
-export default Checkout;
+// export default Checkout;
+const mapStateToProps = state => {
+  return {
+    cartItems: state.cartItems.carts
+  };
+};
+
+export default connect(mapStateToProps)(Checkout);

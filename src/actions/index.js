@@ -152,13 +152,16 @@ export const clearFoodTypeFilters = () => dispatch => {
 };
 
 /* ----------------------
-    cart actions/api calls 
-  ----------------------- */
+cart actions/api calls 
+----------------------- */
 
 export const addToCart = product => dispatch => {
   dispatch({
     type: "ADD_TO_CART",
     payload: product
+  });
+  toast.success("Item added to cart", {
+    position: toast.POSITION.TOP_LEFT
   });
 };
 
