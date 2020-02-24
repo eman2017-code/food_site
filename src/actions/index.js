@@ -156,11 +156,10 @@ export const clearFoodTypeFilters = () => dispatch => {
   ----------------------- */
 
 export const addToCart = product => dispatch => {
-  const hello = dispatch({
+  dispatch({
     type: "ADD_TO_CART",
     payload: product
   });
-  console.log("hello:", hello);
 };
 
 // export const removeFromCart = productId => dipatch => {
