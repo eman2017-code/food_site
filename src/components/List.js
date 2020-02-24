@@ -26,8 +26,8 @@ class List extends React.Component {
 
     this.state = {
       isLoading: true,
-      restaurants: this.props.restaurants
-    };
+    }
+    console.log('foodtypes in constructor:', this.props.filters.foodTypes)
   }
 
   async componentDidMount() {
@@ -56,6 +56,8 @@ class List extends React.Component {
   };
 
   render() {
+    const { restaurants } = this.props;
+
     return (
       <>
         {this.props.location.pathname !== "/login" &&
@@ -361,7 +363,7 @@ class List extends React.Component {
                 ) : (
                   /* once done loading the restuarants are displayed */
 
-                  this.state.restaurants.map((restaurant, i) => {
+                  restaurants.map((restaurant, i) => {
                     return (
                       <div className="grid-container" key={i}>
                         <div className="grid-item">
@@ -400,11 +402,10 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    // restaurants: restaurantFilter(state.restaurants.restaurants, state.filters),
-    restaurants: state.restaurants.restaurants
-    // filters: state.filters
-  };
+  return { 
+    restaurants: restaurantFilter(state.restaurants.restaurants, state.filters),
+    filters: state.filters
+  }
 };
 
 export default connect(mapStateToProps, {
