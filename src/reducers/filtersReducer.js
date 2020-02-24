@@ -20,6 +20,13 @@ export default function filtersReducer(state=initialState, action) {
               foodTypes: newFoodTypes
           }
 
+      // removes all of the food type filters
+      case 'CLEAR_ALL_FOOD_TYPES':
+          return {
+            ...state,
+            foodTypes: []
+          }
+
       default:
           return state;
   }
