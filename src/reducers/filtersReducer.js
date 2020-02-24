@@ -1,8 +1,10 @@
 const initialState = {
-  foodTypes: [],
+  foodTypes: []
 }
 
 export default function filtersReducer(state=initialState, action) {
+  console.log('in filteresReducer');
+  console.log('initial state in filtersReducter:', state);
 
   switch(action.type) {
 
