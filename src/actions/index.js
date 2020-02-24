@@ -52,6 +52,16 @@ export const addDeliveryAddress = deliveryAddress => async dispatch => {
   }
 };
 
+// action for getting all of the users delivery addresses
+export const getUsersDeliveryAddresses = () => async dispatch => {
+  const response = await apiConnector.getUsersDeliveryAddresses();
+
+  dispatch({
+    type: "SET_DELIVERY_ADDRESSES",
+    payload: response.data
+  });
+};
+
 // action for editing a delivery address
 export const editDeliveryAddress = deliveryAddress => async dispatch => {
   const response = await apiConnector.editDeliveryAddress(deliveryAddress);
@@ -137,19 +147,31 @@ export const removeFoodTypeFilter = foodType => dispatch => {
 /* ----------------------
     cart actions/api calls 
   ----------------------- */
-export const addToCart = items => dispatch => {
+export const addToCart = product => dispatch => {
   dispatch({
     type: "ADD_TO_CART",
-    payload: items
+    payload: {
+      product,
+      quantity: 1
+    }
   });
 };
 
-// action for getting all of the users delivery addresses
-export const getUsersDeliveryAddresses = () => async dispatch => {
-  const response = await apiConnector.getUsersDeliveryAddresses();
+export const removeFromCart = productId => dipatch => {
+  return {
+    type: "REMOVE_FROM_CART",
+    payload: {
+      productId: productId
+    }
+  };
+};
 
-  dispatch({
-    type: "SET_DELIVERY_ADDRESSES",
-    payload: response.data
-  });
+export const updateCartQuantity = (productId, quantity) => dispatch => {
+  return {
+    type: "UPDATE_CART_QUANTITY",
+    payload: {
+      productId,
+      quantity: quantity
+    }
+  };
 };
