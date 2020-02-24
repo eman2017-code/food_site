@@ -39,6 +39,10 @@ class Favourites extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+	return {
+		favoriteFoods: state.favorites.favoriteFoods
+	}
+}
 
-
-export default Favourites;
+export default connect(mapStateToProps, {})(Favourites);
