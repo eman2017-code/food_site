@@ -27,7 +27,9 @@ class Detail extends React.Component {
 
     this.state = {
       showAddressModal: false,
-      restaurant_api_key: this.props.match.params.restaurant_api_key
+      restaurant_api_key: this.props.match.params.restaurant_api_key,
+      lat: props.restaurant.restaurant.latitude,
+      lon: props.restaurant.restaurant.longitude
     };
   }
 
@@ -170,6 +172,7 @@ class Detail extends React.Component {
                           </Badge>
                         </h6>
                         <ItemsCarousel />
+
                         <Row>
                           <h5 className="mb-4 mt-3 col-md-12">
                             Food Options -
@@ -177,6 +180,7 @@ class Detail extends React.Component {
                               {allItems.length}
                             </small>
                           </h5>
+
                           <Col md={12}>
                             {allItems.map((foodItem, i) => {
                               return (
@@ -316,18 +320,20 @@ class Detail extends React.Component {
                       <Icofont icon="sale-discount" />
                     </div>
                   </div>
-                  {/* <div className="generator-bg rounded shadow-sm mb-4 p-4 osahan-cart-item"></div> */}
-                  <Map google={this.props.google} zoom={14}>
+                  <Map
+                    google={this.props.google}
+                    zoom={14}
+                    style={style}
+                    initialCenter={{
+                      lat: this.state.lat,
+                      lng: this.state.lon
+                    }}
+                    position="relative"
+                  >
                     <Marker
                       onClick={this.onMarkerClick}
                       name={"Current location"}
                     />
-
-                    <InfoWindow onClose={this.onInfoWindowClose}>
-                      {/* <div>
-                        <h1>{this.state.selectedPlace.name}</h1>
-                      </div> */}
-                    </InfoWindow>
                   </Map>
                 </Col>
               </Row>
@@ -338,6 +344,11 @@ class Detail extends React.Component {
     );
   }
 }
+
+const style = {
+  width: "100%",
+  height: "100%"
+};
 
 const mapStateToProps = state => {
   return {

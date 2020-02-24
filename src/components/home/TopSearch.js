@@ -6,8 +6,8 @@ import { Row, Col, Container, Form, Button } from "react-bootstrap";
 import Icofont from "react-icofont";
 import OwlCarousel from "react-owl-carousel3";
 import ProductBox from "./ProductBox";
-
 import CategoriesCarousel from "../common/CategoriesCarousel";
+import { GoogleComponent } from "react-google-location";
 
 class TopSearch extends React.Component {
   constructor(props) {
@@ -19,19 +19,12 @@ class TopSearch extends React.Component {
     };
   }
 
-  // handles form input change
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
   // handles the form submission
   handleSubmit = async e => {
     e.preventDefault();
 
     // calls the action to get restaurants near the users location
-    await this.props.getRestaurantsNearBy(this.state.address);
+    await this.props.getRestaurantsNearBy(this.state.address.place);
 
     // this causes the user to be redirected to the restaurant listing page
     this.setState({
@@ -71,7 +64,7 @@ class TopSearch extends React.Component {
               <div className="homepage-search-form">
                 <Form className="form-noborder">
                   <div className="form-row">
-                    <Form.Group className="col-lg-7 col-md-7 col-sm-12">
+                    {/* <Form.Group className="col-lg-7 col-md-7 col-sm-12">
                       <Form.Control
                         value={this.state.address}
                         onChange={this.handleChange}
@@ -80,7 +73,18 @@ class TopSearch extends React.Component {
                         placeholder="Enter your delivery location"
                         size="lg"
                       />
-                    </Form.Group>
+                    </Form.Group> */}
+                    <div className="col-lg-7 col-md-7 col-sm-12">
+                      <GoogleComponent
+                        apiKey={API_KEY}
+                        language={"en"}
+                        country={"country:in|country:us"}
+                        coordinates={true}
+                        onChange={e => {
+                          this.setState({ address: e });
+                        }}
+                      />
+                    </div>
                     <Form.Group className="col-lg-2 col-md-2 col-sm-12">
                       <Button
                         onClick={this.handleSubmit}
@@ -140,6 +144,7 @@ class TopSearch extends React.Component {
   }
 }
 
+const API_KEY = "AIzaSyCQKneGPIJiepqosbq5Akdh8ziuI5KSGqM";
 const options2 = {
   responsive: {
     0: {
