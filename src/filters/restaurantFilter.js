@@ -1,11 +1,9 @@
 // filters which restaurants are shown on the listing page
 export const restaurantFilter = (restaurants, filters) => {
     const foodTypes = filters.foodTypes;
-    console.log('filters:', filters);
-    console.log('food types:', foodTypes);
 
     // if there are no food types to filter by
-    if (!foodTypes || foodTypes.length === 0) {
+    if (foodTypes.length === 0) {
         return restaurants;
     }
 

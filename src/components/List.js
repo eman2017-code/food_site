@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setFoodTypeFilter, removeFoodTypeFilter } from "../actions";
+import { clearFoodTypeFilters, setFoodTypeFilter, removeFoodTypeFilter } from "../actions";
 import { restaurantFilter } from "../filters/restaurantFilter.js";
 import { Link } from "react-router-dom";
 import {
@@ -27,6 +27,9 @@ class List extends React.Component {
     this.state = {
       isLoading: true,
     }
+
+    // clears any food type filters that may be in the store
+    this.props.clearFoodTypeFilters();
   }
 
   async componentDidMount() {
@@ -408,6 +411,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
+  clearFoodTypeFilters,
   setFoodTypeFilter,
   removeFoodTypeFilter
 })(List);
