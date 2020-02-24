@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { addToCart } from "../../actions";
 import { Image, Badge, Button, Media } from "react-bootstrap";
 import PropTypes from "prop-types";
 import Icofont from "react-icofont";
@@ -141,4 +143,10 @@ QuickBite.defaultProps = {
   badgeVariant: "danger"
 };
 
-export default QuickBite;
+const mapStateToProps = state => {
+  return {
+    cartItems: state.cartItems
+  };
+};
+
+export default connect(mapStateToProps, { addToCart })(QuickBite);

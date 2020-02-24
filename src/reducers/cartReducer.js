@@ -11,8 +11,9 @@ export default function cartReducer(state = initialState, action) {
       };
     case "CLEAR_CART":
       return {
-        ...state,
         cart: []
       };
+    default:
+      return state;
   }
 }
