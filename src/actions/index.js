@@ -3,7 +3,7 @@ import apiConnector from "../apis/apiConnector";
 import { toast } from "react-toastify";
 
 /* ----------------------
-    user api calls 
+    user actions/api calls 
   ----------------------- */
 
 const _registerUser = _.memoize(async (registrationInfo, dispatch) => {
@@ -40,8 +40,54 @@ export const logoutUser = () => async dispatch => {
   dispatch({ type: "LOGOUT_USER" });
 };
 
+// action for adding a new delivery address
+export const addDeliveryAddress = deliveryAddress => async dispatch => {
+  const response = await apiConnector.addDeliveryAddress(deliveryAddress);
+
+  if (response.status.code === 201) {
+    dispatch({
+      type: "ADD_DELIVERY_ADDRESS",
+      payload: response.data
+    });
+  }
+};
+
+// action for getting all of the users delivery addresses
+export const getUsersDeliveryAddresses = () => async dispatch => {
+  const response = await apiConnector.getUsersDeliveryAddresses();
+
+  dispatch({
+    type: "SET_DELIVERY_ADDRESSES",
+    payload: response.data
+  });
+};
+
+// action for editing a delivery address
+export const editDeliveryAddress = deliveryAddress => async dispatch => {
+  const response = await apiConnector.editDeliveryAddress(deliveryAddress);
+
+  if (response.status.code === 204) {
+    dispatch({
+      type: "UPDATE_DELIVERY_ADDRESS",
+      payload: response.data
+    });
+  }
+};
+
+// action for deleting a delivery address
+export const deleteDeliveryAddress = addressId => async dispatch => {
+  const response = await apiConnector.deleteDeliveryAddress(addressId);
+
+  if (response.status.code === 204) {
+    dispatch({
+      type: "DELETE_DELIVERY_ADDRESS",
+      payload: addressId
+    });
+  }
+};
+
 /* ----------------------
-    restaurant api calls 
+    restaurant actions/api calls 
   ----------------------- */
 
 const _fetchSingleRestaurant = _.memoize(
@@ -106,59 +152,33 @@ export const clearFoodTypeFilters = () => dispatch => {
 }
 
 /* ----------------------
-    cart api calls 
+    cart actions/api calls 
   ----------------------- */
-export const createUserCart = items => dispatch => {
+export const addToCart = product => dispatch => {
   dispatch({
-    type: "CREATE_USER_CART",
-    payload: items
+    type: "ADD_TO_CART",
+    payload: {
+      product,
+      quantity: 1
+    }
   });
 };
 
-// action for getting all of the users delivery addresses
-export const getUsersDeliveryAddresses = () => async dispatch => {
-  const response = await apiConnector.getUsersDeliveryAddresses();
+export const removeFromCart = productId => dipatch => {
+  return {
+    type: "REMOVE_FROM_CART",
+    payload: {
+      productId: productId
+    }
+  };
+};
 
-  dispatch({
-    type: 'SET_DELIVERY_ADDRESSES',
-    payload: response.data
-  });
-}
-
-// action for adding a new delivery address
-export const addDeliveryAddress = deliveryAddress => async dispatch => {
-  const response = await apiConnector.addDeliveryAddress(deliveryAddress);
-
-  if (response.status.code === 201) {
-    dispatch({
-      type: 'ADD_DELIVERY_ADDRESS',
-      payload: response.data
-    });
-  }
-}
-
-// action for editing a delivery address
-export const editDeliveryAddress = deliveryAddress => async dispatch => {
-  const response = await apiConnector.editDeliveryAddress(deliveryAddress);
-
-  if (response.status.code === 204) {
-    dispatch({
-      type: 'UPDATE_DELIVERY_ADDRESS',
-      payload: response.data
-    });
-  }
-}
-
-// action for deleting a delivery address 
-export const deleteDeliveryAddress = (addressId) => async dispatch => {
-  const response = await apiConnector.deleteDeliveryAddress(addressId);
-
-  if (response.status.code === 204) {
-    dispatch({
-      type: 'DELETE_DELIVERY_ADDRESS',
-      payload: addressId
-    });
-  }
-}
-
-
+export const updateCartQuantity = (productId, quantity) => dispatch => {
+  return {
+    type: "UPDATE_CART_QUANTITY",
+    payload: {
+      productId,
+      quantity: quantity
+    }
+  };
+};

@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { addToCart } from "../../actions";
 import { Image, Badge, Button, Media } from "react-bootstrap";
 import PropTypes from "prop-types";
 import Icofont from "react-icofont";
@@ -42,7 +44,9 @@ class QuickBite extends React.Component {
       <div className={"p-3 border-bottom " + this.props.itemClass}>
         {this.state.quantity === 0 ? (
           <span className="float-right">
+            {/* on button click, we will add the item to the cart array */}
             <Button
+              // onClick={this.props.addToCart}
               variant="outline-secondary"
               onClick={this.IncrementItem}
               size="sm"
@@ -141,4 +145,10 @@ QuickBite.defaultProps = {
   badgeVariant: "danger"
 };
 
-export default QuickBite;
+const mapStateToProps = state => {
+  return {
+    cart: state.cartItems.cart
+  };
+};
+
+export default connect(mapStateToProps, { addToCart })(QuickBite);
