@@ -46,7 +46,7 @@ class QuickBite extends React.Component {
           <span className="float-right">
             {/* on button click, we will add the item to the cart array */}
             <Button
-              onClick={() => this.props.addToCart()}
+              // onClick={this.props.addToCart}
               variant="outline-secondary"
               onClick={this.IncrementItem}
               size="sm"
@@ -147,7 +147,7 @@ QuickBite.defaultProps = {
 
 const mapStateToProps = state => {
   return {
-    cartItems: state.cartItems
+    cart: state.cartItems.cart
   };
 };
 

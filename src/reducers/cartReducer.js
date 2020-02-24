@@ -13,9 +13,7 @@ export default function cartReducer(state = initialState, action) {
     case "REMOVE_FROM_CART":
       return {
         ...state,
-        cart: cart.filter(
-          item => item.product.apiKey != action.payload.productApiKey
-        )
+        cart: cart.filter(item => item.product.id != action.payload.productId)
       };
     case "UPDATE_CART_QUANTITY":
       let item = cart.find(item => item.product.id == action.payload.productId);
