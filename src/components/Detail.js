@@ -210,35 +210,39 @@ class Detail extends React.Component {
                           <div className="address-map float-right ml-5">
                             <div className="mapouter">
                               <div className="gmap_canvas">
-                                <iframe
-                                  title="addressMap"
-                                  width="300"
-                                  height="170"
-                                  id="gmap_canvas"
-                                  src="https://maps.google.com/maps?q=university%20of%20san%20francisco&t=&z=9&ie=UTF8&iwloc=&output=embed"
-                                  frameBorder="0"
-                                  scrolling="no"
-                                  marginHeight="0"
-                                  marginWidth="0"
-                                ></iframe>
+                                <h5 className="mb-4">Restaurant Info</h5>
+                                <p className="mb-2 text-black">
+                                  <Icofont icon="phone-circle text-primary mr-2" />{" "}
+                                  {restaurant.phone}
+                                </p>
+                                <p className="mb-2 text-black">
+                                  <Icofont icon="clock-time text-primary mr-2" />{" "}
+                                  Today 11am – 5pm, 6pm – 11pm
+                                  <Badge variant="success" className="ml-1">
+                                    {" "}
+                                    OPEN NOW{" "}
+                                  </Badge>
+                                </p>
+                                <hr className="clearfix" />
+                                <hr className="clearfix" />
+                                <Map
+                                  google={this.props.google}
+                                  zoom={14}
+                                  style={style}
+                                  initialCenter={{
+                                    lat: this.state.lat,
+                                    lng: this.state.lon
+                                  }}
+                                  position="relative"
+                                >
+                                  <Marker
+                                    onClick={this.onMarkerClick}
+                                    name={"Current location"}
+                                  />
+                                </Map>
                               </div>
                             </div>
                           </div>
-                          <h5 className="mb-4">Restaurant Info</h5>
-                          <p className="mb-2 text-black">
-                            <Icofont icon="phone-circle text-primary mr-2" />{" "}
-                            {restaurant.phone}
-                          </p>
-                          <p className="mb-2 text-black">
-                            <Icofont icon="clock-time text-primary mr-2" />{" "}
-                            Today 11am – 5pm, 6pm – 11pm
-                            <Badge variant="success" className="ml-1">
-                              {" "}
-                              OPEN NOW{" "}
-                            </Badge>
-                          </p>
-                          <hr className="clearfix" />
-                          <hr className="clearfix" />
                         </div>
                       </Tab.Pane>
                       <Tab.Pane eventKey="fourth">
@@ -320,21 +324,6 @@ class Detail extends React.Component {
                       <Icofont icon="sale-discount" />
                     </div>
                   </div>
-                  <Map
-                    google={this.props.google}
-                    zoom={14}
-                    style={style}
-                    initialCenter={{
-                      lat: this.state.lat,
-                      lng: this.state.lon
-                    }}
-                    position="relative"
-                  >
-                    <Marker
-                      onClick={this.onMarkerClick}
-                      name={"Current location"}
-                    />
-                  </Map>
                 </Col>
               </Row>
             </Container>
