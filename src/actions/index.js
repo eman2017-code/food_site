@@ -139,7 +139,7 @@ export const removeFoodTypeFilter = foodType => dispatch => {
   ----------------------- */
 export const addToCart = items => dispatch => {
   dispatch({
-    type: "CREATE_USER_CART",
+    type: "ADD_TO_CART",
     payload: items
   });
 };

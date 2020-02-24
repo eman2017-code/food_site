@@ -44,7 +44,9 @@ class QuickBite extends React.Component {
       <div className={"p-3 border-bottom " + this.props.itemClass}>
         {this.state.quantity === 0 ? (
           <span className="float-right">
+            {/* on button click, we will add the item to the cart array */}
             <Button
+              onClick={() => this.props.addToCart()}
               variant="outline-secondary"
               onClick={this.IncrementItem}
               size="sm"

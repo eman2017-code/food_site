@@ -1,7 +1,7 @@
 /* This is where all of the api calls are made to talk to the API */
 
 /* This allows us to switch url for production and testing purposes */
-const debug = false;
+const debug = true;
 
 let apiURL;
 if (debug) {
@@ -16,7 +16,7 @@ export default {
     try {
       const response = await fetch(apiURL + "users/register", {
         method: "POST",
-        credentials: 'include',
+        credentials: "include",
         body: JSON.stringify(registrationInfo),
         headers: {
           "Content-Type": "application/json"
@@ -31,7 +31,7 @@ export default {
   loginUser: async loginInfo => {
     const loginResponse = await fetch(apiURL + "users/login", {
       method: "POST",
-      credentials: 'include',
+      credentials: "include",
       body: JSON.stringify(loginInfo),
       headers: {
         "Content-Type": "application/json"
@@ -84,9 +84,9 @@ export default {
 
   // gets all of the users delivery addresses
   getUsersDeliveryAddresses: async () => {
-    const response = await fetch(apiURL + 'addresses/', {
-      method: 'GET',
-      credentials: 'include'
+    const response = await fetch(apiURL + "addresses/", {
+      method: "GET",
+      credentials: "include"
     });
     const parsedResponse = await response.json();
     return parsedResponse;
@@ -94,12 +94,12 @@ export default {
 
   // creates a delivery address for the user
   addDeliveryAddress: async deliveryAddress => {
-    const response = await fetch(apiURL + 'addresses/', {
-      method: 'POST',
-      credentials: 'include',
+    const response = await fetch(apiURL + "addresses/", {
+      method: "POST",
+      credentials: "include",
       body: JSON.stringify(deliveryAddress),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     });
     const parsedResponse = await response.json();
@@ -108,12 +108,12 @@ export default {
 
   // updates a users delivery address
   editDeliveryAddress: async deliveryAddress => {
-    const response = await fetch(apiURL + 'addresses/' + deliveryAddress.id, {
-      method: 'PUT',
-      credentials: 'include',
+    const response = await fetch(apiURL + "addresses/" + deliveryAddress.id, {
+      method: "PUT",
+      credentials: "include",
       body: JSON.stringify(deliveryAddress),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     });
     const parsedResponse = await response.json();
@@ -122,16 +122,11 @@ export default {
 
   // deletes a users delivery address
   deleteDeliveryAddress: async addressId => {
-    const response = await fetch(apiURL + 'addresses/' + addressId, {
-      method: 'DELETE',
-      credentials: 'include'
+    const response = await fetch(apiURL + "addresses/" + addressId, {
+      method: "DELETE",
+      credentials: "include"
     });
     const parsedResponse = await response.json();
     return parsedResponse;
   }
-
 };
-
-
-
-
