@@ -29,7 +29,15 @@ class Detail extends React.Component {
       showAddressModal: false,
       restaurant_api_key: this.props.match.params.restaurant_api_key,
       lat: props.restaurant.restaurant.latitude,
-      lon: props.restaurant.restaurant.longitude
+      lon: props.restaurant.restaurant.longitude,
+      monday: this.props.restaurant.restaurant.hours.Monday,
+      tuesday: this.props.restaurant.restaurant.hours.Tuesday,
+      wednesday: this.props.restaurant.restaurant.hours.Wednesday,
+      thursday: this.props.restaurant.restaurant.hours.Thursday,
+      friday: this.props.restaurant.restaurant.hours.Friday,
+      saturday: this.props.restaurant.restaurant.hours.Saturday,
+      sunday: this.props.restaurant.restaurant.hours.Sunday,
+      numberOfDay: 15
     };
   }
 
@@ -41,11 +49,42 @@ class Detail extends React.Component {
 
   componentDidMount() {
     this.props.fetchSingleRestaurantMenu(this.state.restaurant_api_key);
+    this.getCorrectDay();
   }
+
+  getCorrectDay = () => {
+    // get the current day
+    let d = new Date();
+    // convert day to number
+    const getNumberOfDay = d.getDay();
+    // sets state
+    this.setState({ numberOfDay: getNumberOfDay });
+  };
 
   render() {
     const { restaurant } = this.props.restaurant;
     const restaurantMenu = this.props.restaurant.restaurantMenu;
+
+    const renderCorrectDays = () => {
+      switch (this.state.numberOfDay) {
+        case 0:
+          return `Today: ${this.state.sunday[0]}`;
+        case 1:
+          return `Today: ${this.state.monday[0]}`;
+        case 2:
+          return `Today: ${this.state.tuesday[0]}`;
+        case 3:
+          return `Today: ${this.state.wednesday[0]}`;
+        case 4:
+          return `Today: ${this.state.thursday[0]}`;
+        case 5:
+          return `Today: ${this.state.friday[0]}`;
+        case 6:
+          return `Today: ${this.state.saturday[0]}`;
+        default:
+          return "This Shop Has Closed Down";
+      }
+    };
 
     let menuItems = [];
     const allItems = [];
@@ -100,7 +139,7 @@ class Detail extends React.Component {
                   <div className="restaurant-detailed-header-right text-right">
                     <Button variant="success" type="button">
                       <Icofont icon="clock-time" />
-                      {`${restaurant.minWaitTime} - ${restaurant.maxWaitTime} minutes`}
+                      {` ${restaurant.minWaitTime} - ${restaurant.maxWaitTime} minutes`}
                     </Button>
                   </div>
                 </Col>
@@ -123,9 +162,6 @@ class Detail extends React.Component {
                     >
                       <Icofont icon="heart" className="text-danger" /> Mark as
                       Favourite
-                    </Button>
-                    <Button variant="outline-danger" size="sm" type="button">
-                      <Icofont icon="sale-discount" /> OFFERS
                     </Button>
                   </span>
                   <Nav id="pills-tab">
@@ -217,10 +253,9 @@ class Detail extends React.Component {
                                 </p>
                                 <p className="mb-2 text-black">
                                   <Icofont icon="clock-time text-primary mr-2" />{" "}
-                                  Today 11am – 5pm, 6pm – 11pm
+                                  {renderCorrectDays()}
                                   <Badge variant="success" className="ml-1">
-                                    {" "}
-                                    OPEN NOW{" "}
+                                    OPEN NOW
                                   </Badge>
                                 </p>
                                 <hr className="clearfix" />
