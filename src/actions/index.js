@@ -107,3 +107,51 @@ export const createUserCart = items => dispatch => {
     payload: items
   });
 };
+
+// action for getting all of the users delivery addresses
+export const getUsersDeliveryAddresses = () => async dispatch => {
+  const response = await apiConnector.getUsersDeliveryAddresses();
+
+  dispatch({
+    type: 'SET_DELIVERY_ADDRESSES',
+    payload: response.data
+  });
+}
+
+// action for adding a new delivery address
+export const addDeliveryAddress = deliveryAddress => async dispatch => {
+  const response = await apiConnector.addDeliveryAddress(deliveryAddress);
+
+  if (response.status.code === 201) {
+    dispatch({
+      type: 'ADD_DELIVERY_ADDRESS',
+      payload: response.data
+    });
+  }
+}
+
+// action for editing a delivery address
+export const editDeliveryAddress = deliveryAddress => async dispatch => {
+  const response = await apiConnector.editDeliveryAddress(deliveryAddress);
+
+  if (response.status.code === 204) {
+    dispatch({
+      type: 'UPDATE_DELIVERY_ADDRESS',
+      payload: response.data
+    });
+  }
+}
+
+// action for deleting a delivery address 
+export const deleteDeliveryAddress = (addressId) => async dispatch => {
+  const response = await apiConnector.deleteDeliveryAddress(addressId);
+
+  if (response.status.code === 204) {
+    dispatch({
+      type: 'DELETE_DELIVERY_ADDRESS',
+      payload: addressId
+    });
+  }
+}
+
+
