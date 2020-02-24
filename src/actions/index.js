@@ -147,38 +147,37 @@ export const removeFoodTypeFilter = foodType => dispatch => {
 // clears all of the food type filters in the store
 export const clearFoodTypeFilters = () => dispatch => {
   dispatch({
-    type: 'CLEAR_ALL_FOOD_TYPE_FILTERS'
+    type: "CLEAR_ALL_FOOD_TYPE_FILTERS"
   });
-}
+};
 
 /* ----------------------
     cart actions/api calls 
   ----------------------- */
+
 export const addToCart = product => dispatch => {
-  dispatch({
+  const hello = dispatch({
     type: "ADD_TO_CART",
-    payload: {
-      product,
-      quantity: 1
-    }
+    payload: product
   });
+  console.log("hello:", hello);
 };
 
-export const removeFromCart = productId => dipatch => {
-  return {
-    type: "REMOVE_FROM_CART",
-    payload: {
-      productId: productId
-    }
-  };
-};
+// export const removeFromCart = productId => dipatch => {
+//   return {
+//     type: "REMOVE_FROM_CART",
+//     payload: {
+//       productId: productId
+//     }
+//   };
+// };
 
-export const updateCartQuantity = (productId, quantity) => dispatch => {
-  return {
-    type: "UPDATE_CART_QUANTITY",
-    payload: {
-      productId,
-      quantity: quantity
-    }
-  };
-};
+// export const updateCartQuantity = (productId, quantity) => dispatch => {
+//   return {
+//     type: "UPDATE_CART_QUANTITY",
+//     payload: {
+//       productId,
+//       quantity: quantity
+//     }
+//   };
+// };

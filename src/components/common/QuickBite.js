@@ -16,6 +16,10 @@ class QuickBite extends React.Component {
     };
   }
 
+  addToCart = foodItem => {
+    this.props.addToCart(foodItem);
+  };
+
   IncrementItem = () => {
     if (this.state.quantity >= this.state.max) {
     } else {
@@ -40,46 +44,19 @@ class QuickBite extends React.Component {
   };
 
   render() {
+    const foodItem = this.props.foodItem;
+    console.log("foodItem:", foodItem);
     return (
       <div className={"p-3 border-bottom " + this.props.itemClass}>
-        {this.state.quantity === 0 ? (
-          <span className="float-right">
-            {/* on button click, we will add the item to the cart array */}
-            <Button
-              // onClick={this.props.addToCart}
-              variant="outline-secondary"
-              onClick={this.IncrementItem}
-              size="sm"
-            >
-              ADD
-            </Button>
-          </span>
-        ) : (
-          <span className="count-number float-right">
-            <Button
-              variant="outline-secondary"
-              onClick={this.DecreaseItem}
-              className="btn-sm left dec"
-            >
-              {" "}
-              <Icofont icon="minus" />{" "}
-            </Button>
-            <input
-              className="count-number-input"
-              type="text"
-              value={this.state.quantity}
-              readOnly
-            />
-            <Button
-              variant="outline-secondary"
-              onClick={this.IncrementItem}
-              className="btn-sm right inc"
-            >
-              {" "}
-              <Icofont icon="icofont-plus" />{" "}
-            </Button>
-          </span>
-        )}
+        <span className="float-right">
+          <Button
+            onClick={() => addToCart(foodItem)}
+            variant="outline-secondary"
+            size="sm"
+          >
+            ADD
+          </Button>
+        </span>
         <Media>
           {this.props.image ? (
             <Image
@@ -147,7 +124,7 @@ QuickBite.defaultProps = {
 
 const mapStateToProps = state => {
   return {
-    cart: state.cartItems.cart
+    cart: state.cartItems.carts
   };
 };
 
