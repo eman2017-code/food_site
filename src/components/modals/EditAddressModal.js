@@ -11,6 +11,7 @@ class EditAddressModal extends React.Component {
 		super(props);
 	
 		this.state = {
+			id: props.addressToEdit.id || '',
 			name: props.addressToEdit.name || '',
 			address: props.addressToEdit.address || '',			
 			instructions: props.addressToEdit.instructions || ''

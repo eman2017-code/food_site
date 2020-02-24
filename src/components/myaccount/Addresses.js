@@ -16,7 +16,7 @@ class Addresses extends React.Component {
 	      showDeleteModal: false,
 		  showAddressModal: false,
 		  showEditAddressModal: false,
-		  addressToEdit: undefined,
+		  addressToEdit: {},
 		  addressToDelete: 0
 		};
 	}
@@ -67,7 +67,7 @@ class Addresses extends React.Component {
 	// hides the edit adress modal
 	hideEditAddressModal = () => {
 		this.setState({
-			addressToEdit: null,
+			addressToEdit: {},
 			showEditAddressModal: false
 		});
 	}

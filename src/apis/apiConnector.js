@@ -116,7 +116,7 @@ export default {
   },
 
   // updates a users delivery address
-  updateDeliveryAddress: async deliveryAddress => {
+  editDeliveryAddress: async deliveryAddress => {
     const response = await fetch(apiURL + 'addresses/' + deliveryAddress.id, {
       method: 'PUT',
       credentials: 'include',

@@ -10,9 +10,10 @@ export default function addressReducer(state = initialState, action) {
 
         // sets all of the users delivery addresses
         case 'SET_DELIVERY_ADDRESSES':
+            console.log('delivery addresses:', action.payload);
             return {
                 ...state,
-                deliveryAddresses: action.payload
+                deliveryAddresses: [...action.payload]
             }
 
         // adds a single delivery address
@@ -20,6 +21,16 @@ export default function addressReducer(state = initialState, action) {
             return {
                 ...state,
                 deliveryAddresses: [...state.deliveryAddresses, action.payload]
+            }
+
+        // updates a single delivery address
+        case 'UPDATE_DELIVERY_ADDRESS':
+            // gets the index of the delivery address which was updated
+            const deliveryAddressIndex = state.deliveryAddresses.findIndex(address => address.id === action.payload.id);
+
+            return {
+                ...state,
+                deliveryAddresses: [action.payload, ...state.deliveryAddresses.splice(deliveryAddressIndex, 1)]
             }
 
         // deletes a single delivery address
