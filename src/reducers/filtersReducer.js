@@ -3,9 +3,6 @@ const initialState = {
 }
 
 export default function filtersReducer(state=initialState, action) {
-  console.log('in filteresReducer');
-  console.log('initial state in filtersReducter:', state);
-
   switch(action.type) {
 
       // sets a food type to the array of food types the user wants to filter restaurants by

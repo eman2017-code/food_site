@@ -27,7 +27,6 @@ class List extends React.Component {
     this.state = {
       isLoading: true,
     }
-    console.log('foodtypes in constructor:', this.props.filters)
   }
 
   async componentDidMount() {
@@ -403,7 +402,7 @@ class List extends React.Component {
 
 const mapStateToProps = state => {
   return { 
-    restaurants: state.restaurants.restaurants,
+    restaurants: restaurantFilter(state.restaurants.restaurants, state.filters),
     filters: state.filters
   }
 };
