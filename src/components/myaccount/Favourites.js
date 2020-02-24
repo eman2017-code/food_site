@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import {Row,Col,Button,Spinner} from 'react-bootstrap';
 import CardItem from '../common/CardItem';
 
@@ -36,4 +38,7 @@ class Favourites extends React.Component {
     	);
     }
 }
+
+
+
 export default Favourites;
