@@ -3,22 +3,18 @@ const initialState = {
 };
 
 export default function cartReducer(state = initialState, action) {
-  const cartState = state.cart;
-  const cartArr = [];
-  cartArr.push(cartState);
   switch (action.type) {
     case "ADD_TO_CART":
-      const newProduct = action.payload;
-      state.cart.push(newProduct);
       return {
         ...state,
-        cart: [...cartArr, action.payload]
+        cart: [action.payload, ...state.cart]
       };
 
     case "CLEAR_CART":
       return {
         cart: []
       };
+
     default:
       return state;
   }

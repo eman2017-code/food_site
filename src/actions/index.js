@@ -206,7 +206,6 @@ export const addToCart = product => dispatch => {
 };
 
 export const clearCart = () => dispatch => {
-  console.log("the cart has been cleared... via ACTIONS");
   dispatch({
     type: "CLEAR_CART"
   });
