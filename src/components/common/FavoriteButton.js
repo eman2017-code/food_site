@@ -31,13 +31,13 @@ class FavoriteButton extends React.Component {
     }
 
     // unfavorites this food
-    unFavoriteFood = async () => {
+    unFavoriteFood = () => {
         const foodToDelete = this.formatFoodItem();
 
         // adds the favorite food id to the object becuase the id is required for deleting it
         foodToDelete['id'] = this.props.id;
 
-        await this.props.deleteFavoriteFood(foodToDelete);
+        this.props.deleteFavoriteFood(foodToDelete);
 
         this.setState({
             hasFavorited: false
