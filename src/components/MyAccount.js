@@ -23,6 +23,12 @@ class MyAccount extends React.Component {
   hideEditProfile = () => this.setState({ showEditProfile: false });
 
   render() {
+    const { user } = this.props;
+
+    // creates a string containing the month and year the user created their account
+    const userTimestampArray = user.timestamp.split(' ');
+    const userTimestampString = 'Active since ' + userTimestampArray[2] + ' ' + userTimestampArray[3];
+
     return (
       <>
         {this.props.location.pathname !== "/login" &&
@@ -49,9 +55,15 @@ class MyAccount extends React.Component {
                           alt="gurdeep singh osahan"
                         />
                         <div className="osahan-user-media-body">
-                          <h6 className="mb-2">Gurdeep Singh</h6>
-                          <p className="mb-1">+91 85680-79956</p>
-                          <p>iamosahan@gmail.com</p>
+                          <h6 className="mb-2">
+                            { user.first_name } {user.last_name}
+                          </h6>
+                          <p className="mb-1">
+                            { user.email }
+                          </p>
+                          <p>
+                            { userTimestampString }
+                          </p>
                           <p className="mb-0 text-black font-weight-bold">
                             <Link
                               to="#"
