@@ -27,6 +27,7 @@ class Favourites extends React.Component {
 							return (
 								<Col md={4} sm={6} key={food.id} className="mb-4 pb-2">
 									<FavoriteFoodCard 
+										id={food.id}
 										name={food.name}
 										description={food.description}
 										price={food.price}

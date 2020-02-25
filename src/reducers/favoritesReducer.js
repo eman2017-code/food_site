@@ -26,8 +26,8 @@ export default function favoritesReducer(state = initialState, action) {
         case 'DELETE_FAVORITE_FOOD':
             // creates a new array of the users favorite foods without the one the deleted
             const newFavoriteFoods = state.favoriteFoods.filter(food => {
-                if (food.restaurant_api_key != payload.restaurant_api_key &&
-                    food.food_item_api_key != payload.food_item_api_key) {
+                if (food.restaurant_api_key != action.payload.restaurant_api_key &&
+                    food.food_item_api_key != action.payload.food_item_api_key) {
                     return true;
                 }
             });    

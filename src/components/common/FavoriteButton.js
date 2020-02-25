@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addFavoriteFood } from "../../actions";
+import { addFavoriteFood, deleteFavoriteFood } from "../../actions";
 import Icofont from "react-icofont";
 
 
@@ -21,7 +21,7 @@ class FavoriteButton extends React.Component {
 
     // favorites this food
     favoriteFood = async () => {
-        foodToAdd = this.formatFoodItem();
+        const foodToAdd = this.formatFoodItem();
 
         await this.props.addFavoriteFood(foodToAdd);
 
@@ -30,16 +30,30 @@ class FavoriteButton extends React.Component {
         });
     }
 
+    // unfavorites this food
+    unFavoriteFood = async () => {
+        const foodToDelete = this.formatFoodItem();
+
+        // adds the favorite food id to the object becuase the id is required for deleting it
+        foodToDelete['id'] = this.props.id;
+
+        await this.props.deleteFavoriteFood(foodToDelete);
+
+        this.setState({
+            hasFavorited: false
+        });
+    }
+
     // formats the food correctly for the api call
     formatFoodItem = () => {
-        const foodToAdd = {
+        const food = {
             restaurant_api_key: this.props.restaurantAPIKey,
             food_item_api_key: this.props.foodAPIKey,
             name: this.props.name,
             description: this.props.description,
             price: this.props.price,
         }
-        return foodToAdd;
+        return food;
     }
 
     // determines if the food has been favorited
@@ -61,7 +75,7 @@ class FavoriteButton extends React.Component {
     render() {
         if (this.state.hasFavorited) {
             return (
-                <button className="btn btn-sm btn-outline-danger">
+                <button className="btn btn-sm btn-outline-danger" onClick={ this.unFavoriteFood }>
                     <Icofont icon="icofont-heart" /> Favorited
                 </button>
             )
@@ -81,4 +95,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { addFavoriteFood })(FavoriteButton);
+export default connect(mapStateToProps, { addFavoriteFood, deleteFavoriteFood })(FavoriteButton);

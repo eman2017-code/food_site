@@ -152,6 +152,17 @@ export default {
     });
     const parsedResponse = await response.json();
     return parsedResponse;
+  },
+
+  // deletes a users favorite food
+  deleteFavoriteFood: async foodId => {
+    const response = await fetch(apiURL + 'favorite-foods/' + foodId, {
+      method: 'DELETE',
+      credentials: "include"
+    });
+    const parsedResponse = await response.json();
+    return parsedResponse;
   }
+
 
 };

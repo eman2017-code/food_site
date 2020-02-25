@@ -113,6 +113,19 @@ export const addFavoriteFood = food => async dispatch => {
 }
 
 
+// action for deleting a favorite food
+export const deleteFavoriteFood = food => async dispatch => {
+  const response = await apiConnector.deleteFavoriteFood(food.id);
+
+  if (response.status.code === 204) {
+    dispatch({
+      type: 'DELETE_FAVORITE_FOOD',
+      payload: food
+    });
+  }
+}
+
+
 /* ----------------------
     restaurant actions/api calls 
   ----------------------- */

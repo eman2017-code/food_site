@@ -36,6 +36,7 @@ class FavoriteFoodCard extends React.Component {
                         </span>
                     </p>
                     <FavoriteButton 
+                        id={this.props.id}
                         foodAPIKey={this.props.food_item_api_key}  
                         restaurantAPIKey={this.props.restaurant_api_key}
                         name={this.props.title}
