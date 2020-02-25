@@ -11,7 +11,6 @@ class Favourites extends React.Component {
 
 	componentDidMount() {
 		this.props.getUsersFavoriteFoods();
-		console.log('initial favorite foods:', this.props.favoriteFoods);
 	}
 
 	render() {
@@ -34,19 +33,7 @@ class Favourites extends React.Component {
 										restaurant_api_key={food.restaurant_api_key}
 										food_item_api_key={food.food_item_api_key}
 									/>
-
-	                    			{/* <CardItem 
-					   					title={food.name}
-										subTitle={food.description}
-						    			linkUrl='detail'
-										time='15–25 min'
-										price={food.price}
-										apiKey={food.restaurant_api_key}
-										promotedVariant='dark'
-										favIcoIconColor='text-danger'
-					   				/> */}
 	                 			</Col>
-
 							)
 						 })
 					 }

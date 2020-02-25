@@ -35,7 +35,7 @@ class FavoriteButton extends React.Component {
         const foodToDelete = this.formatFoodItem();
 
         // adds the favorite food id to the object becuase the id is required for deleting it
-        foodToDelete['id'] = this.props.id;
+        foodToDelete['id'] = this.getFoodItemId();
 
         this.props.deleteFavoriteFood(foodToDelete);
 
@@ -59,17 +59,25 @@ class FavoriteButton extends React.Component {
     // determines if the food has been favorited
     hasFavoritedFood = () => {
         this.props.favoriteFoods.forEach(food => {
-            console.log(food.food_item_api_key, '==', this.props.foodAPIKey);
-            console.log(food.restaurant_api_key, '==', this.props.restaurantAPIKey);
-
             if (food.food_item_api_key == this.props.foodAPIKey &&
                 food.restaurant_api_key == this.props.restaurantAPIKey) {
-                console.log('has favorited')
                 this.setState({
                     hasFavorited: true
                 })
             }
         });
+    }
+
+    // returns the food items id which is needed to delete a favorite food
+    getFoodItemId = () => {
+        const favoriteFoods = this.props.favoriteFoods;
+
+        for (let i = 0; i < favoriteFoods.length; i++) {
+            if (favoriteFoods[i].food_item_api_key == this.props.foodAPIKey &&
+                favoriteFoods[i].restaurant_api_key == this.props.restaurantAPIKey) {
+                    return favoriteFoods[i].id;
+            }
+        }
     }
 
     render() {
