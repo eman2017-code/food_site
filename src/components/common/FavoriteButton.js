@@ -12,6 +12,11 @@ class FavoriteButton extends React.Component {
         }
     }
 
+
+    favoriteFoodItem = () => {
+        
+    }
+
     // determines if the food has been favorited
     hasFavoritedFood = () => {
         this.props.favoriteFoods.forEach(food => {
@@ -27,11 +32,11 @@ class FavoriteButton extends React.Component {
     render() {
         if (this.state.hasFavorited) {
             return (
-                <button>Favorite</button>
+                <button>Unfavorite</button>
             )
         } else {
             return (
-                <button>Unfavorite</button>
+                <button>Favorite</button>
             )
         }
     }

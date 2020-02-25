@@ -47,6 +47,9 @@ class QuickBite extends React.Component {
           <FavoriteButton 
             foodAPIKey={this.props.id}  
             restaurantAPIKey={this.props.restaurantAPIKey}
+            name={this.props.title}
+            price={this.props.price}
+            description={this.props.description}
             />
         </span>
         
