@@ -43,7 +43,7 @@ class QuickBite extends React.Component {
   render() {
     return (
       <div className={"p-3 border-bottom " + this.props.itemClass}>
-        <span className="float-right">
+        <span className="float-right ml-2">
           <FavoriteButton 
             foodAPIKey={this.props.id}  
             restaurantAPIKey={this.props.restaurantAPIKey}

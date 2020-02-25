@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { getUsersFavoriteFoods } from '../../actions';
 import {Row,Col,Button,Spinner} from 'react-bootstrap';
 import CardItem from '../common/CardItem';
+import FavoriteFoodCard from '../common/FavoriteFoodCard.js';
+
 
 class Favourites extends React.Component {
 
@@ -24,7 +26,15 @@ class Favourites extends React.Component {
 						 this.props.favoriteFoods.map(food => {
 							return (
 								<Col md={4} sm={6} key={food.id} className="mb-4 pb-2">
-	                    			<CardItem 
+									<FavoriteFoodCard 
+										name={food.name}
+										description={food.description}
+										price={food.price}
+										restaurant_api_key={food.restaurant_api_key}
+										food_item_api_key={food.food_item_api_key}
+									/>
+
+	                    			{/* <CardItem 
 					   					title={food.name}
 										subTitle={food.description}
 						    			linkUrl='detail'
@@ -33,7 +43,7 @@ class Favourites extends React.Component {
 										apiKey={food.restaurant_api_key}
 										promotedVariant='dark'
 										favIcoIconColor='text-danger'
-					   				/>
+					   				/> */}
 	                 			</Col>
 
 							)
