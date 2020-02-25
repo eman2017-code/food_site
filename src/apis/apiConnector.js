@@ -128,5 +128,15 @@ export default {
     });
     const parsedResponse = await response.json();
     return parsedResponse;
+  },
+
+  // gets the users favorite foods
+  getUsersFavoriteFoods: async () => {
+    const response = await fetch(apiURL + 'favorite-foods/', {
+      method: 'GET',
+      credentials: 'include'
+    });
+    const parsedResponse = await response.json();
+    return parsedResponse;
   }
 };
