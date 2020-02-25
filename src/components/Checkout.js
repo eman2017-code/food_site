@@ -32,7 +32,16 @@ class Checkout extends React.Component {
   getQty = ({ id, quantity }) => {};
 
   render() {
-    console.log(this.props);
+    const { cartItems, user } = this.props;
+
+    const getTotalPrice = cartItems => {
+      let total = 0;
+      this.props.cartItems.map(item => {
+        total += item.basePrice;
+      });
+      return Math.round(100 * total) / 100;
+    };
+
     return (
       <section className="offer-dedicated-body mt-4 mb-4 pt-2 pb-2">
         {this.props.location.pathname !== "/login" &&
@@ -177,7 +186,7 @@ class Checkout extends React.Component {
                                     to="/thanks"
                                     className="btn btn-success btn-block btn-lg"
                                   >
-                                    PAY $1329
+                                    {getTotalPrice()}
                                     <Icofont icon="long-arrow-right" />
                                   </Link>
                                 </Form.Group>
@@ -219,71 +228,35 @@ class Checkout extends React.Component {
                   />
                   <div className="d-flex flex-column">
                     <h6 className="mb-1 text-white">
-                      Spice Hut Indian Restaurant
+                      {user.userInfo ? (
+                        user.userInfo
+                      ) : (
+                        <span>Thanks for Shopping Guest</span>
+                      )}
                     </h6>
-                    <p className="mb-0 text-white">
+                    {/* <p className="mb-0 text-white">
                       <Icofont icon="location-pin" /> 2036 2ND AVE, NEW YORK, NY
                       10029
-                    </p>
+                    </p> */}
                   </div>
                 </div>
-                <div className="bg-white rounded shadow-sm mb-2">
-                  <CheckoutItem
-                    itemName="Chicken Tikka Sub"
-                    price={314}
-                    priceUnit="$"
-                    id={1}
-                    qty={2}
-                    show={true}
-                    minValue={0}
-                    maxValue={7}
-                    getValue={this.getQty}
-                  />
-                  <CheckoutItem
-                    itemName="Cheese corn Roll"
-                    price={260}
-                    priceUnit="$"
-                    id={1}
-                    qty={1}
-                    show={true}
-                    minValue={0}
-                    maxValue={7}
-                    getValue={this.getQty}
-                  />
-                  <CheckoutItem
-                    itemName="Mixed Veg"
-                    price={122}
-                    priceUnit="$"
-                    id={1}
-                    qty={1}
-                    show={true}
-                    minValue={0}
-                    maxValue={7}
-                    getValue={this.getQty}
-                  />
-                  <CheckoutItem
-                    itemName="Black Dal Makhani"
-                    price={652}
-                    priceUnit="$"
-                    id={1}
-                    qty={1}
-                    show={true}
-                    minValue={0}
-                    maxValue={7}
-                    getValue={this.getQty}
-                  />
-                  <CheckoutItem
-                    itemName="Mixed Veg"
-                    price={122}
-                    priceUnit="$"
-                    id={1}
-                    qty={1}
-                    show={true}
-                    minValue={0}
-                    maxValue={7}
-                    getValue={this.getQty}
-                  />
-                </div>
+                {cartItems.map((item, apiKey) => {
+                  return (
+                    <div
+                      className="bg-white rounded shadow-sm mb-2"
+                      key={apiKey}
+                    >
+                      <CheckoutItem
+                        itemName={item.name}
+                        price={Number(item.basePrice)}
+                        id={Number(item.apiKey)}
+                        qty={1}
+                        show={true}
+                        getValue={this.getQty}
+                      />
+                    </div>
+                  );
+                })}
                 <div className="mb-2 bg-white rounded p-2 clearfix">
                   <InputGroup className="input-group-sm mb-2">
                     <Form.Control type="text" placeholder="Enter promo code" />
@@ -299,17 +272,18 @@ class Checkout extends React.Component {
                   </InputGroup>
                 </div>
                 <div className="mb-2 bg-white rounded p-2 clearfix">
-                  <p className="mb-1">
+                  {/* <p className="mb-1">
                     Item Total{" "}
                     <span className="float-right text-dark">$3140</span>
-                  </p>
-                  <p className="mb-1 text-success">
+                  </p> */}
+                  {/* <p className="mb-1 text-success">
                     Total Discount
                     <span className="float-right text-success">$1884</span>
-                  </p>
+                  </p> */}
                   <hr />
                   <h6 className="font-weight-bold mb-0">
-                    TOTAL <span className="float-right">$1329</span>
+                    TOTAL{" "}
+                    <span className="float-right">${getTotalPrice()}</span>
                   </h6>
                 </div>
               </div>
@@ -329,9 +303,9 @@ class Checkout extends React.Component {
 
 // export default Checkout;
 const mapStateToProps = state => {
-  console.warn("state:", state);
   return {
-    cartItems: state.cartItems.carts
+    cartItems: state.cartItems.cart[0],
+    user: state.user.userInfo
   };
 };
 
