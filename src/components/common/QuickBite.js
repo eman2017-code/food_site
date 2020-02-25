@@ -5,7 +5,6 @@ import { Image, Badge, Button, Media } from "react-bootstrap";
 import PropTypes from "prop-types";
 import Icofont from "react-icofont";
 import FavoriteButton from './FavoriteButton.js';
-import FoodCustomizationModal from '../modals/FoodCustomizationModel.js';
 
 
 class QuickBite extends React.Component {
@@ -16,23 +15,8 @@ class QuickBite extends React.Component {
       show: this.props.show || true,
       max: this.props.maxValue || 5,
       min: this.props.minValue || 0,
-      showFoodCustomizationModal: false,
-      selectedFoodItem: {},
     };
-  }
 
-  showFoodCustomizationModal = (foodItem) => {
-    this.setState({ 
-      showFoodCustomizationModal: true,
-      selectedFoodItem: foodItem
-    });
-  }
-
-  hideFoodCustomizationModal = () => {
-    this.setState({ 
-      showFoodCustomizationModal: false,
-      selectedFoodItem: {}
-    });
   }
 
   addToCart = foodItem => {
@@ -42,13 +26,6 @@ class QuickBite extends React.Component {
   render() {
     const foodItem = this.props.foodItem;
     return (
-      <>
-      <FoodCustomizationModal 
-        show={this.state.showFoodCustomizationModal}
-        onHide={this.hideFoodCustomizationModal}
-        foodItem={this.state.selectedItemFood}
-      />
-
       <div className={"p-3 border-bottom " + this.props.itemClass}>
         <span className="float-right ml-2">
           <FavoriteButton 
@@ -63,7 +40,7 @@ class QuickBite extends React.Component {
 
         <span className="float-right">
           <Button
-            onClick={() => this.showFoodCustomizationModal(foodItem)}
+            onClick={() => this.props.showFoodCustomizationModal(this.props.foodItem)}
             variant="outline-secondary"
             size="sm"
           >
@@ -103,7 +80,6 @@ class QuickBite extends React.Component {
           </Media.Body>
         </Media>
       </div>
-      </>
     )
   }
 }

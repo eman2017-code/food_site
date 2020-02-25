@@ -5,17 +5,27 @@ import { Form, Modal, Button } from 'react-bootstrap';
 
 class FoodCustomizatonModal extends React.Component {
 
+    constructor(props) {
+        super(props)
+    }
+
     render() {
+        const { foodItem } = this.props;
+   
         return (
             <Modal 
 	        	show={this.props.show} 
 	        	onHide={this.props.onHide}
-		        size="lg"
+		        size="md"
 		        centered>
                 <Modal.Header closeButton={true}>
-			        <Modal.Title as='h5' id="edit-profile">Edit profile</Modal.Title>
+                    <Modal.Title as='h5' id="edit-profile">{ foodItem.name }</Modal.Title>
 			    </Modal.Header>
-                 
+                <Modal.Body>
+                    <p className="text-gray">
+                        { foodItem.description }
+                    </p>
+                </Modal.Body>
             </Modal>
         )
     }
