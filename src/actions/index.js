@@ -101,8 +101,15 @@ export const getUsersFavoriteFoods = () => async dispatch => {
 
 
 // action for adding a favorite food item
-export const addFavoriteFood = food = async dispatch => {
-  
+export const addFavoriteFood = food => async dispatch => {
+  const response = await apiConnector.addFavoriteFood(food);
+
+  if (response.status.code === 201) {
+    dispatch({
+      type: 'ADD_FAVORITE_FOOD',
+      payload: response.data
+    });
+  }
 }
 
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { addFavoriteFood } from "../../actions";
 
 
 class FavoriteButton extends React.Component {
@@ -8,13 +9,22 @@ class FavoriteButton extends React.Component {
         super(props);
 
         this.state = {
-            hasFavorited: false
+            hasFavorited: false,
         }
     }
 
+    // favorites this food
+    favoriteFood = () => {
+        // formats the food correctly for the api call
+        const foodToAdd = {
+            restaurant_api_key: this.props.restaurantAPIKey,
+            food_item_api_key: this.props.foodAPIKey,
+            name: this.props.name,
+            description: this.props.description,
+            price: this.props.price,
+        }
 
-    favoriteFoodItem = () => {
-        
+        this.props.addFavoriteFood(foodToAdd);
     }
 
     // determines if the food has been favorited
@@ -36,7 +46,7 @@ class FavoriteButton extends React.Component {
             )
         } else {
             return (
-                <button>Favorite</button>
+                <button onClick={ this.favoriteFood }>Favorite</button>
             )
         }
     }
@@ -48,4 +58,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {})(FavoriteButton);
+export default connect(mapStateToProps, { addFavoriteFood })(FavoriteButton);

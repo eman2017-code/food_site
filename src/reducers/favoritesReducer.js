@@ -15,6 +15,13 @@ export default function favoritesReducer(state = initialState, action) {
                 favoriteFoods: action.payload
             }
 
+        // adds a favorite food to the users favorite foods
+        case 'ADD_FAVORITE_FOOD':
+            return {
+                ...state,
+                favoriteFoods: [action.payload, ...state.favoriteFoods]
+            }
+
         default:
             return state
     }
