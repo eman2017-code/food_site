@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import Icofont from "react-icofont";
 import FavoriteButton from './FavoriteButton.js';
 
+
 class QuickBite extends React.Component {
   constructor(props) {
     super(props);
@@ -13,8 +14,9 @@ class QuickBite extends React.Component {
       quantity: this.props.qty || 0,
       show: this.props.show || true,
       max: this.props.maxValue || 5,
-      min: this.props.minValue || 0
+      min: this.props.minValue || 0,
     };
+
   }
 
   addToCart = foodItem => {
@@ -38,7 +40,7 @@ class QuickBite extends React.Component {
 
         <span className="float-right">
           <Button
-            onClick={() => this.addToCart(foodItem)}
+            onClick={() => this.props.showFoodCustomizationModal(this.props.foodItem)}
             variant="outline-secondary"
             size="sm"
           >
@@ -78,7 +80,7 @@ class QuickBite extends React.Component {
           </Media.Body>
         </Media>
       </div>
-    );
+    )
   }
 }
 
@@ -99,6 +101,7 @@ QuickBite.propTypes = {
   maxValue: PropTypes.number,
   getValue: PropTypes.func.isRequired
 };
+
 QuickBite.defaultProps = {
   itemClass: "gold-members",
   imageAlt: "",

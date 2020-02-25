@@ -19,6 +19,7 @@ import QuickBite from "./common/QuickBite";
 import Icofont from "react-icofont";
 import Header from "./common/Header";
 import Checkout from "./Checkout";
+import FoodCustomizationModal from './modals/FoodCustomizationModel.js';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
 class Detail extends React.Component {
@@ -37,7 +38,11 @@ class Detail extends React.Component {
       friday: this.props.restaurant.restaurant.hours.Friday || '',
       saturday: this.props.restaurant.restaurant.hours.Saturday || '',
       sunday: this.props.restaurant.restaurant.hours.Sunday || '',
-      numberOfDay: 15
+      numberOfDay: 15,
+
+      // for the food customization model
+      showFoodCustomizationModal: false,
+      selectedFoodItem: {}
     };
   }
 
@@ -60,6 +65,22 @@ class Detail extends React.Component {
     // sets state
     this.setState({ numberOfDay: getNumberOfDay });
   };
+
+  // shows the model to customize a food item
+  showFoodCustomizationModal = (foodItem) => {
+    this.setState({ 
+      selectedFoodItem: foodItem, 
+      showFoodCustomizationModal: true
+    });
+  }
+
+  // hides the model to customize a food item
+  hideFoodCustomizationModal = () => {
+    this.setState({ 
+      selectedFoodItem: {},
+      showFoodCustomizationModal: false,
+    });
+  }
 
   render() {
     const { restaurant } = this.props.restaurant;
@@ -106,6 +127,18 @@ class Detail extends React.Component {
         ) : (
           ""
         )}
+
+        {/* food item customization model */}
+        { this.state.showFoodCustomizationModal ? (
+          <FoodCustomizationModal 
+            show={this.state.showFoodCustomizationModal}
+            onHide={this.hideFoodCustomizationModal}
+            foodItem={this.state.selectedFoodItem}
+          />
+        ) : (
+          ""
+        ) }
+
         <section className="restaurant-detailed-banner">
           <div className="text-center">
             <Image
@@ -232,6 +265,7 @@ class Detail extends React.Component {
                                     price={foodItem.basePrice}
                                     description={foodItem.description}
                                     getValue={this.getQty}
+                                    showFoodCustomizationModal={this.showFoodCustomizationModal}
                                   />
                                 </div>
                               );
