@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { Form, Modal, Button } from 'react-bootstrap';
+import { Form, Modal, Button, Badge } from 'react-bootstrap';
 
 
 class FoodCustomizatonModal extends React.Component {
@@ -45,24 +45,23 @@ class FoodCustomizatonModal extends React.Component {
 		        size="md"
 		        centered>
                 <Modal.Header closeButton={true}>
-                    <Modal.Title as='h5' id="edit-profile">{foodItem.name}</Modal.Title>
+                    <Modal.Title as='h5'>{foodItem.name}</Modal.Title>
 			    </Modal.Header>
                 <Modal.Body>
                     <p className="text-gray">{foodItem.description}</p>
-
                     <Form>
                         {
                         this.state.customizations.map((customization, i) => {
                         return (
                             <Form.Group key={customization.apiKey}>
-                                <Form.Label key={i}>
+                                <h6 key={i} className="font-weight-bold text-center mt-2">
                                     {customization.name}
-                                </Form.Label>
+                                </h6>
 
                                 {customization.customizations.map((choice, i) => {
                                     return (
-                                        <div key={i}>
-                                            <Form.Label>{choice.name}</Form.Label>
+                                        <div key={i} className="mt-3">
+                                            {choice.name ? (<Form.Label>{choice.name}</Form.Label>) : ""}
                                             <Form.Control as="select" key={choice.apiKey}>
 
                                                 {choice.customizationChoices.map((option, i) => {
@@ -72,7 +71,7 @@ class FoodCustomizatonModal extends React.Component {
                                                         </option>
                                                     )
                                                 })}    
-                                                    
+
                                             </Form.Control>
                                         </div>
                                     )
@@ -82,7 +81,17 @@ class FoodCustomizatonModal extends React.Component {
                         })
                         }
                     </Form>
-
+                    <div className="d-flex justify-content-between">
+                        <h4>
+                            <Badge variant="light">Total: ${ foodItem.basePrice }</Badge>
+                        </h4>
+                        <Button
+                            // onClick={() => this.props.showFoodCustomizationModal(this.props.foodItem)}
+                            variant="secondary"
+                            size="md">
+                            Add To Cart
+                        </Button>
+                    </div>
                 </Modal.Body>
             </Modal>
         )
