@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import { NavLink, Link } from "react-router-dom";
 import { Row, Col, Container, Image } from "react-bootstrap";
@@ -22,6 +23,20 @@ class MyAccount extends React.Component {
   hideEditProfile = () => this.setState({ showEditProfile: false });
 
   render() {
+
+    // return nothing if the user isnt logged in
+    if (!this.props.isLoggedIn) {
+      return (
+        <></>
+      )
+    }
+
+    const { user } = this.props;
+
+    // creates a string containing the month and year the user created their account
+    const userTimestampArray = user.timestamp.split(' ');
+    const userTimestampString = 'Active since ' + userTimestampArray[2] + ' ' + userTimestampArray[3];
+
     return (
       <>
         {this.props.location.pathname !== "/login" &&
@@ -48,9 +63,15 @@ class MyAccount extends React.Component {
                           alt="gurdeep singh osahan"
                         />
                         <div className="osahan-user-media-body">
-                          <h6 className="mb-2">Gurdeep Singh</h6>
-                          <p className="mb-1">+91 85680-79956</p>
-                          <p>iamosahan@gmail.com</p>
+                          <h6 className="mb-2">
+                            { user.first_name } {user.last_name}
+                          </h6>
+                          <p className="mb-1">
+                            { user.email }
+                          </p>
+                          <p>
+                            { userTimestampString }
+                          </p>
                           <p className="mb-0 text-black font-weight-bold">
                             <Link
                               to="#"
@@ -136,4 +157,11 @@ class MyAccount extends React.Component {
   }
 }
 
-export default MyAccount;
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.user.isLoggedIn,
+    user: state.user.userInfo
+  }
+}
+
+export default connect(mapStateToProps, {})(MyAccount);

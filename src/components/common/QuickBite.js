@@ -4,6 +4,7 @@ import { addToCart } from "../../actions";
 import { Image, Badge, Button, Media } from "react-bootstrap";
 import PropTypes from "prop-types";
 import Icofont from "react-icofont";
+import FavoriteButton from './FavoriteButton.js';
 
 class QuickBite extends React.Component {
   constructor(props) {
@@ -24,6 +25,17 @@ class QuickBite extends React.Component {
     const foodItem = this.props.foodItem;
     return (
       <div className={"p-3 border-bottom " + this.props.itemClass}>
+        <span className="float-right ml-2">
+          <FavoriteButton 
+            id={this.props.foodId}
+            foodAPIKey={this.props.id}  
+            restaurantAPIKey={this.props.restaurantAPIKey}
+            name={this.props.title}
+            price={this.props.price}
+            description={this.props.description}
+            />
+        </span>
+
         <span className="float-right">
           <Button
             onClick={() => this.addToCart(foodItem)}

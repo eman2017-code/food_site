@@ -25,12 +25,16 @@ export default function addressReducer(state = initialState, action) {
 
         // updates a single delivery address
         case 'UPDATE_DELIVERY_ADDRESS':
+
             // gets the index of the delivery address which was updated
             const deliveryAddressIndex = state.deliveryAddresses.findIndex(address => address.id === action.payload.id);
 
+            // removes the old delivery address that was updated
+            state.deliveryAddresses.splice(deliveryAddressIndex, 1);
+
             return {
                 ...state,
-                deliveryAddresses: [action.payload, ...state.deliveryAddresses.splice(deliveryAddressIndex, 1)]
+                deliveryAddresses: [action.payload, ...state.deliveryAddresses]
             }
 
         // deletes a single delivery address

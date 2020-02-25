@@ -32,11 +32,16 @@ class CardItem extends React.Component {
               this.props.fetchSingleRestaurant(this.props.apiKey);
             }}
           >
-            <Image
-              src={this.props.image}
-              className={this.props.imageClass}
-              alt={this.props.imageAlt}
-            />
+            {
+              this.props.image ? (
+                <Image
+                  src={this.props.image}
+                  className={this.props.imageClass}
+                  alt={this.props.imageAlt} />
+              )
+              :
+              null
+            }
           </Link>
         </div>
         <div className="p-3 position-relative">
@@ -68,8 +73,7 @@ class CardItem extends React.Component {
                   ""
                 )}
                 {this.props.price ? (
-                  <span className="float-right text-black-50">
-                    {" "}
+                  <span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2 ml-2">
                     {this.props.price}
                   </span>
                 ) : (
@@ -95,10 +99,10 @@ class CardItem extends React.Component {
 }
 
 CardItem.propTypes = {
-  apiKey: PropTypes.string,
+  apiKey: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   imageAlt: PropTypes.string,
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   imageClass: PropTypes.string,
   offerText: PropTypes.string,
   offerColor: PropTypes.string,
@@ -109,6 +113,7 @@ CardItem.propTypes = {
   promotedVariant: PropTypes.string,
   favIcoIconColor: PropTypes.string
 };
+
 CardItem.defaultProps = {
   imageAlt: "",
   imageClass: "",

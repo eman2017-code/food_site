@@ -86,6 +86,46 @@ export const deleteDeliveryAddress = addressId => async dispatch => {
   }
 };
 
+
+// action for getting all of the users favorite foods
+export const getUsersFavoriteFoods = () => async dispatch => {
+  const response = await apiConnector.getUsersFavoriteFoods();
+
+  if (response.status.code === 200) {
+    dispatch({
+      type: 'SET_FAVORITE_FOODS',
+      payload: response.data
+    });
+  }
+}
+
+
+// action for adding a favorite food item
+export const addFavoriteFood = food => async dispatch => {
+  const response = await apiConnector.addFavoriteFood(food);
+
+  if (response.status.code === 201) {
+    dispatch({
+      type: 'ADD_FAVORITE_FOOD',
+      payload: response.data
+    });
+  }
+}
+
+
+// action for deleting a favorite food
+export const deleteFavoriteFood = food => async dispatch => {
+  const response = await apiConnector.deleteFavoriteFood(food.id);
+
+  if (response.status.code === 204) {
+    dispatch({
+      type: 'DELETE_FAVORITE_FOOD',
+      payload: food
+    });
+  }
+}
+
+
 /* ----------------------
     restaurant actions/api calls 
   ----------------------- */
