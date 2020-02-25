@@ -1,5 +1,5 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import React from "react";
 import { connect } from "react-redux";
 import {
   Row,
@@ -228,10 +228,10 @@ class Checkout extends React.Component {
                   />
                   <div className="d-flex flex-column">
                     <h6 className="mb-1 text-white">
-                      {user.userInfo ? (
-                        user.userInfo
+                      {this.props.user.active ? (
+                        <span>Thank You for Shopping {user.first_name}</span>
                       ) : (
-                        <span>Thanks for Shopping Guest</span>
+                        <span>Thank You for Shopping Guest</span>
                       )}
                     </h6>
                     {/* <p className="mb-0 text-white">
