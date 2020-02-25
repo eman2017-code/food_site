@@ -59,11 +59,11 @@ class FavoriteButton extends React.Component {
     // determines if the food has been favorited
     hasFavoritedFood = () => {
         this.props.favoriteFoods.forEach(food => {
-            console.log(food.food_item_api_key, '===', this.props.foodAPIKey);
-            console.log(food.restaurant_api_key, '===', this.props.restaurantAPIKey);
+            console.log(food.food_item_api_key, '==', this.props.foodAPIKey);
+            console.log(food.restaurant_api_key, '==', this.props.restaurantAPIKey);
 
-            if (food.food_item_api_key === this.props.foodAPIKey &&
-                food.restaurant_api_key === this.props.restaurantAPIKey) {
+            if (food.food_item_api_key == this.props.foodAPIKey &&
+                food.restaurant_api_key == this.props.restaurantAPIKey) {
                 console.log('has favorited')
                 this.setState({
                     hasFavorited: true
