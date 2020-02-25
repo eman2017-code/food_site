@@ -240,6 +240,9 @@ class Checkout extends React.Component {
                     </p> */}
                   </div>
                 </div>
+                <Button className="btn btn-sm btn-primary mr-2">
+                  Clear Cart
+                </Button>
                 {cartItems.map((item, apiKey) => {
                   return (
                     <div
