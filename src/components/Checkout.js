@@ -41,6 +41,7 @@ class Checkout extends React.Component {
         return <h1>0</h1>;
       } else {
         this.props.cartItems.map(item => {
+          console.log("item.basePrice --> :", item.basePrice);
           total += item.basePrice;
         });
         // rounds each number to the nearest 100th

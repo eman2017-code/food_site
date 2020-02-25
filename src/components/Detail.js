@@ -67,22 +67,22 @@ class Detail extends React.Component {
 
     const renderCorrectDays = () => {
       switch (this.state.numberOfDay) {
-        case 0:
+        case 0 !== undefined:
           return `Today: ${this.state.sunday[0]}`;
-        case 1:
+        case 1 !== undefined:
           return `Today: ${this.state.monday[0]}`;
-        case 2:
+        case 2 !== undefined:
           return `Today: ${this.state.tuesday[0]}`;
-        case 3:
+        case 3 !== undefined:
           return `Today: ${this.state.wednesday[0]}`;
-        case 4:
+        case 4 !== undefined:
           return `Today: ${this.state.thursday[0]}`;
-        case 5:
+        case 5 !== undefined:
           return `Today: ${this.state.friday[0]}`;
-        case 6:
+        case 6 !== undefined:
           return `Today: ${this.state.saturday[0]}`;
         default:
-          return "This Shop Has Closed Down";
+          return "This Shop's Hours are Available Today";
       }
     };
 
@@ -128,7 +128,7 @@ class Detail extends React.Component {
                     <h2 className="text-white">{restaurant.name}</h2>
                     <p className="text-white mb-1">
                       <Icofont icon="location-pin" /> {restaurant.streetAddress}{" "}
-                      <Badge variant="success">OPEN</Badge>
+                      {/* <Badge variant="success">OPEN</Badge> */}
                     </p>
                     <p className="text-white mb-0">
                       <Icofont icon="food-cart" /> {restaurant.foodTypes}
@@ -255,9 +255,9 @@ class Detail extends React.Component {
                                 <p className="mb-2 text-black">
                                   <Icofont icon="clock-time text-primary mr-2" />{" "}
                                   {renderCorrectDays()}
-                                  <Badge variant="success" className="ml-1">
+                                  {/* <Badge variant="success" className="ml-1">
                                     OPEN NOW
-                                  </Badge>
+                                  </Badge> */}
                                 </p>
                                 <hr className="clearfix" />
                                 <hr className="clearfix" />
