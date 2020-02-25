@@ -21,7 +21,17 @@ class FavoriteButton extends React.Component {
 
     // favorites this food
     favoriteFood = async () => {
-        // formats the food correctly for the api call
+        foodToAdd = this.formatFoodItem();
+
+        await this.props.addFavoriteFood(foodToAdd);
+
+        this.setState({
+            hasFavorited: true
+        });
+    }
+
+    // formats the food correctly for the api call
+    formatFoodItem = () => {
         const foodToAdd = {
             restaurant_api_key: this.props.restaurantAPIKey,
             food_item_api_key: this.props.foodAPIKey,
@@ -29,12 +39,7 @@ class FavoriteButton extends React.Component {
             description: this.props.description,
             price: this.props.price,
         }
-
-        await this.props.addFavoriteFood(foodToAdd);
-
-        this.setState({
-            hasFavorited: true
-        });
+        return foodToAdd;
     }
 
     // determines if the food has been favorited
