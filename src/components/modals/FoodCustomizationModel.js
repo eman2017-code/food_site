@@ -28,7 +28,11 @@ class FoodCustomizatonModal extends React.Component {
             credentials: 'include'
         });
         const parsedResponse = await response.json();
-        console.log('response:', parsedResponse);
+        
+        // sets the food items customization options in the state
+        if (parsedResponse.status.code === 200) {
+            this.setState({ customizationOptions: parsedResponse.data });
+        }
     }
 
     render() {
