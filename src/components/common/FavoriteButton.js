@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addFavoriteFood } from "../../actions";
+import Icofont from "react-icofont";
 
 
 class FavoriteButton extends React.Component {
@@ -14,7 +15,7 @@ class FavoriteButton extends React.Component {
     }
 
     // favorites this food
-    favoriteFood = () => {
+    favoriteFood = async () => {
         // formats the food correctly for the api call
         const foodToAdd = {
             restaurant_api_key: this.props.restaurantAPIKey,
@@ -24,7 +25,11 @@ class FavoriteButton extends React.Component {
             price: this.props.price,
         }
 
-        this.props.addFavoriteFood(foodToAdd);
+        await this.props.addFavoriteFood(foodToAdd);
+
+        this.setState({
+            hasFavorited: true
+        });
     }
 
     // determines if the food has been favorited
@@ -42,11 +47,15 @@ class FavoriteButton extends React.Component {
     render() {
         if (this.state.hasFavorited) {
             return (
-                <button>Unfavorite</button>
+                <button className="btn btn-sm btn-danger">
+                    <Icofont icon="icofont-heart" /> Favorited
+                </button>
             )
         } else {
             return (
-                <button onClick={ this.favoriteFood }>Favorite</button>
+                <button className="btn btn-sm btn-danger" onClick={ this.favoriteFood }>
+                    <Icofont icon="icofont-heart" /> Favorite
+                </button>
             )
         }
     }

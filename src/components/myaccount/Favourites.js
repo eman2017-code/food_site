@@ -25,20 +25,14 @@ class Favourites extends React.Component {
 							return (
 								<Col md={4} sm={6} key={food.id} className="mb-4 pb-2">
 	                    			<CardItem 
-					   					title='Bite Me Sandwiches'
-										subTitle='North Indian • American • Pure veg'
-						  				imageAlt='Product'
-						    			image='img/list/1.png'
-						    			imageClass='img-fluid item-img'
+					   					title={food.name}
+										subTitle={food.description}
 						    			linkUrl='detail'
-						    			offerText='65% off Coupon OSAHAN50'
-						    			offerColor='danger'
 										time='15–25 min'
-										price='$100 FOR TWO'
-										showPromoted={true}
+										price={food.price}
+										apiKey={food.restaurant_api_key}
 										promotedVariant='dark'
 										favIcoIconColor='text-danger'
-										rating='3.1 (300+)'
 					   				/>
 	                 			</Col>
 

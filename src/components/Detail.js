@@ -28,15 +28,15 @@ class Detail extends React.Component {
     this.state = {
       showAddressModal: false,
       restaurant_api_key: this.props.match.params.restaurant_api_key,
-      lat: props.restaurant.restaurant.latitude,
-      lon: props.restaurant.restaurant.longitude,
-      monday: this.props.restaurant.restaurant.hours.Monday,
-      tuesday: this.props.restaurant.restaurant.hours.Tuesday,
-      wednesday: this.props.restaurant.restaurant.hours.Wednesday,
-      thursday: this.props.restaurant.restaurant.hours.Thursday,
-      friday: this.props.restaurant.restaurant.hours.Friday,
-      saturday: this.props.restaurant.restaurant.hours.Saturday,
-      sunday: this.props.restaurant.restaurant.hours.Sunday,
+      lat: props.restaurant.restaurant.latitude || '',
+      lon: props.restaurant.restaurant.longitude || '',
+      monday: this.props.restaurant.restaurant.hours.Monday || '',
+      tuesday: this.props.restaurant.restaurant.hours.Tuesday || '',
+      wednesday: this.props.restaurant.restaurant.hours.Wednesday || '',
+      thursday: this.props.restaurant.restaurant.hours.Thursday || '',
+      friday: this.props.restaurant.restaurant.hours.Friday || '',
+      saturday: this.props.restaurant.restaurant.hours.Saturday || '',
+      sunday: this.props.restaurant.restaurant.hours.Sunday || '',
       numberOfDay: 15
     };
   }
