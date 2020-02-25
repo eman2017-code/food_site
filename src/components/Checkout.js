@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { connect } from "react-redux";
+import { clearCart } from "../actions";
 import {
   Row,
   Col,
@@ -36,10 +37,15 @@ class Checkout extends React.Component {
 
     const getTotalPrice = cartItems => {
       let total = 0;
-      this.props.cartItems.map(item => {
-        total += item.basePrice;
-      });
-      return Math.round(100 * total) / 100;
+      if (this.props.cartItems === undefined) {
+        return <h1>0</h1>;
+      } else {
+        this.props.cartItems.map(item => {
+          total += item.basePrice;
+        });
+        // rounds each number to the nearest 100th
+        return Math.round(100 * total) / 100;
+      }
     };
 
     return (
@@ -186,7 +192,9 @@ class Checkout extends React.Component {
                                     to="/thanks"
                                     className="btn btn-success btn-block btn-lg"
                                   >
-                                    {getTotalPrice()}
+                                    {cartItems === undefined
+                                      ? ""
+                                      : getTotalPrice()}
                                     <Icofont icon="long-arrow-right" />
                                   </Link>
                                 </Form.Group>
@@ -240,26 +248,34 @@ class Checkout extends React.Component {
                     </p> */}
                   </div>
                 </div>
-                <Button className="btn btn-sm btn-primary mr-2">
+                <Button
+                  className="btn btn-sm btn-primary mr-2"
+                  onClick={() => this.props.clearCart()}
+                >
                   Clear Cart
                 </Button>
-                {cartItems.map((item, apiKey) => {
-                  return (
-                    <div
-                      className="bg-white rounded shadow-sm mb-2"
-                      key={apiKey}
-                    >
-                      <CheckoutItem
-                        itemName={item.name}
-                        price={Number(item.basePrice)}
-                        id={Number(item.apiKey)}
-                        qty={1}
-                        show={true}
-                        getValue={this.getQty}
-                      />
-                    </div>
-                  );
-                })}
+                {/* if there are no cartItems */}
+                {cartItems === undefined
+                  ? // dont show anything
+                    ""
+                  : // otherwise shows list of cartItems
+                    cartItems.map((item, apiKey) => {
+                      return (
+                        <div
+                          className="bg-white rounded shadow-sm mb-2"
+                          key={apiKey}
+                        >
+                          <CheckoutItem
+                            itemName={item.name}
+                            price={Number(item.basePrice)}
+                            id={Number(item.apiKey)}
+                            qty={1}
+                            show={true}
+                            getValue={this.getQty}
+                          />
+                        </div>
+                      );
+                    })}
                 <div className="mb-2 bg-white rounded p-2 clearfix">
                   <InputGroup className="input-group-sm mb-2">
                     <Form.Control type="text" placeholder="Enter promo code" />
@@ -312,4 +328,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Checkout);
+export default connect(mapStateToProps, { clearCart })(Checkout);

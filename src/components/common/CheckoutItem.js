@@ -85,7 +85,7 @@ class CheckoutItem extends Component {
 }
 
 CheckoutItem.propTypes = {
-  itemName: PropTypes.string.isRequired,
+  itemName: PropTypes.string,
   price: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
   qty: PropTypes.number.isRequired,
