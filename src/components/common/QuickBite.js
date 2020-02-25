@@ -16,16 +16,23 @@ class QuickBite extends React.Component {
       show: this.props.show || true,
       max: this.props.maxValue || 5,
       min: this.props.minValue || 0,
-      showFoodCustomizationModal: false
+      showFoodCustomizationModal: false,
+      selectedFoodItem: {},
     };
   }
 
-  showFoodCustomizationModal = () => {
-    this.setState({ showFoodCustomizationModal: true });
+  showFoodCustomizationModal = (foodItem) => {
+    this.setState({ 
+      showFoodCustomizationModal: true,
+      selectedFoodItem: foodItem
+    });
   }
 
   hideFoodCustomizationModal = () => {
-    this.setState({ showFoodCustomizationModal: false });
+    this.setState({ 
+      showFoodCustomizationModal: false,
+      selectedFoodItem: {}
+    });
   }
 
   addToCart = foodItem => {
@@ -39,6 +46,7 @@ class QuickBite extends React.Component {
       <FoodCustomizationModal 
         show={this.state.showFoodCustomizationModal}
         onHide={this.hideFoodCustomizationModal}
+        foodItem={this.state.selectedItemFood}
       />
 
       <div className={"p-3 border-bottom " + this.props.itemClass}>
@@ -55,7 +63,7 @@ class QuickBite extends React.Component {
 
         <span className="float-right">
           <Button
-            onClick={() => this.addToCart(foodItem)}
+            onClick={() => this.showFoodCustomizationModal(foodItem)}
             variant="outline-secondary"
             size="sm"
           >
@@ -117,6 +125,7 @@ QuickBite.propTypes = {
   maxValue: PropTypes.number,
   getValue: PropTypes.func.isRequired
 };
+
 QuickBite.defaultProps = {
   itemClass: "gold-members",
   imageAlt: "",

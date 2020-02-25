@@ -10,7 +10,7 @@ class FoodCustomizatonModal extends React.Component {
             <Modal 
 	        	show={this.props.show} 
 	        	onHide={this.props.onHide}
-		        size="sm"
+		        size="lg"
 		        centered>
                 <Modal.Header closeButton={true}>
 			        <Modal.Title as='h5' id="edit-profile">Edit profile</Modal.Title>
