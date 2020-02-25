@@ -37,10 +37,10 @@ class Checkout extends React.Component {
 
     const getTotalPrice = cartItems => {
       let total = 0;
-      if (this.props.cartItems === undefined) {
+      if (cartItems === undefined) {
         return <h1>0</h1>;
       } else {
-        this.props.cartItems.map(item => {
+        cartItems.cart.map(item => {
           total += item.basePrice;
         });
         // rounds each number to the nearest 100th
@@ -194,7 +194,7 @@ class Checkout extends React.Component {
                                   >
                                     {cartItems === undefined
                                       ? ""
-                                      : getTotalPrice()}
+                                      : getTotalPrice(cartItems)}
                                     <Icofont icon="long-arrow-right" />
                                   </Link>
                                 </Form.Group>
@@ -254,12 +254,11 @@ class Checkout extends React.Component {
                 >
                   Clear Cart
                 </Button>
-                {/* if there are no cartItems */}
                 {cartItems === undefined
                   ? // dont show anything
                     ""
                   : // otherwise shows list of cartItems
-                    cartItems.map((item, apiKey) => {
+                    cartItems.cart.map((item, apiKey) => {
                       return (
                         <div
                           className="bg-white rounded shadow-sm mb-2"
@@ -302,7 +301,9 @@ class Checkout extends React.Component {
                   <hr />
                   <h6 className="font-weight-bold mb-0">
                     TOTAL{" "}
-                    <span className="float-right">${getTotalPrice()}</span>
+                    <span className="float-right">
+                      ${getTotalPrice(cartItems)}
+                    </span>
                   </h6>
                 </div>
               </div>
@@ -323,7 +324,7 @@ class Checkout extends React.Component {
 // export default Checkout;
 const mapStateToProps = state => {
   return {
-    cartItems: state.cartItems.cart[0],
+    cartItems: state.cartItems,
     user: state.user.userInfo
   };
 };
