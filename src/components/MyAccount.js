@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import { NavLink, Link } from "react-router-dom";
 import { Row, Col, Container, Image } from "react-bootstrap";
@@ -136,4 +137,10 @@ class MyAccount extends React.Component {
   }
 }
 
-export default MyAccount;
+const mapStateToProps = state => {
+  return {
+    user: state.user.userInfo
+  }
+}
+
+export default connect(mapStateToProps, {})(MyAccount);
