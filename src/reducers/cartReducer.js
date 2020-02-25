@@ -16,7 +16,6 @@ export default function cartReducer(state = initialState, action) {
       };
 
     case "CLEAR_CART":
-      console.log("the cart has been cleared... via REDUCER");
       return {
         cart: []
       };
