@@ -213,7 +213,9 @@ class Checkout extends React.Component {
                                 to="/thanks"
                                 className="btn btn-success btn-block btn-lg"
                               >
-                                PAY $1329
+                                {cartItems === undefined
+                                  ? ""
+                                  : getTotalPrice(cartItems)}
                                 <Icofont icon="long-arrow-right" />
                               </Link>
                             </Form>
@@ -272,6 +274,9 @@ class Checkout extends React.Component {
                             show={true}
                             getValue={this.getQty}
                           />
+                          <button>
+                            <Icofont icon="icofont-delete" />
+                          </button>
                         </div>
                       );
                     })}
