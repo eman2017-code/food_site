@@ -100,6 +100,12 @@ export const getUsersFavoriteFoods = () => async dispatch => {
 }
 
 
+// action for adding a favorite food item
+export const addFavoriteFood = food = async dispatch => {
+  
+}
+
+
 /* ----------------------
     restaurant actions/api calls 
   ----------------------- */

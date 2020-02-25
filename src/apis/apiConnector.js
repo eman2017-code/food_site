@@ -138,5 +138,20 @@ export default {
     });
     const parsedResponse = await response.json();
     return parsedResponse;
+  },
+
+  // creates a favorite food for the user
+  addFavoriteFood: async food => {
+    const response = await fetch(apiURL + 'favorite-foods/', {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(food),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const parsedResponse = await response.json();
+    return parsedResponse;
   }
+
 };
