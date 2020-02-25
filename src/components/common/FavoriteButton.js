@@ -25,9 +25,9 @@ class FavoriteButton extends React.Component {
     }
 }
 
-mapStateToProps = state => {
+const mapStateToProps = state => {
     return {
-        favoriteFoods: state.favorite.favoriteFoods
+        favoriteFoods: state.favorites.favoriteFoods
     }
 }
 

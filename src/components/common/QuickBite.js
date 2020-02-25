@@ -4,6 +4,7 @@ import { addToCart } from "../../actions";
 import { Image, Badge, Button, Media } from "react-bootstrap";
 import PropTypes from "prop-types";
 import Icofont from "react-icofont";
+import FavoriteButton from './FavoriteButton.js';
 
 class QuickBite extends React.Component {
   constructor(props) {
@@ -42,6 +43,10 @@ class QuickBite extends React.Component {
   render() {
     return (
       <div className={"p-3 border-bottom " + this.props.itemClass}>
+        <span className="float-right">
+          <FavoriteButton />
+        </span>
+        
         {this.state.quantity === 0 ? (
           <span className="float-right">
             {/* on button click, we will add the item to the cart array */}
@@ -55,6 +60,8 @@ class QuickBite extends React.Component {
             </Button>
           </span>
         ) : (
+
+          
           <span className="count-number float-right">
             <Button
               variant="outline-secondary"
