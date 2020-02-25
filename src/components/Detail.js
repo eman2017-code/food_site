@@ -226,6 +226,7 @@ class Detail extends React.Component {
                                 >
                                   <QuickBite
                                     id={Number(foodItem.apiKey)}
+                                    restaurantAPIKey={this.state.restaurant_api_key}
                                     title={foodItem.name}
                                     price={foodItem.basePrice}
                                     description={foodItem.description}
