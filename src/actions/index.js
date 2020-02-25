@@ -86,6 +86,20 @@ export const deleteDeliveryAddress = addressId => async dispatch => {
   }
 };
 
+
+// action for getting all of the users favorite foods
+export const getUsersFavoriteFoods = () => async dispatch => {
+  const response = await apiConnector.getUsersFavoriteFoods();
+
+  if (response.status.code === 200) {
+    dispatch({
+      type: 'SET_FAVORITE_FOODS',
+      payload: response.data
+    });
+  }
+}
+
+
 /* ----------------------
     restaurant actions/api calls 
   ----------------------- */
