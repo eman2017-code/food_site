@@ -9,7 +9,9 @@ class FoodCustomizatonModal extends React.Component {
         super(props)
 
         this.state = {
-            customizations: []
+            customizations: [],
+            additionalCharges: [],
+            totalPrice: this.props.foodItem.basePrice
         }
     }
 
@@ -35,6 +37,18 @@ class FoodCustomizatonModal extends React.Component {
         }
     }
 
+    // when a food option is selected from a dropdown box
+    foodOptionSelected = (e) => {
+        const selectionApiKey = e.target;
+        const optionApiKey = e.target.options[e.target.selectedIndex];
+
+        console.log('selectionApiKey:', selectionApiKey);
+        console.log('optionApiKey:', optionApiKey);
+
+
+        
+    }
+
     render() {
         const { foodItem } = this.props;
    
@@ -53,8 +67,8 @@ class FoodCustomizatonModal extends React.Component {
                         {
                         this.state.customizations.map((customization, i) => {
                         return (
-                            <Form.Group key={customization.apiKey}>
-                                <h6 key={i} className="font-weight-bold text-center mt-2">
+                            <Form.Group key={i} apikey={customization.apiKey}>
+                                <h6 className="font-weight-bold text-center mt-2">
                                     {customization.name}
                                 </h6>
 
@@ -62,12 +76,18 @@ class FoodCustomizatonModal extends React.Component {
                                     return (
                                         <div key={i} className="mt-3">
                                             {choice.name ? (<Form.Label>{choice.name}</Form.Label>) : ""}
-                                            <Form.Control as="select" key={choice.apiKey}>
+                                            <Form.Control 
+                                                as="select" 
+                                                apikey={ choice.apiKey } 
+                                                onChange={ this.foodOptionSelected } >
 
                                                 {choice.customizationChoices.map((option, i) => {
-                                                    return (
-                                                        <option key={option.apiKey}>
-                                                            { option.name } - ${ option.price }
+                                                    return ( 
+                                                        <option 
+                                                            key={i}
+                                                            apikey={ option.apiKey } 
+                                                            value={ option.price } >
+                                                             { option.name } - ${ option.price }
                                                         </option>
                                                     )
                                                 })}    
