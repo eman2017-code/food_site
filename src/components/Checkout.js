@@ -21,7 +21,6 @@ import Footer from "./common/Footer";
 
 class Checkout extends React.Component {
   constructor(props, context) {
-    console.log("props:", props);
     super(props, context);
 
     this.state = {
@@ -33,7 +32,7 @@ class Checkout extends React.Component {
   getQty = ({ id, quantity }) => {};
 
   render() {
-    console.log("this.props:", this.props);
+    console.log(this.props);
     return (
       <section className="offer-dedicated-body mt-4 mb-4 pt-2 pb-2">
         {this.props.location.pathname !== "/login" &&
@@ -50,10 +49,6 @@ class Checkout extends React.Component {
           <Row>
             <Col md={8}>
               <div className="offer-dedicated-body-left">
-                {/* <div className="bg-white rounded shadow-sm p-4 mb-4">
-	                        <h6 className="mb-3">You may also like</h6>
-	                        <ItemsCarousel />
-	                     </div> */}
                 <div className="pt-2"></div>
                 <div className="bg-white rounded shadow-sm p-4 mb-4">
                   <h4 className="mb-1">Choose a delivery address</h4>
@@ -334,6 +329,7 @@ class Checkout extends React.Component {
 
 // export default Checkout;
 const mapStateToProps = state => {
+  console.warn("state:", state);
   return {
     cartItems: state.cartItems.carts
   };
