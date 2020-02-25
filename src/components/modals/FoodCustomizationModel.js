@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { Form, Modal, Button, Badge } from 'react-bootstrap';
+import { addToCart } from '../../actions';
 
 
 class FoodCustomizatonModal extends React.Component {
@@ -39,12 +40,13 @@ class FoodCustomizatonModal extends React.Component {
 
     // when a food option is selected from a dropdown box
     foodOptionSelected = (e) => {
-        const selectionApiKey = e.target;
-        const optionApiKey = e.target.options[e.target.selectedIndex];
+        const selectionApiKey = e.target.getAttribute('apikey');
+        const optionApiKey = e.target.childNodes[e.target.selectedIndex].getAttribute('apikey');
 
         console.log('selectionApiKey:', selectionApiKey);
         console.log('optionApiKey:', optionApiKey);
 
+        
 
         
     }
@@ -118,5 +120,5 @@ class FoodCustomizatonModal extends React.Component {
     }
 }
 
-export default connect(null, {})(FoodCustomizatonModal);
+export default connect(null, { addToCart })(FoodCustomizatonModal);
 
