@@ -128,5 +128,41 @@ export default {
     });
     const parsedResponse = await response.json();
     return parsedResponse;
+  },
+
+  // gets the users favorite foods
+  getUsersFavoriteFoods: async () => {
+    const response = await fetch(apiURL + 'favorite-foods/', {
+      method: 'GET',
+      credentials: 'include'
+    });
+    const parsedResponse = await response.json();
+    return parsedResponse;
+  },
+
+  // creates a favorite food for the user
+  addFavoriteFood: async food => {
+    const response = await fetch(apiURL + 'favorite-foods/', {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(food),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const parsedResponse = await response.json();
+    return parsedResponse;
+  },
+
+  // deletes a users favorite food
+  deleteFavoriteFood: async foodId => {
+    const response = await fetch(apiURL + 'favorite-foods/' + foodId, {
+      method: 'DELETE',
+      credentials: "include"
+    });
+    const parsedResponse = await response.json();
+    return parsedResponse;
   }
+
+
 };
