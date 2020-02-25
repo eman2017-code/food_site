@@ -9,9 +9,8 @@ class FoodCustomizatonModal extends React.Component {
         super(props)
 
         this.state = {
-            customizationOptions: {}
+            customizations: []
         }
-        console.log('foodItem:', this.props.foodItem);
     }
 
     componentDidMount() {
@@ -28,10 +27,11 @@ class FoodCustomizatonModal extends React.Component {
             credentials: 'include'
         });
         const parsedResponse = await response.json();
+        console.log('customization options:', parsedResponse.data);
         
         // sets the food items customization options in the state
         if (parsedResponse.status.code === 200) {
-            this.setState({ customizationOptions: parsedResponse.data });
+            this.setState({ customizations: parsedResponse.data });
         }
     }
 
@@ -45,14 +45,44 @@ class FoodCustomizatonModal extends React.Component {
 		        size="md"
 		        centered>
                 <Modal.Header closeButton={true}>
-                    <Modal.Title as='h5' id="edit-profile">{ foodItem.name }</Modal.Title>
+                    <Modal.Title as='h5' id="edit-profile">{foodItem.name}</Modal.Title>
 			    </Modal.Header>
                 <Modal.Body>
-                    <p className="text-gray">{ foodItem.description }</p>
+                    <p className="text-gray">{foodItem.description}</p>
 
                     <Form>
-                        
+                        {
+                        this.state.customizations.map((customization, i) => {
+                        return (
+                            <Form.Group key={customization.apiKey}>
+                                <Form.Label key={i}>
+                                    {customization.name}
+                                </Form.Label>
+
+                                {customization.customizations.map((choice, i) => {
+                                    return (
+                                        <div key={i}>
+                                            <Form.Label>{choice.name}</Form.Label>
+                                            <Form.Control as="select" key={choice.apiKey}>
+
+                                                {choice.customizationChoices.map((option, i) => {
+                                                    return (
+                                                        <option key={option.apiKey}>
+                                                            { option.name } - ${ option.price }
+                                                        </option>
+                                                    )
+                                                })}    
+                                                    
+                                            </Form.Control>
+                                        </div>
+                                    )
+                                })}
+                            </Form.Group>    
+                        )
+                        })
+                        }
                     </Form>
+
                 </Modal.Body>
             </Modal>
         )
