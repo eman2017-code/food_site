@@ -5,6 +5,8 @@ import { Image, Badge, Button, Media } from "react-bootstrap";
 import PropTypes from "prop-types";
 import Icofont from "react-icofont";
 import FavoriteButton from './FavoriteButton.js';
+import FoodCustomizationModal from '../modals/FoodCustomizationModel.js';
+
 
 class QuickBite extends React.Component {
   constructor(props) {
@@ -13,8 +15,17 @@ class QuickBite extends React.Component {
       quantity: this.props.qty || 0,
       show: this.props.show || true,
       max: this.props.maxValue || 5,
-      min: this.props.minValue || 0
+      min: this.props.minValue || 0,
+      showFoodCustomizationModal: false
     };
+  }
+
+  showFoodCustomizationModal = () => {
+    this.setState({ showFoodCustomizationModal: true });
+  }
+
+  hideFoodCustomizationModal = () => {
+    this.setState({ showFoodCustomizationModal: false });
   }
 
   addToCart = foodItem => {
@@ -24,6 +35,12 @@ class QuickBite extends React.Component {
   render() {
     const foodItem = this.props.foodItem;
     return (
+      <>
+      <FoodCustomizationModal 
+        show={this.state.showFoodCustomizationModal}
+        onHide={this.hideFoodCustomizationModal}
+      />
+
       <div className={"p-3 border-bottom " + this.props.itemClass}>
         <span className="float-right ml-2">
           <FavoriteButton 
@@ -78,7 +95,8 @@ class QuickBite extends React.Component {
           </Media.Body>
         </Media>
       </div>
-    );
+      </>
+    )
   }
 }
 
