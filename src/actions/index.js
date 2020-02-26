@@ -3,7 +3,7 @@ import apiConnector from "../apis/apiConnector";
 import { toast } from "react-toastify";
 
 /* ----------------------
-    user actions/api calls 
+    user actions calls 
   ----------------------- */
 
 const _registerUser = _.memoize(async (registrationInfo, dispatch) => {
@@ -123,7 +123,7 @@ export const deleteFavoriteFood = food => async dispatch => {
 };
 
 /* ----------------------
-    restaurant actions/api calls 
+  restaurant actions calls 
   ----------------------- */
 
 const _fetchSingleRestaurant = _.memoize(
@@ -187,9 +187,9 @@ export const clearFoodTypeFilters = () => dispatch => {
   });
 };
 
-/* ----------------------
-cart actions/api calls 
------------------------ */
+/* -----------------
+  cart actions calls 
+  ------------------ */
 
 export const addToCart = product => dispatch => {
   dispatch({

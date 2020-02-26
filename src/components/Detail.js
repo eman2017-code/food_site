@@ -29,8 +29,12 @@ class Detail extends React.Component {
     this.state = {
       showAddressModal: false,
       restaurant_api_key: this.props.match.params.restaurant_api_key,
+
+      // google maps
       lat: props.restaurant.restaurant.latitude || "",
       lon: props.restaurant.restaurant.longitude || "",
+
+      // restaurant hours
       monday: this.props.restaurant.restaurant.hours.Monday || "",
       tuesday: this.props.restaurant.restaurant.hours.Tuesday || "",
       wednesday: this.props.restaurant.restaurant.hours.Wednesday || "",
@@ -42,7 +46,10 @@ class Detail extends React.Component {
 
       // for the food customization model
       showFoodCustomizationModal: false,
-      selectedFoodItem: {}
+      selectedFoodItem: {},
+
+      // search results
+      search: ""
     };
   }
 
@@ -79,6 +86,10 @@ class Detail extends React.Component {
       showFoodCustomizationModal: false
     });
   };
+
+  updateSearch(e) {
+    this.setState({ search: e.targer.value.substr(0, 20) });
+  }
 
   render() {
     const { restaurant } = this.props.restaurant;
