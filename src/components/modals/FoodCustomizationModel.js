@@ -74,6 +74,24 @@ class FoodCustomizatonModal extends React.Component {
         });
     }
 
+    // handles adding the formatted food object to the store
+    handleAddToCart = () => {
+        const formattedFoodItem = this.formatFoodItem();
+        console.log('formattedFoodItem:', formattedFoodItem);
+
+        
+    }
+
+    // formats the food item object to it includes all of the food customizations
+    formatFoodItem = () => {
+        const formattedFoodItem = {
+            ...this.props.foodItem,
+            price: this.state.totalPrice,
+            customizations: this.state.additionalCharges
+        } 
+        return formattedFoodItem;
+    }
+
     render() {
         const { foodItem } = this.props;
 
@@ -133,7 +151,7 @@ class FoodCustomizatonModal extends React.Component {
                             <Badge variant="light">Total: ${ this.state.totalPrice }</Badge>
                         </h4>
                         <Button
-                            onClick={() => this.props.addToCart()}
+                            onClick={this.handleAddToCart}
                             variant="secondary"
                             size="md">
                             Add To Cart
