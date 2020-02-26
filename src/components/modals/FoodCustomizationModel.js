@@ -39,6 +39,8 @@ class FoodCustomizatonModal extends React.Component {
 
     // when a food option is selected from a dropdown box
     foodOptionSelected = async (e) => {
+
+        // gets the attributes from the select boxes 
         const selectionApiKey = e.target.getAttribute('apikey');
         const optionApiKey = e.target.childNodes[e.target.selectedIndex].getAttribute('apikey');
         const optionPrice = e.target.childNodes[e.target.selectedIndex].getAttribute('price');
@@ -58,6 +60,8 @@ class FoodCustomizatonModal extends React.Component {
     }
 
 
+    // checks if a new customization that was added does not already have another option selected 
+    // for that same customzation
     verifyAdditionalChargesAreUnique = async (selectionApiKeyToCheck) => {
 
         // removes any additional charge in state that matches the selection api key in the parameter
@@ -67,6 +71,7 @@ class FoodCustomizatonModal extends React.Component {
                 this.setState({ totalPrice: updatedTotalPrice });
                 return false;
             }
+            return true;
         });
 
         this.setState({
@@ -74,10 +79,25 @@ class FoodCustomizatonModal extends React.Component {
         });
     }
 
+    // handles adding the formatted food object to the store
+    handleAddToCart = () => {
+        const formattedFoodItem = this.formatFoodItem();
+        this.props.addToCart(formattedFoodItem);
+        this.props.onHide();
+    }
+
+    // formats the food item object to it includes all of the food customizations, and updates the totalPrice
+    formatFoodItem = () => {
+        const formattedFoodItem = {
+            ...this.props.foodItem,
+            totalPrice: this.state.totalPrice,
+            customizations: this.state.additionalCharges
+        } 
+        return formattedFoodItem;
+    }
+
     render() {
         const { foodItem } = this.props;
-
-        console.log('additional charges after:', this.state.additionalCharges);
    
         return (
             <Modal 
@@ -133,7 +153,7 @@ class FoodCustomizatonModal extends React.Component {
                             <Badge variant="light">Total: ${ this.state.totalPrice }</Badge>
                         </h4>
                         <Button
-                            onClick={() => this.props.addToCart()}
+                            onClick={this.handleAddToCart}
                             variant="secondary"
                             size="md">
                             Add To Cart
