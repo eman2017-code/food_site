@@ -20,7 +20,6 @@ class Index extends React.Component {
         ) : (
           ""
         )}
-        {/* <Header /> */}
         <TopSearch />
         <section className="section pt-5 pb-5 bg-white homepage-add-section">
           <Container>
@@ -85,33 +84,5 @@ class Index extends React.Component {
     );
   }
 }
-
-const options = {
-  responsive: {
-    0: {
-      items: 1
-    },
-    600: {
-      items: 2
-    },
-    1000: {
-      items: 4
-    },
-    1200: {
-      items: 4
-    }
-  },
-
-  lazyLoad: true,
-  pagination: false.toString(),
-  loop: true,
-  dots: false,
-  autoPlay: 2000,
-  nav: true,
-  navText: [
-    "<i class='fa fa-chevron-left'></i>",
-    "<i class='fa fa-chevron-right'></i>"
-  ]
-};
 
 export default Index;

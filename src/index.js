@@ -52,7 +52,6 @@ class RootContainer extends React.Component {
             <Route path="/invoice" exact component={Invoice} />
             <Route path="/checkout" exact component={Checkout} />
             <Route path="/thanks" exact component={Thanks} />
-
             <Route
               path="/detail/:restaurant_api_key"
               exact
