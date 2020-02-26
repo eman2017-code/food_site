@@ -49,7 +49,8 @@ class Detail extends React.Component {
       selectedFoodItem: {},
 
       // search results
-      search: ""
+      search: "",
+      currentlyTyping: false
     };
   }
 
@@ -88,7 +89,10 @@ class Detail extends React.Component {
   };
 
   updateSearch(e) {
-    this.setState({ search: e.targer.value.substr(0, 20) });
+    this.setState({
+      search: e.target.value.substr(0, 20),
+      currentlyTyping: true
+    });
   }
 
   render() {
@@ -127,6 +131,8 @@ class Detail extends React.Component {
         allItems.push(singeItem);
       });
     });
+
+    let filteredResults = this.props.restaurant.restaurantMenu;
 
     return (
       <>
@@ -234,6 +240,8 @@ class Detail extends React.Component {
                             <Form.Control
                               type="text"
                               placeholder="Search for dishes..."
+                              value={this.state.search}
+                              onChange={this.updateSearch.bind(this)}
                             />
                             <InputGroup.Append>
                               <Button type="button" variant="link">
@@ -260,29 +268,53 @@ class Detail extends React.Component {
                           </h5>
 
                           <Col md={12}>
-                            {allItems.map((foodItem, i) => {
-                              return (
-                                <div
-                                  className="bg-white rounded border shadow-sm mb-4"
-                                  key={i}
-                                >
-                                  <QuickBite
-                                    foodItem={foodItem}
-                                    id={Number(foodItem.apiKey)}
-                                    restaurantAPIKey={
-                                      this.state.restaurant_api_key
-                                    }
-                                    title={foodItem.name}
-                                    price={foodItem.basePrice}
-                                    description={foodItem.description}
-                                    getValue={this.getQty}
-                                    showFoodCustomizationModal={
-                                      this.showFoodCustomizationModal
-                                    }
-                                  />
-                                </div>
-                              );
-                            })}
+                            {this.state.currentlyTyping
+                              ? // filteredResults.map((result, i) => {
+                                //   // console.log("result:", result);
+                                //   return (
+                                //     <QuickBite
+                                //       key={i}
+                                //       foodItem={result}
+                                //       id={Number(result.apiKey)}
+                                //       restaurantAPIKey={
+                                //         this.state.restaurant_api_key
+                                //       }
+                                //       title={result.name}
+                                //       price={Number(result.basePrice)}
+                                //       description={result.description}
+                                //       getValue={this.getQty}
+                                //       showFoodCustomizationModal={
+                                //         this.showFoodCustomizationModal
+                                //       }
+                                //     />
+                                //   );
+                                // })
+                                filteredResults.map(result =>
+                                  console.log("result:", result)
+                                )
+                              : allItems.map((foodItem, i) => {
+                                  return (
+                                    <div
+                                      className="bg-white rounded border shadow-sm mb-4"
+                                      key={i}
+                                    >
+                                      <QuickBite
+                                        foodItem={foodItem}
+                                        id={Number(foodItem.apiKey)}
+                                        restaurantAPIKey={
+                                          this.state.restaurant_api_key
+                                        }
+                                        title={foodItem.name}
+                                        price={foodItem.basePrice}
+                                        description={foodItem.description}
+                                        getValue={this.getQty}
+                                        showFoodCustomizationModal={
+                                          this.showFoodCustomizationModal
+                                        }
+                                      />
+                                    </div>
+                                  );
+                                })}
                           </Col>
                         </Row>
                         <Row></Row>
