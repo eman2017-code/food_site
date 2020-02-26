@@ -19,7 +19,7 @@ export default function cartReducer(state = initialState, action) {
       return {
         ...state,
         cart: state.cart.filter(
-          product => product.apiKey !== action.product.apiKey
+          product => product.apiKey !== action.payload.apiKey
         )
       };
 

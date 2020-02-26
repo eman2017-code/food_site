@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { connect } from "react-redux";
-import { clearCart } from "../actions";
+import { clearCart, removeFromCart } from "../actions";
 import {
   Row,
   Col,
@@ -275,7 +275,10 @@ class Checkout extends React.Component {
                             getValue={this.getQty}
                           />
                           <button>
-                            <Icofont icon="icofont-delete" />
+                            <Icofont
+                              icon="icofont-delete"
+                              onClick={() => this.props.removeFromCart(item)}
+                            />
                           </button>
                         </div>
                       );
@@ -328,10 +331,13 @@ class Checkout extends React.Component {
 
 // export default Checkout;
 const mapStateToProps = state => {
+  console.log("state:", state);
   return {
     cartItems: state.cartItems,
     user: state.user.userInfo
   };
 };
 
-export default connect(mapStateToProps, { clearCart })(Checkout);
+export default connect(mapStateToProps, { clearCart, removeFromCart })(
+  Checkout
+);
