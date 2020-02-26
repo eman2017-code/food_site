@@ -12,7 +12,7 @@ class FoodCustomizatonModal extends React.Component {
         this.state = {
             customizations: [],
             additionalCharges: [],
-            totalPrice: this.props.foodItem.basePrice
+            totalPrice: parseFloat(this.props.foodItem.basePrice)
         }
     }
 
@@ -48,12 +48,12 @@ class FoodCustomizatonModal extends React.Component {
         const additionalChargeToAdd = {
             selectionApiKey: selectionApiKey,
             optionApiKey: optionApiKey,
-            price: optionPrice
+            price: parseFloat(optionPrice)
         }
-
-        console.log('additional charges before:', this.state.additionalCharges);  
+ 
         this.setState({ 
-            additionalCharges: [additionalChargeToAdd, ...this.state.additionalCharges] 
+            additionalCharges: [additionalChargeToAdd, ...this.state.additionalCharges], 
+            totalPrice: this.state.totalPrice += additionalChargeToAdd.price
         });
     }
 
@@ -62,8 +62,11 @@ class FoodCustomizatonModal extends React.Component {
 
         // removes any additional charge in state that matches the selection api key in the parameter
         const verifiedUniqueCustomizations = this.state.additionalCharges.filter(charge => {
-            console.log(selectionApiKeyToCheck, '!=', charge.selectionApiKey);
-            return charge.selectionApiKey != selectionApiKeyToCheck;
+            if (charge.selectionApiKey === selectionApiKeyToCheck) {
+                const updatedTotalPrice = this.state.totalPrice - charge.price;
+                this.setState({ totalPrice: updatedTotalPrice });
+                return false;
+            }
         });
 
         this.setState({
@@ -127,7 +130,7 @@ class FoodCustomizatonModal extends React.Component {
                     </Form>
                     <div className="d-flex justify-content-between">
                         <h4>
-                            <Badge variant="light">Total: ${ foodItem.basePrice }</Badge>
+                            <Badge variant="light">Total: ${ this.state.totalPrice }</Badge>
                         </h4>
                         <Button
                             onClick={() => this.props.addToCart()}
