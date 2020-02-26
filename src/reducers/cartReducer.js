@@ -15,6 +15,8 @@ export default function cartReducer(state = initialState, action) {
         cart: []
       };
 
+    // case ''
+
     default:
       return state;
   }
