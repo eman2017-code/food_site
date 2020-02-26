@@ -38,10 +38,12 @@ class FoodCustomizatonModal extends React.Component {
     }
 
     // when a food option is selected from a dropdown box
-    foodOptionSelected = (e) => {
+    foodOptionSelected = async (e) => {
         const selectionApiKey = e.target.getAttribute('apikey');
         const optionApiKey = e.target.childNodes[e.target.selectedIndex].getAttribute('apikey');
         const optionPrice = e.target.childNodes[e.target.selectedIndex].getAttribute('price');
+
+        await this.verifyAdditionalChargesAreUnique(selectionApiKey);
 
         const additionalChargeToAdd = {
             selectionApiKey: selectionApiKey,
@@ -53,7 +55,20 @@ class FoodCustomizatonModal extends React.Component {
         this.setState({ 
             additionalCharges: [additionalChargeToAdd, ...this.state.additionalCharges] 
         });
+    }
 
+
+    verifyAdditionalChargesAreUnique = async (selectionApiKeyToCheck) => {
+
+        // removes any additional charge in state that matches the selection api key in the parameter
+        const verifiedUniqueCustomizations = this.state.additionalCharges.filter(charge => {
+            console.log(selectionApiKeyToCheck, '!=', charge.selectionApiKey);
+            return charge.selectionApiKey != selectionApiKeyToCheck;
+        });
+
+        this.setState({
+            additionalCharges: verifiedUniqueCustomizations
+        });
     }
 
     render() {
