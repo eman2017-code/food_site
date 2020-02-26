@@ -30,7 +30,6 @@ class FoodCustomizatonModal extends React.Component {
             credentials: 'include'
         });
         const parsedResponse = await response.json();
-        console.log('customization options:', parsedResponse.data);
         
         // sets the food items customization options in the state
         if (parsedResponse.status.code === 200) {
@@ -42,17 +41,25 @@ class FoodCustomizatonModal extends React.Component {
     foodOptionSelected = (e) => {
         const selectionApiKey = e.target.getAttribute('apikey');
         const optionApiKey = e.target.childNodes[e.target.selectedIndex].getAttribute('apikey');
+        const optionPrice = e.target.childNodes[e.target.selectedIndex].getAttribute('price');
 
-        console.log('selectionApiKey:', selectionApiKey);
-        console.log('optionApiKey:', optionApiKey);
+        const additionalChargeToAdd = {
+            selectionApiKey: selectionApiKey,
+            optionApiKey: optionApiKey,
+            price: optionPrice
+        }
 
-        
+        console.log('additional charges before:', this.state.additionalCharges);  
+        this.setState({ 
+            additionalCharges: [additionalChargeToAdd, ...this.state.additionalCharges] 
+        });
 
-        
     }
 
     render() {
         const { foodItem } = this.props;
+
+        console.log('additional charges after:', this.state.additionalCharges);
    
         return (
             <Modal 
@@ -88,7 +95,7 @@ class FoodCustomizatonModal extends React.Component {
                                                         <option 
                                                             key={i}
                                                             apikey={ option.apiKey } 
-                                                            value={ option.price } >
+                                                            price={ option.price } >
                                                              { option.name } - ${ option.price }
                                                         </option>
                                                     )
@@ -108,7 +115,7 @@ class FoodCustomizatonModal extends React.Component {
                             <Badge variant="light">Total: ${ foodItem.basePrice }</Badge>
                         </h4>
                         <Button
-                            // onClick={() => this.props.showFoodCustomizationModal(this.props.foodItem)}
+                            onClick={() => this.props.addToCart()}
                             variant="secondary"
                             size="md">
                             Add To Cart
