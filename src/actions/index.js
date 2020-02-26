@@ -205,6 +205,9 @@ export const clearCart = () => dispatch => {
   dispatch({
     type: "CLEAR_CART"
   });
+  toast.success("Cleared your Cart", {
+    position: toast.POSITION.TOP_LEFT
+  });
 };
 
 export const removeFromCart = productId => dispatch => {
@@ -213,7 +216,7 @@ export const removeFromCart = productId => dispatch => {
     payload: productId
   });
   toast.success("Item Removed from Cart", {
-    position: toast.POSITION.TOP_CENTER
+    position: toast.POSITION.TOP_LEFT
   });
 };
 

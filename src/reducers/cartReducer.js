@@ -15,7 +15,13 @@ export default function cartReducer(state = initialState, action) {
         cart: []
       };
 
-    // case ''
+    case "REMOVE_ITEM_FROM_CART":
+      return {
+        ...state,
+        cart: state.cart.filter(
+          product => product.apiKey !== action.product.apiKey
+        )
+      };
 
     default:
       return state;
