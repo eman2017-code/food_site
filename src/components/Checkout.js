@@ -331,7 +331,6 @@ class Checkout extends React.Component {
 
 // export default Checkout;
 const mapStateToProps = state => {
-  console.log("state:", state);
   return {
     cartItems: state.cartItems,
     user: state.user.userInfo

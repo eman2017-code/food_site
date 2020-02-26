@@ -215,7 +215,6 @@ export const removeFromCart = product => dispatch => {
     type: "REMOVE_ITEM_FROM_CART",
     payload: product
   });
-  console.log("productId:", product);
   toast.success("Item Removed from Cart", {
     position: toast.POSITION.TOP_LEFT
   });
