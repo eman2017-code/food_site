@@ -51,7 +51,7 @@ class ChooseAddressCard extends React.Component {
 }
 
 ChooseAddressCard.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   icoIcon: PropTypes.string.isRequired,
   iconclassName: PropTypes.string,
   address: PropTypes.string,

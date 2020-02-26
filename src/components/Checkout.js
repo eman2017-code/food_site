@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { connect } from "react-redux";
-import { clearCart, removeFromCart } from "../actions";
+import {
+  clearCart,
+  removeFromCart,
+  getUsersDeliveryAddresses
+} from "../actions";
 import {
   Row,
   Col,
@@ -32,8 +36,12 @@ class Checkout extends React.Component {
   hideAddressModal = () => this.setState({ showAddressModal: false });
   getQty = ({ id, quantity }) => {};
 
+  componentDidMount() {
+    this.props.getUsersDeliveryAddresses();
+  }
+
   render() {
-    const { cartItems, user } = this.props;
+    const { cartItems, user, deliveryAddresses } = this.props;
 
     const getTotalPrice = cartItems => {
       let total = 0;
@@ -72,41 +80,20 @@ class Checkout extends React.Component {
                   </h6>
                   <Row>
                     <Col md={6}>
-                      <ChooseAddressCard
-                        boxclassName="border border-success"
-                        title="Work"
-                        icoIcon="briefcase"
-                        iconclassName="icofont-3x"
-                        address="NCC, Model Town Rd, Pritm Nagar, Model Town, Ludhiana, Punjab 141002, India"
-                      />
-                    </Col>
-                    <Col md={6}>
-                      <ChooseAddressCard
-                        title="Work"
-                        icoIcon="briefcase"
-                        iconclassName="icofont-3x"
-                        address="NCC, Model Town Rd, Pritm Nagar, Model Town, Ludhiana, Punjab 141002, India"
-                      />
-                    </Col>
-                    <Col md={6}>
-                      <ChooseAddressCard
-                        title="Work"
-                        icoIcon="briefcase"
-                        iconclassName="icofont-3x"
-                        address="NCC, Model Town Rd, Pritm Nagar, Model Town, Ludhiana, Punjab 141002, India"
-                      />
-                    </Col>
-                    <Col md={6}>
-                      <ChooseAddressCard
-                        title="Work"
-                        icoIcon="briefcase"
-                        iconclassName="icofont-3x"
-                        type="newAddress"
-                        address="NCC, Model Town Rd, Pritm Nagar, Model Town, Ludhiana, Punjab 141002, India"
-                        onAddNewClick={() =>
-                          this.setState({ showAddressModal: true })
-                        }
-                      />
+                      {deliveryAddresses !== undefined
+                        ? deliveryAddresses.map(address => {
+                            return (
+                              <ChooseAddressCard
+                                key={address.id}
+                                boxclassName="border border-success"
+                                title={address.address}
+                                icoIcon="briefcase"
+                                iconclassName="icofont-3x"
+                                address={address.address}
+                              />
+                            );
+                          })
+                        : ""}
                     </Col>
                   </Row>
                 </div>
@@ -333,10 +320,13 @@ class Checkout extends React.Component {
 const mapStateToProps = state => {
   return {
     cartItems: state.cartItems,
-    user: state.user.userInfo
+    user: state.user.userInfo,
+    deliveryAddresses: state.addresses.deliveryAddresses
   };
 };
 
-export default connect(mapStateToProps, { clearCart, removeFromCart })(
-  Checkout
-);
+export default connect(mapStateToProps, {
+  clearCart,
+  removeFromCart,
+  getUsersDeliveryAddresses
+})(Checkout);

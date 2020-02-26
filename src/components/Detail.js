@@ -19,7 +19,7 @@ import QuickBite from "./common/QuickBite";
 import Icofont from "react-icofont";
 import Header from "./common/Header";
 import Checkout from "./Checkout";
-import FoodCustomizationModal from './modals/FoodCustomizationModel.js';
+import FoodCustomizationModal from "./modals/FoodCustomizationModel.js";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
 class Detail extends React.Component {
@@ -29,15 +29,15 @@ class Detail extends React.Component {
     this.state = {
       showAddressModal: false,
       restaurant_api_key: this.props.match.params.restaurant_api_key,
-      lat: props.restaurant.restaurant.latitude || '',
-      lon: props.restaurant.restaurant.longitude || '',
-      monday: this.props.restaurant.restaurant.hours.Monday || '',
-      tuesday: this.props.restaurant.restaurant.hours.Tuesday || '',
-      wednesday: this.props.restaurant.restaurant.hours.Wednesday || '',
-      thursday: this.props.restaurant.restaurant.hours.Thursday || '',
-      friday: this.props.restaurant.restaurant.hours.Friday || '',
-      saturday: this.props.restaurant.restaurant.hours.Saturday || '',
-      sunday: this.props.restaurant.restaurant.hours.Sunday || '',
+      lat: props.restaurant.restaurant.latitude || "",
+      lon: props.restaurant.restaurant.longitude || "",
+      monday: this.props.restaurant.restaurant.hours.Monday || "",
+      tuesday: this.props.restaurant.restaurant.hours.Tuesday || "",
+      wednesday: this.props.restaurant.restaurant.hours.Wednesday || "",
+      thursday: this.props.restaurant.restaurant.hours.Thursday || "",
+      friday: this.props.restaurant.restaurant.hours.Friday || "",
+      saturday: this.props.restaurant.restaurant.hours.Saturday || "",
+      sunday: this.props.restaurant.restaurant.hours.Sunday || "",
       numberOfDay: 15,
 
       // for the food customization model
@@ -48,9 +48,7 @@ class Detail extends React.Component {
 
   hideAddressModal = () => this.setState({ showAddressModal: false });
   getQty = ({ id, quantity }) => {};
-  getStarValue = ({ value }) => {
-    console.log(value);
-  };
+  getStarValue = ({ value }) => {};
 
   componentDidMount() {
     this.props.fetchSingleRestaurantMenu(this.state.restaurant_api_key);
@@ -67,20 +65,20 @@ class Detail extends React.Component {
   };
 
   // shows the model to customize a food item
-  showFoodCustomizationModal = (foodItem) => {
-    this.setState({ 
-      selectedFoodItem: foodItem, 
+  showFoodCustomizationModal = foodItem => {
+    this.setState({
+      selectedFoodItem: foodItem,
       showFoodCustomizationModal: true
     });
-  }
+  };
 
   // hides the model to customize a food item
   hideFoodCustomizationModal = () => {
-    this.setState({ 
+    this.setState({
       selectedFoodItem: {},
-      showFoodCustomizationModal: false,
+      showFoodCustomizationModal: false
     });
-  }
+  };
 
   render() {
     const { restaurant } = this.props.restaurant;
@@ -129,15 +127,15 @@ class Detail extends React.Component {
         )}
 
         {/* food item customization model */}
-        { this.state.showFoodCustomizationModal ? (
-          <FoodCustomizationModal 
+        {this.state.showFoodCustomizationModal ? (
+          <FoodCustomizationModal
             show={this.state.showFoodCustomizationModal}
             onHide={this.hideFoodCustomizationModal}
             foodItem={this.state.selectedFoodItem}
           />
         ) : (
           ""
-        ) }
+        )}
 
         <section className="restaurant-detailed-banner">
           <div className="text-center">
@@ -260,12 +258,16 @@ class Detail extends React.Component {
                                   <QuickBite
                                     foodItem={foodItem}
                                     id={Number(foodItem.apiKey)}
-                                    restaurantAPIKey={this.state.restaurant_api_key}
+                                    restaurantAPIKey={
+                                      this.state.restaurant_api_key
+                                    }
                                     title={foodItem.name}
                                     price={foodItem.basePrice}
                                     description={foodItem.description}
                                     getValue={this.getQty}
-                                    showFoodCustomizationModal={this.showFoodCustomizationModal}
+                                    showFoodCustomizationModal={
+                                      this.showFoodCustomizationModal
+                                    }
                                   />
                                 </div>
                               );
