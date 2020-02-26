@@ -78,20 +78,15 @@ class Header extends React.Component {
                   <Icofont icon="sale-discount" /> Offers{" "}
                   <Badge variant="danger">New</Badge>
                 </Nav.Link>
-                <NavDropdown
-                  title="Restaurants"
-                  alignRight
-                  className="border-0"
+                <Nav.Link
+                  eventKey={2.1}
+                  as={NavLink}
+                  activeclassname="active"
+                  exact
+                  to="/listing"
                 >
-                  <NavDropdown.Item
-                    eventKey={2.1}
-                    as={NavLink}
-                    activeclassname="active"
-                    to="/listing"
-                  >
-                    Listing
-                  </NavDropdown.Item>
-                </NavDropdown>
+                  Restaurants <span className="sr-only">(current)</span>
+                </Nav.Link>
                 {this.props.isLoggedIn ? (
                   <NavDropdown
                     alignRight

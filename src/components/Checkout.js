@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { connect } from "react-redux";
-import { clearCart } from "../actions";
+import { clearCart, removeFromCart } from "../actions";
 import {
   Row,
   Col,
@@ -213,7 +213,9 @@ class Checkout extends React.Component {
                                 to="/thanks"
                                 className="btn btn-success btn-block btn-lg"
                               >
-                                PAY $1329
+                                {cartItems === undefined
+                                  ? ""
+                                  : getTotalPrice(cartItems)}
                                 <Icofont icon="long-arrow-right" />
                               </Link>
                             </Form>
@@ -272,6 +274,12 @@ class Checkout extends React.Component {
                             show={true}
                             getValue={this.getQty}
                           />
+                          <button>
+                            <Icofont
+                              icon="icofont-delete"
+                              onClick={() => this.props.removeFromCart(item)}
+                            />
+                          </button>
                         </div>
                       );
                     })}
@@ -329,4 +337,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { clearCart })(Checkout);
+export default connect(mapStateToProps, { clearCart, removeFromCart })(
+  Checkout
+);

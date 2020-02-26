@@ -45,7 +45,7 @@ export default {
   logoutUser: async () => {
     try {
       const response = await fetch(apiURL + "users/logout", {
-        method: "POST",
+        method: "GET",
         credentials: "include",
         headers: {
           "Content-Type": "application/json"
@@ -132,9 +132,9 @@ export default {
 
   // gets the users favorite foods
   getUsersFavoriteFoods: async () => {
-    const response = await fetch(apiURL + 'favorite-foods/', {
-      method: 'GET',
-      credentials: 'include'
+    const response = await fetch(apiURL + "favorite-foods/", {
+      method: "GET",
+      credentials: "include"
     });
     const parsedResponse = await response.json();
     return parsedResponse;
@@ -142,7 +142,7 @@ export default {
 
   // creates a favorite food for the user
   addFavoriteFood: async food => {
-    const response = await fetch(apiURL + 'favorite-foods/', {
+    const response = await fetch(apiURL + "favorite-foods/", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify(food),
@@ -156,13 +156,11 @@ export default {
 
   // deletes a users favorite food
   deleteFavoriteFood: async foodId => {
-    const response = await fetch(apiURL + 'favorite-foods/' + foodId, {
-      method: 'DELETE',
+    const response = await fetch(apiURL + "favorite-foods/" + foodId, {
+      method: "DELETE",
       credentials: "include"
     });
     const parsedResponse = await response.json();
     return parsedResponse;
   }
-
-
 };

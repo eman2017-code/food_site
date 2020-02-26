@@ -86,19 +86,17 @@ export const deleteDeliveryAddress = addressId => async dispatch => {
   }
 };
 
-
 // action for getting all of the users favorite foods
 export const getUsersFavoriteFoods = () => async dispatch => {
   const response = await apiConnector.getUsersFavoriteFoods();
 
   if (response.status.code === 200) {
     dispatch({
-      type: 'SET_FAVORITE_FOODS',
+      type: "SET_FAVORITE_FOODS",
       payload: response.data
     });
   }
-}
-
+};
 
 // action for adding a favorite food item
 export const addFavoriteFood = food => async dispatch => {
@@ -106,12 +104,11 @@ export const addFavoriteFood = food => async dispatch => {
 
   if (response.status.code === 201) {
     dispatch({
-      type: 'ADD_FAVORITE_FOOD',
+      type: "ADD_FAVORITE_FOOD",
       payload: response.data
     });
   }
-}
-
+};
 
 // action for deleting a favorite food
 export const deleteFavoriteFood = food => async dispatch => {
@@ -119,12 +116,11 @@ export const deleteFavoriteFood = food => async dispatch => {
 
   if (response.status.code === 204) {
     dispatch({
-      type: 'DELETE_FAVORITE_FOOD',
+      type: "DELETE_FAVORITE_FOOD",
       payload: food
     });
   }
-}
-
+};
 
 /* ----------------------
     restaurant actions/api calls 
@@ -209,16 +205,20 @@ export const clearCart = () => dispatch => {
   dispatch({
     type: "CLEAR_CART"
   });
+  toast.success("Cleared your Cart", {
+    position: toast.POSITION.TOP_LEFT
+  });
 };
 
-// export const removeFromCart = productId => dipatch => {
-//   return {
-//     type: "REMOVE_FROM_CART",
-//     payload: {
-//       productId: productId
-//     }
-//   };
-// };
+export const removeFromCart = product => dispatch => {
+  dispatch({
+    type: "REMOVE_ITEM_FROM_CART",
+    payload: product
+  });
+  toast.success("Item Removed from Cart", {
+    position: toast.POSITION.TOP_LEFT
+  });
+};
 
 // export const updateCartQuantity = (productId, quantity) => dispatch => {
 //   return {
