@@ -67,6 +67,7 @@ class FoodCustomizatonModal extends React.Component {
                 this.setState({ totalPrice: updatedTotalPrice });
                 return false;
             }
+            return true;
         });
 
         this.setState({
@@ -77,9 +78,7 @@ class FoodCustomizatonModal extends React.Component {
     // handles adding the formatted food object to the store
     handleAddToCart = () => {
         const formattedFoodItem = this.formatFoodItem();
-        console.log('formattedFoodItem:', formattedFoodItem);
-
-        
+        this.props.addToCart(formattedFoodItem);
     }
 
     // formats the food item object to it includes all of the food customizations
