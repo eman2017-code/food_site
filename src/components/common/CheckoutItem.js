@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { removeFromCart } from "../../actions";
 import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 import Icofont from "react-icofont";
@@ -26,6 +28,7 @@ class CheckoutItem extends Component {
       });
     }
   };
+
   DecreaseItem = () => {
     if (this.state.quantity <= this.state.min + 1) {
     } else {
@@ -36,11 +39,14 @@ class CheckoutItem extends Component {
       });
     }
   };
+
   ToggleClick = () => {
     this.setState({ show: !this.state.show });
   };
 
   render() {
+    const { item } = this.props;
+
     return (
       <div className="gold-members p-2 border-bottom">
         <p className="text-gray mb-0 float-right ml-2">
@@ -51,6 +57,7 @@ class CheckoutItem extends Component {
           <Button
             variant="outline-secondary"
             onClick={this.DecreaseItem}
+            // onClick={() => this.props.updateCartQuantity()}
             className="btn-sm left dec"
           >
             {" "}
@@ -65,6 +72,7 @@ class CheckoutItem extends Component {
           <Button
             variant="outline-secondary"
             onClick={this.IncrementItem}
+            // onClick={() => this.props.updateCartQuantity()}
             className="btn-sm right inc"
           >
             {" "}
@@ -73,7 +81,12 @@ class CheckoutItem extends Component {
         </span>
         <div className="media">
           <div className="mr-2">
-            <Icofont icon="ui-press" className="text-danger food-item" />
+            <Button className="btn-sm left dec">
+              <Icofont
+                icon="icofont-delete"
+                // onClick={() => this.props.removeFromCart(item)}
+              />
+            </Button>
           </div>
           <div className="media-body">
             <p className="mt-1 mb-0 text-black">{this.props.itemName}</p>
@@ -88,13 +101,21 @@ CheckoutItem.propTypes = {
   itemName: PropTypes.string,
   price: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
-  qty: PropTypes.number.isRequired,
+  // qty: PropTypes.number.isRequired,
   show: PropTypes.bool.isRequired,
   getValue: PropTypes.func.isRequired
 };
+
 CheckoutItem.defaultProps = {
   show: true,
   priceUnit: "$"
 };
 
-export default CheckoutItem;
+// export default CheckoutItem;
+
+const mapStateToProps = state => {
+  return {
+    total: state
+  };
+};
+export default connect(mapStateToProps, { removeFromCart })(CheckoutItem);

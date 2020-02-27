@@ -220,12 +220,12 @@ export const removeFromCart = product => dispatch => {
   });
 };
 
-// export const updateCartQuantity = (productId, quantity) => dispatch => {
-//   return {
-//     type: "UPDATE_CART_QUANTITY",
-//     payload: {
-//       productId,
-//       quantity: quantity
-//     }
-//   };
-// };
+export const updateCartQuantity = (productId, quantity) => dispatch => {
+  return {
+    type: "UPDATE_CART_QUANTITY",
+    payload: {
+      productId,
+      quantity: quantity
+    }
+  };
+};

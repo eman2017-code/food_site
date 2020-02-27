@@ -1,5 +1,6 @@
 const initialState = {
-  cart: []
+  cart: [],
+  total: 0
 };
 
 export default function cartReducer(state = initialState, action) {
@@ -21,6 +22,12 @@ export default function cartReducer(state = initialState, action) {
         cart: state.cart.filter(
           product => product.apiKey !== action.payload.apiKey
         )
+      };
+
+    case "UPDATE_CART_QUANTITY":
+      return {
+        ...state,
+        total: state.cart.find(product => console.log(product.quantity))
       };
 
     default:
