@@ -46,6 +46,7 @@ class CheckoutItem extends Component {
 
   render() {
     const { item } = this.props;
+    console.log("item:", item);
 
     return (
       <div className="gold-members p-2 border-bottom">
@@ -57,7 +58,6 @@ class CheckoutItem extends Component {
           <Button
             variant="outline-secondary"
             onClick={this.DecreaseItem}
-            // onClick={() => this.props.updateCartQuantity()}
             className="btn-sm left dec"
           >
             {" "}
@@ -72,7 +72,6 @@ class CheckoutItem extends Component {
           <Button
             variant="outline-secondary"
             onClick={this.IncrementItem}
-            // onClick={() => this.props.updateCartQuantity()}
             className="btn-sm right inc"
           >
             {" "}
@@ -84,7 +83,7 @@ class CheckoutItem extends Component {
             <Button className="btn-sm left dec">
               <Icofont
                 icon="icofont-delete"
-                // onClick={() => this.props.removeFromCart(item)}
+                onClick={() => this.props.removeFromCart(item)}
               />
             </Button>
           </div>
@@ -115,7 +114,7 @@ CheckoutItem.defaultProps = {
 
 const mapStateToProps = state => {
   return {
-    total: state
+    total: state.cartItems.cart
   };
 };
 export default connect(mapStateToProps, { removeFromCart })(CheckoutItem);
