@@ -31,6 +31,8 @@ class Checkout extends React.Component {
     this.state = {
       showAddressModal: false,
       addressSelected: {},
+
+    
     };
   }
 
@@ -79,29 +81,29 @@ class Checkout extends React.Component {
                 <div className="pt-2"></div>
                 <div className="bg-white rounded shadow-sm p-4 mb-4">
                   <h4 className="mb-1">Choose a delivery address</h4>
-                  <Row>
-                    <Col md={6}>
-                    <button 
+                  <button 
 					            type="button" 
 					            className="btn btn-primary my-3"
 					            onClick={this.showAddressModal}>
 						            Add Delivery Address
 				            </button>
-                      {isLoggedIn === true
-                        ? deliveryAddresses.map(address => {
-                            return (
-                              <ChooseAddressCard
-                                key={address.id}
-                                boxclassName="border border-success"
-                                title={address.address}
-                                icoIcon="briefcase"
-                                iconclassName="icofont-3x"
-                                address={address.address}
-                              />
-                            );
-                          })
-                        : ""}
-                    </Col>
+                  <Row>
+                    {isLoggedIn === true
+                      ? deliveryAddresses.map(address => {
+                          return (
+                          <Col md={6}>
+                            <ChooseAddressCard
+                              key={address.id}
+                              boxclassName="border border-success"
+                              title={address.address}
+                              icoIcon="briefcase"
+                              iconclassName="icofont-3x"
+                              address={address.address}
+                            />
+                          </Col>
+                          );
+                        })
+                      : ""}
                   </Row>
                 </div>
                 <div className="pt-2"></div>
