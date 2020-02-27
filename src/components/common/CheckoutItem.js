@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { removeFromCart } from "../../actions";
+import { removeFromCart, incrementQuantity } from "../../actions";
 import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 import Icofont from "react-icofont";
@@ -16,29 +16,30 @@ class CheckoutItem extends Component {
     };
   }
 
-  IncrementItem = () => {
-    if (this.state.quantity >= this.state.max) {
-    } else {
-      this.setState({
-        quantity: this.state.quantity + 1
-      });
-      this.props.getValue({
-        id: this.props.id,
-        quantity: this.state.quantity + 1
-      });
-    }
-  };
+  // IncrementItem = () => {
+  //   if (this.state.quantity >= this.state.max) {
+  //   } else {
+  //     this.setState({
+  //       quantity: this.state.quantity + 1
+  //     });
+  //     this.props.getValue({
+  //       id: this.props.id,
+  //       // quantity: this.state.quantity + 1
+  //       quantity: console.log(this.props.qty)
+  //     });
+  //   }
+  // };
 
-  DecreaseItem = () => {
-    if (this.state.quantity <= this.state.min + 1) {
-    } else {
-      this.setState({ quantity: this.state.quantity - 1 });
-      this.props.getValue({
-        id: this.props.id,
-        quantity: this.state.quantity - 1
-      });
-    }
-  };
+  // DecreaseItem = () => {
+  //   if (this.state.quantity <= this.state.min + 1) {
+  //   } else {
+  //     this.setState({ quantity: this.state.quantity - 1 });
+  //     this.props.getValue({
+  //       id: this.props.id,
+  //       quantity: this.state.quantity - 1
+  //     });
+  //   }
+  // };
 
   ToggleClick = () => {
     this.setState({ show: !this.state.show });
@@ -46,7 +47,6 @@ class CheckoutItem extends Component {
 
   render() {
     const { item } = this.props;
-    console.log("item:", item);
 
     return (
       <div className="gold-members p-2 border-bottom">
@@ -57,7 +57,7 @@ class CheckoutItem extends Component {
         <span className="count-number float-right">
           <Button
             variant="outline-secondary"
-            onClick={this.DecreaseItem}
+            // onClick={this.DecreaseItem}
             className="btn-sm left dec"
           >
             {" "}
@@ -71,7 +71,8 @@ class CheckoutItem extends Component {
           />
           <Button
             variant="outline-secondary"
-            onClick={this.IncrementItem}
+            // onClick={this.IncrementItem}
+            onClick={() => this.props.incrementQuantity(item)}
             className="btn-sm right inc"
           >
             {" "}
@@ -100,7 +101,7 @@ CheckoutItem.propTypes = {
   itemName: PropTypes.string,
   price: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
-  // qty: PropTypes.number.isRequired,
+  qty: PropTypes.number.isRequired,
   show: PropTypes.bool.isRequired,
   getValue: PropTypes.func.isRequired
 };
@@ -113,8 +114,11 @@ CheckoutItem.defaultProps = {
 // export default CheckoutItem;
 
 const mapStateToProps = state => {
+  console.warn("state in CheckoutItem:", state);
   return {
-    total: state.cartItems.cart
+    state: "test"
   };
 };
-export default connect(mapStateToProps, { removeFromCart })(CheckoutItem);
+export default connect(mapStateToProps, { removeFromCart, incrementQuantity })(
+  CheckoutItem
+);

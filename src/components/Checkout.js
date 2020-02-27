@@ -264,6 +264,7 @@ class Checkout extends React.Component {
                             id={Number(item.apiKey)}
                             show={true}
                             getValue={this.getQty}
+                            qty={1}
                           />
                           {/* <button>
                             <Icofont
@@ -340,6 +341,7 @@ class Checkout extends React.Component {
 
 // export default Checkout;
 const mapStateToProps = state => {
+  // console.log("state in Checkout:", state);
   return {
     cartItems: state.cartItems,
     user: state.user.userInfo,

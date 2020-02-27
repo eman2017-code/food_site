@@ -1,6 +1,6 @@
 const initialState = {
   cart: [],
-  total: 0
+  quantity: 0
 };
 
 export default function cartReducer(state = initialState, action) {
@@ -8,7 +8,8 @@ export default function cartReducer(state = initialState, action) {
     case "ADD_TO_CART":
       return {
         ...state,
-        cart: [action.payload, ...state.cart]
+        cart: [action.payload, ...state.cart],
+        total: 1
       };
 
     case "CLEAR_CART":
@@ -24,10 +25,27 @@ export default function cartReducer(state = initialState, action) {
         )
       };
 
-    case "UPDATE_CART_QUANTITY":
+    case "INCREMENT_QUANTITY":
+      // find the product
+      const foundProduct = state.cart.find(
+        product => product.apiKey === action.payload.apiKey
+      );
+      console.log("foundProduct:", foundProduct);
+
+      // const productToAdd = action.payload;
+      // console.log("productToAdd:", productToAdd);
+
+      // const quantityToAdd = action.qty;
+      // console.log("quantityToAdd:", quantityToAdd);
+
+      // let indexOfProduct = state.cart.findIndex(
+      //   product => product.upc === productToAdd.id
+      // );
+      // console.log("indexOfProduct:", indexOfProduct);
+
       return {
         ...state,
-        total: state.cart.find(product => console.log(product.quantity))
+        quantity: state.quantity + 1
       };
 
     default:
