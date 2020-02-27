@@ -37,24 +37,28 @@ class Checkout extends React.Component {
   getQty = ({ id, quantity }) => {};
 
   componentDidMount() {
-    this.props.getUsersDeliveryAddresses();
+    if (this.props.isLoggedIn) {
+      this.props.getUsersDeliveryAddresses();
+    } else {
+      return null;
+    }
   }
+
+  getTotalPrice = items => {
+    let total = 0;
+    if (items === undefined) {
+      return;
+    } else {
+      items.cart.map(item => {
+        total += item.totalPrice;
+      });
+      // rounds each number to the nearest 100th
+      return Math.round(100 * total) / 100;
+    }
+  };
 
   render() {
     const { cartItems, user, deliveryAddresses, isLoggedIn } = this.props;
-
-    const getTotalPrice = cartItems => {
-      let total = 0;
-      if (cartItems === undefined) {
-        return <h1>0</h1>;
-      } else {
-        cartItems.cart.map(item => {
-          total += item.basePrice;
-        });
-        // rounds each number to the nearest 100th
-        return Math.round(100 * total) / 100;
-      }
-    };
 
     return (
       <section className="offer-dedicated-body mt-4 mb-4 pt-2 pb-2">
@@ -181,7 +185,7 @@ class Checkout extends React.Component {
                                   >
                                     {cartItems === undefined
                                       ? ""
-                                      : getTotalPrice(cartItems)}
+                                      : this.getTotalPrice(cartItems)}
                                     <Icofont icon="long-arrow-right" />
                                   </Link>
                                 </Form.Group>
@@ -202,7 +206,7 @@ class Checkout extends React.Component {
                               >
                                 {cartItems === undefined
                                   ? ""
-                                  : getTotalPrice(cartItems)}
+                                  : this.getTotalPrice(cartItems)}
                                 <Icofont icon="long-arrow-right" />
                               </Link>
                             </Form>
@@ -297,7 +301,7 @@ class Checkout extends React.Component {
                   <h6 className="font-weight-bold mb-0">
                     TOTAL{" "}
                     <span className="float-right">
-                      ${getTotalPrice(cartItems)}
+                      ${this.getTotalPrice(cartItems)}
                     </span>
                   </h6>
                 </div>
