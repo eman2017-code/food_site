@@ -30,9 +30,9 @@ export default function cartReducer(state = initialState, action) {
       const foundProduct = state.cart.find(
         product => product.apiKey === action.payload.apiKey
       );
-      console.log("foundProduct:", foundProduct);
+      // console.log("foundProduct:", foundProduct);
 
-      // const productToAdd = action.payload;
+      // const productToAdd = action.payload
       // console.log("productToAdd:", productToAdd);
 
       // const quantityToAdd = action.qty;

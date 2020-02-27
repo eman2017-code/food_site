@@ -221,7 +221,7 @@ export const removeFromCart = product => dispatch => {
 };
 
 export const incrementQuantity = product => dispatch => {
-  console.log("product ... via ACTIONS:", product);
+  // console.log("product ... via ACTIONS:", product);
   dispatch({
     type: "INCREMENT_QUANTITY",
     payload: product
