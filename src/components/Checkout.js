@@ -29,11 +29,15 @@ class Checkout extends React.Component {
     super(props, context);
 
     this.state = {
-      showAddressModal: false
+      showAddressModal: false,
+      addressSelected: {},
     };
   }
 
+  showAddressModal = () => this.setState({ showAddressModal: true });
   hideAddressModal = () => this.setState({ showAddressModal: false });
+
+
   getQty = ({ id, quantity }) => {};
 
   componentDidMount() {
@@ -75,11 +79,14 @@ class Checkout extends React.Component {
                 <div className="pt-2"></div>
                 <div className="bg-white rounded shadow-sm p-4 mb-4">
                   <h4 className="mb-1">Choose a delivery address</h4>
-                  <h6 className="mb-3 text-black-50">
-                    Multiple addresses in this location
-                  </h6>
                   <Row>
                     <Col md={6}>
+                    <button 
+					            type="button" 
+					            className="btn btn-primary my-3"
+					            onClick={this.showAddressModal}>
+						            Add Delivery Address
+				            </button>
                       {isLoggedIn === true
                         ? deliveryAddresses.map(address => {
                             return (

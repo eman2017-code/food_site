@@ -104,7 +104,7 @@ class Addresses extends React.Component {
 					className="btn btn-primary"
 					onClick={this.showAddressModal}>
 						Add Delivery Address
-					</button>
+				   </button>
                </Col>
 
 				{
