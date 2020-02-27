@@ -49,9 +49,10 @@ class Detail extends React.Component {
       selectedFoodItem: {},
 
       // search results
-      search: "",
-      currentlyTyping: false
+      filteredResults: [],
+      isTyping: false
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   hideAddressModal = () => this.setState({ showAddressModal: false });
@@ -87,11 +88,45 @@ class Detail extends React.Component {
       showFoodCustomizationModal: false
     });
   };
+  handleChange(e) {
+    // items reduced to own arrays
+    let menuItems = [];
 
-  updateSearch(e) {
+    // list of searched items
+    let newList = [];
+
+    // items reduced singular objects
+    const allItems = [];
+
+    this.props.restaurant.restaurantMenu.map(item => {
+      const itemObject = item.items;
+      menuItems.push(itemObject);
+    });
+    menuItems.map(item => {
+      item.map(singeItem => {
+        allItems.push(singeItem);
+      });
+    });
+
+    // if the search bar isn't empty
+    if (e.target.value !== "") {
+      newList = allItems.filter(item => {
+        // change current item to lowercase
+        const lc = item.name.toLowerCase();
+        // change search term to lowercase
+        // elimates issues with search
+        const filter = e.target.value.toLowerCase();
+
+        return lc.includes(filter);
+      });
+    } else {
+      // if the search bar is empty, set newList to original task list
+      newList = allItems;
+    }
+
     this.setState({
-      search: e.target.value.substr(0, 20),
-      currentlyTyping: true
+      filteredResults: newList,
+      isTyping: true
     });
   }
 
@@ -131,8 +166,6 @@ class Detail extends React.Component {
         allItems.push(singeItem);
       });
     });
-
-    let filteredResults = this.props.restaurant.restaurantMenu;
 
     return (
       <>
@@ -240,8 +273,7 @@ class Detail extends React.Component {
                             <Form.Control
                               type="text"
                               placeholder="Search for dishes..."
-                              value={this.state.search}
-                              onChange={this.updateSearch.bind(this)}
+                              onChange={this.handleChange}
                             />
                             <InputGroup.Append>
                               <Button type="button" variant="link">
@@ -268,30 +300,26 @@ class Detail extends React.Component {
                           </h5>
 
                           <Col md={12}>
-                            {this.state.currentlyTyping
-                              ? // filteredResults.map((result, i) => {
-                                //   // console.log("result:", result);
-                                //   return (
-                                //     <QuickBite
-                                //       key={i}
-                                //       foodItem={result}
-                                //       id={Number(result.apiKey)}
-                                //       restaurantAPIKey={
-                                //         this.state.restaurant_api_key
-                                //       }
-                                //       title={result.name}
-                                //       price={Number(result.basePrice)}
-                                //       description={result.description}
-                                //       getValue={this.getQty}
-                                //       showFoodCustomizationModal={
-                                //         this.showFoodCustomizationModal
-                                //       }
-                                //     />
-                                //   );
-                                // })
-                                filteredResults.map(result =>
-                                  console.log("result:", result)
-                                )
+                            {this.state.isTyping
+                              ? this.state.filteredResults.map((result, i) => {
+                                  return (
+                                    <QuickBite
+                                      key={i}
+                                      foodItem={result}
+                                      id={Number(result.apiKey)}
+                                      restaurantAPIKey={
+                                        this.state.restaurant_api_key
+                                      }
+                                      title={result.name}
+                                      price={Number(result.basePrice)}
+                                      description={result.description}
+                                      getValue={this.getQty}
+                                      showFoodCustomizationModal={
+                                        this.showFoodCustomizationModal
+                                      }
+                                    />
+                                  );
+                                })
                               : allItems.map((foodItem, i) => {
                                   return (
                                     <div
