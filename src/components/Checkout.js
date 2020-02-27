@@ -41,7 +41,7 @@ class Checkout extends React.Component {
   }
 
   render() {
-    const { cartItems, user, deliveryAddresses } = this.props;
+    const { cartItems, user, deliveryAddresses, isLoggedIn } = this.props;
 
     const getTotalPrice = cartItems => {
       let total = 0;
@@ -80,7 +80,7 @@ class Checkout extends React.Component {
                   </h6>
                   <Row>
                     <Col md={6}>
-                      {deliveryAddresses !== undefined
+                      {isLoggedIn === true
                         ? deliveryAddresses.map(address => {
                             return (
                               <ChooseAddressCard
@@ -321,6 +321,7 @@ const mapStateToProps = state => {
   return {
     cartItems: state.cartItems,
     user: state.user.userInfo,
+    isLoggedIn: state.user.isLoggedIn,
     deliveryAddresses: state.addresses.deliveryAddresses
   };
 };
