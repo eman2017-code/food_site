@@ -38,6 +38,9 @@ export const loginUser = loginInfo => async dispatch => {
 export const logoutUser = () => async dispatch => {
   const response = await apiConnector.logoutUser();
   dispatch({ type: "LOGOUT_USER" });
+  toast.success("Logged Out", {
+    position: toast.POSITION.TOP_LEFT
+  });
 };
 
 // action for adding a new delivery address
