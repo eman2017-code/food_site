@@ -30,7 +30,6 @@ class Checkout extends React.Component {
 
     this.state = {
       showAddressModal: false,
-      restaurant: {},
       addressSelected: {},
 
       // credit card payments
@@ -42,12 +41,6 @@ class Checkout extends React.Component {
   }
 
   componentDidMount() {
-    
-    // sets the restaurant being ordered from in the state
-    this.setState({
-      restaurant: this.props.cartItems[0].restaurant
-    });
-
     this.props.getUsersDeliveryAddresses();
   }
 
@@ -369,6 +362,7 @@ class Checkout extends React.Component {
 const mapStateToProps = state => {
   return {
     cartItems: state.cartItems.cart,
+    restaurant: state.cartItems.restaurant,
     user: state.user.userInfo,
     isLoggedIn: state.user.isLoggedIn,
     deliveryAddresses: state.addresses.deliveryAddresses
