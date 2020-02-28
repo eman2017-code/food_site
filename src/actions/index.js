@@ -194,14 +194,31 @@ export const clearFoodTypeFilters = () => dispatch => {
   cart actions calls 
   ------------------ */
 
+// export const addToCart = (product, qty) => dispatch => {
+//   dispatch({
+//     type: "ADD_TO_CART",
+//     payload: product,
+//     qty: qty
+//   });
+//   toast.success("Item added to cart", {
+//     position: toast.POSITION.TOP_LEFT
+//   });
+// };
 export const addToCart = (product, qty) => dispatch => {
+  toast.success("Item Added to Cart");
+  dispatch(addToCartUnsafe(product, qty));
+};
+export const addToCartUnsafe = (product, qty) => ({
+  type: "ADD_TO_CART",
+  product,
+  qty
+});
+
+export const removeFromCart = product_id => dispatch => {
+  toast.error("Item Removed from Cart");
   dispatch({
-    type: "ADD_TO_CART",
-    payload: product,
-    qty: qty
-  });
-  toast.success("Item added to cart", {
-    position: toast.POSITION.TOP_LEFT
+    type: "REMOVE_FROM_CART",
+    product_id
   });
 };
 
@@ -214,15 +231,15 @@ export const clearCart = () => dispatch => {
   });
 };
 
-export const removeFromCart = product => dispatch => {
-  dispatch({
-    type: "REMOVE_ITEM_FROM_CART",
-    payload: product
-  });
-  toast.success("Item Removed from Cart", {
-    position: toast.POSITION.TOP_LEFT
-  });
-};
+// export const removeFromCart = product => dispatch => {
+//   dispatch({
+//     type: "REMOVE_ITEM_FROM_CART",
+//     payload: product
+//   });
+//   toast.success("Item Removed from Cart", {
+//     position: toast.POSITION.TOP_LEFT
+//   });
+// };
 
 export const incrementQuantity = product => dispatch => {
   // console.log("product ... via ACTIONS:", product);

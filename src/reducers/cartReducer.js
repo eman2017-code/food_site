@@ -1,108 +1,129 @@
-const initialState = {
-  cart: [],
-  quantity: 0
-};
+import ProductBox from "../components/home/ProductBox";
 
-export default function cartReducer(state = initialState, action) {
+// const initialState = {
+//   cart: [],
+//   qty: 0
+// };
+
+// export default function cartReducer(state = initialState, action) {
+//   switch (action.type) {
+//     case "ADD_TO_CART":
+//       return {
+//         ...state,
+//         cart: [action.payload, ...state.cart]
+//       };
+
+//     case "CLEAR_CART":
+//       return {
+//         cart: []
+//       };
+
+//     case "REMOVE_ITEM_FROM_CART":
+//       return {
+//         ...state,
+//         cart: state.cart.filter(
+//           product => product.apiKey !== action.payload.apiKey
+//         )
+//       };
+
+//       return {
+//         ...state,
+//         quantity: state.quantity + 1
+//       };
+
+//     default:
+//       return state;
+//   }
+// }
+
+export default function cartReducer(
+  state = {
+    cart: []
+  },
+  action
+) {
   switch (action.type) {
     case "ADD_TO_CART":
-      const productToAdd = action.payload;
-      const quantityToAdd = action.qty;
+      const productId = action.product.apiKey;
 
-      let indexOfProduct = state.cart.findIndex(
-        product => product.id === productToAdd.id
-      );
+      if (
+        state.cart.findIndex(product => product.apiKey === productId) !== -1
+      ) {
+        const cart = state.cart.reduce((cartAcc, product) => {
+          if (product.id === productId) {
+            cartAcc.push({
+              ...product,
+              qty: product.qty + 1,
+              sum: (product.price / 100) * (product.qty + 1)
+            }); // Increment qty
+          } else {
+            cartAcc.push(product);
+          }
 
-      // if the product already exists
-      if (indexOfProduct !== -1) {
-        const productToUpdate = state.cart[indexOfProduct];
+          return cartAcc;
+        }, []);
 
-        // updates the products quantity and sum
-        productToUpdate.qty = productToUpdate.qty + quantityToAdd;
-        productToUpdate.sum = productToUpdate.price * productToUpdate.qty;
-
-        // if the product doesnt already exist
-      } else {
-        // formats the product in the correct way
-        const formattedProductToAdd = {
-          ...productToAdd,
-          qty: quantityToAdd,
-          sum: productToAdd.price * quantityToAdd
-        };
-
-        state.cart.push(formattedProductToAdd);
+        return { ...state, cart };
       }
 
       return {
         ...state,
-        cart: state.cart
+        cart: [
+          ...state.cart,
+          {
+            ...action.product,
+            qty: action.qty,
+            sum: (action.product.price / 100) * action.qty
+          }
+        ]
       };
 
-    case "CLEAR_CART":
-      return {
-        cart: []
-      };
-
-    case "REMOVE_ITEM_FROM_CART":
-      return {
-        ...state,
-        cart: state.cart.filter(product => product.id !== action.payload.id)
-      };
-
-    // increments the quantity of a product
-    case "INCREMENT_QTY":
-      indexOfProduct = state.cart.findIndex(
-        product => product.id === action.payload.id
-      );
-
-      // if the product exists
-      if (indexOfProduct !== -1) {
-        const productToUpdate = state.cart[indexOfProduct];
-
-        productToUpdate.qty = action.product.qty; // quantity already updated in the action
-        productToUpdate.sum = productToUpdate.price * productToUpdate.qty;
-
-        // otherwise if it doenst exist, just add the product to the cart
-      } else {
-        const formattedProductToAdd = {
-          ...action.product,
-          qty: 1,
-          sum: productToAdd.price
-        };
-        state.cart.push(formattedProductToAdd);
-      }
-
-      return {
-        ...state,
-        cart: state.cart
-      };
-
-    // decrements the quantity of a product
     case "DECREMENT_QTY":
-      indexOfProduct = state.cart.findIndex(
-        product => product.id === action.payload.id
-      );
+      if (
+        state.cart.findIndex(product => product.id === action.productId) !== -1
+      ) {
+        const cart = state.cart.reduce((cartAcc, product) => {
+          if (product.id === action.product && product.qty > 1) {
+            console.log("price: " + product.price + "Qty: " + product.qty);
+            cartAcc.push({
+              ...product,
+              qty: product.qty - 1,
+              sum: (product.price / 100) * (product.qty - 1)
+            }); // Decrement qty
+          } else {
+            cartAcc.push(product);
+          }
 
-      // if the quantity of the product is atleast two
-      if (state.cart[indexOfProduct].qty >= 1) {
-        const productToUpdate = state.cart[indexOfProduct];
+          return cartAcc;
+        }, []);
 
-        productToUpdate.qty = action.product.qty; // quantity already updated in the action
-        productToUpdate.sum = productToUpdate.price * productToUpdate.qty;
-
-        return {
-          ...state,
-          cart: state.cart
-        };
-
-        // if the quantity is only one
-      } else {
-        return {
-          cart: state.cart.filter(product => product.id !== action.payload.id) // removes the product
-        };
+        return { ...state, cart };
       }
+
+      return {
+        ...state,
+        cart: [
+          ...state.cart,
+          {
+            ...action.product,
+            qty: action.qty,
+            sum: action.product.price * action.qty
+          }
+        ]
+      };
+
+    case "REMOVE_FROM_CART":
+      // return {
+      //   cart: state.cart.filter(item => item.id !== action.product_id.id)
+      // };
+      return {
+        ...state,
+        cart: state.cart.filter(
+          product => product.apiKey !== action.payload.apiKey
+        )
+      };
 
     default:
-      return state;
   }
+  return state;
 }
