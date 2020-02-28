@@ -89,11 +89,11 @@ class Checkout extends React.Component {
 				            </button>
                   <Row>
                     {isLoggedIn === true
-                      ? deliveryAddresses.map(address => {
+                      ? deliveryAddresses.map((address, i) => {
                           return (
-                          <Col md={6}>
+                          <Col md={6} key={i}>
                             <ChooseAddressCard
-                              key={address.id}
+                              addressid={address.id}
                               boxclassName="border border-success"
                               title={address.address}
                               icoIcon="briefcase"
@@ -234,7 +234,7 @@ class Checkout extends React.Component {
                   />
                   <div className="d-flex flex-column">
                     <h6 className="mb-1 text-white">
-                      {this.props.user.active ? (
+                      {isLoggedIn ? (
                         <span>Thank You for Shopping {user.first_name}</span>
                       ) : (
                         <span>Thank You for Shopping Guest</span>
@@ -264,11 +264,12 @@ class Checkout extends React.Component {
                         >
                           <CheckoutItem
                             itemName={item.name}
-                            price={Number(item.basePrice)}
+                            price={Number(item.totalPrice)}
                             id={Number(item.apiKey)}
                             qty={1}
                             show={true}
                             getValue={this.getQty}
+                            customizations={item.customizatons}
                           />
                           <button>
                             <Icofont

@@ -77,6 +77,9 @@ class CheckoutItem extends Component {
           </div>
           <div className="media-body">
             <p className="mt-1 mb-0 text-black">{this.props.itemName}</p>
+
+
+
           </div>
         </div>
       </div>
@@ -90,8 +93,10 @@ CheckoutItem.propTypes = {
   id: PropTypes.number.isRequired,
   qty: PropTypes.number.isRequired,
   show: PropTypes.bool.isRequired,
-  getValue: PropTypes.func.isRequired
+  getValue: PropTypes.func.isRequired,
+  customizations: PropTypes.array.isRequired
 };
+
 CheckoutItem.defaultProps = {
   show: true,
   priceUnit: "$"
