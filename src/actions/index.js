@@ -224,11 +224,11 @@ export const addToCart = (product, qty) => dispatch => {
 };
 
 export const removeFromCart = product_id => dispatch => {
-  toast.error("Item Removed from Cart");
   dispatch({
-    type: "REMOVE_FROM_CART",
-    product_id
+    type: "REMOVE_ITEM_FROM_CART",
+    payload: product_id
   });
+  toast.success("Item Removed from Cart");
 };
 
 export const clearCart = () => dispatch => {
@@ -239,16 +239,6 @@ export const clearCart = () => dispatch => {
     position: toast.POSITION.TOP_LEFT
   });
 };
-
-// export const removeFromCart = product => dispatch => {
-//   dispatch({
-//     type: "REMOVE_ITEM_FROM_CART",
-//     payload: product
-//   });
-//   toast.success("Item Removed from Cart", {
-//     position: toast.POSITION.TOP_LEFT
-//   });
-// };
 
 export const incrementQuantity = product => dispatch => {
   // console.log("product ... via ACTIONS:", product);

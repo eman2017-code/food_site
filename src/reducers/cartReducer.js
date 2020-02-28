@@ -112,10 +112,7 @@ export default function cartReducer(
         ]
       };
 
-    case "REMOVE_FROM_CART":
-      // return {
-      //   cart: state.cart.filter(item => item.id !== action.product_id.id)
-      // };
+    case "REMOVE_ITEM_FROM_CART":
       return {
         ...state,
         cart: state.cart.filter(
