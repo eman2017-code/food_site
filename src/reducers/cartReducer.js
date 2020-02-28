@@ -6,29 +6,31 @@ const initialState = {
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case "ADD_TO_CART":
-      const newProduct = action.payload;
-      const quantity = action.quantity;
+      const productToAdd = action.payload;
+      const quantityToAdd = action.qty;
 
-      // find the product
       let indexOfProduct = state.cart.findIndex(
-        product => product.id === newProduct.id
+        product => product.id === productToAdd.id
       );
 
       // if the product already exists
       if (indexOfProduct !== -1) {
-        state.cart[indexOfProduct].qty = quantity;
-        state.cart[indexOfProduct].sum =
-          newProduct.price * state.cart[indexOfProduct].qty;
+        const productToUpdate = state.cart[indexOfProduct];
+
+        // updates the products quantity and sum
+        productToUpdate.qty = productToUpdate.qty + quantityToAdd;
+        productToUpdate.sum = productToUpdate.price * productToUpdate.qty;
 
         // if the product doesnt already exist
       } else {
-        const formattedProduct = {
-          ...newProduct,
-          qty: quantity,
-          sum: newProduct.price * quantity
+        // formats the product in the correct way
+        const formattedProductToAdd = {
+          ...productToAdd,
+          qty: quantityToAdd,
+          sum: productToAdd.price * quantityToAdd
         };
 
-        state.cart.push(formattedProduct);
+        state.cart.push(formattedProductToAdd);
       }
 
       return {
@@ -49,10 +51,32 @@ export default function cartReducer(state = initialState, action) {
         )
       };
 
-    case "INCREMENT_QUANTITY":
+    // increments the quantity of a product
+    case "INCREMENT_QTY":
+      indexOfProduct = state.cart.findIndex(
+        product => product.id === action.payload.id
+      );
+
+      // if the product exists
+      if (indexOfProduct !== -1) {
+        const productToUpdate = state.cart[indexOfProduct];
+
+        productToUpdate.qty = action.product.qty; // quantity already updated in the action
+        productToUpdate.sum = productToUpdate.price * productToUpdate.qty;
+
+        // otherwise if it doenst exist, just add the product to the cart
+      } else {
+        const formattedProductToAdd = {
+          ...action.product,
+          qty: 1,
+          sum: productToAdd.price
+        };
+        state.cart.push(formattedProductToAdd);
+      }
+
       return {
         ...state,
-        quantity: state.quantity + 1
+        cart: state.cart
       };
 
     default:
