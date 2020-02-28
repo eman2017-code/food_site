@@ -127,7 +127,7 @@ class List extends React.Component {
         />
         <section className="section pt-5 pb-5 products-listing">
           <Container>
-            <Row className="d-none-m">
+            {/* <Row className="d-none-m">
               <Col md={12}>
                 <Dropdown className="float-right">
                   <Dropdown.Toggle variant="outline-info">
@@ -146,7 +146,7 @@ class List extends React.Component {
                   {`${this.props.restaurants.length} Restaurants!`}
                 </small>
               </Col>
-            </Row>
+            </Row> */}
             <Row>
               <Col md={3}>
                 <div className="filters shadow-sm rounded bg-white mb-4">
@@ -155,7 +155,7 @@ class List extends React.Component {
                   </div>
                   <div className="filters-body">
                     <Accordion defaultActiveKey="0">
-                      <div className="filters-card border-bottom p-4">
+                      {/* <div className="filters-card border-bottom p-4">
                         <div className="filters-card-header" id="headingOne">
                           <h6 className="mb-0">
                             <Accordion.Toggle
@@ -232,14 +232,9 @@ class List extends React.Component {
                                 </React.Fragment>
                               }
                             />
-                            <div className="mt-2">
-                              <Link to="#" className="link">
-                                See all
-                              </Link>
-                            </div>
                           </div>
                         </Accordion.Collapse>
-                      </div>
+                      </div> */}
                       <div className="filters-card border-bottom p-4">
                         <div className="filters-card-header" id="headingTwo">
                           <h6 className="mb-0">
@@ -260,15 +255,6 @@ class List extends React.Component {
 
                         <Accordion.Collapse eventKey="1">
                           <div className="filters-card-body card-shop-filters">
-                            <form className="filters-search mb-3">
-                              <Form.Group>
-                                <Icofont icon="search" />
-                                <Form.Control
-                                  type="text"
-                                  placeholder="Start typing to search..."
-                                />
-                              </Form.Group>
-                            </form>
                             <Form.Check
                               custom
                               type="checkbox"
@@ -340,15 +326,10 @@ class List extends React.Component {
                               label="Indian"
                               onClick={this.handleCuisineTypeClicked}
                             />
-                            <div className="mt-2">
-                              <Link to="#" className="link">
-                                See all
-                              </Link>
-                            </div>
                           </div>
                         </Accordion.Collapse>
                       </div>
-                      <div className="filters-card border-bottom p-4">
+                      {/* <div className="filters-card border-bottom p-4">
                         <div className="filters-card-header" id="headingOne">
                           <h6 className="mb-0">
                             <Accordion.Toggle
@@ -403,7 +384,7 @@ class List extends React.Component {
                             />
                           </div>
                         </Accordion.Collapse>
-                      </div>
+                      </div> */}
                     </Accordion>
                   </div>
                 </div>

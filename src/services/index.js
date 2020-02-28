@@ -5,7 +5,7 @@
 export const getCartTotal = cartItems => {
   let total = 0;
   for (let i = 0; i < cartItems.length; i++) {
-    if (cartItems[i].qty === undefined) {
+    if (cartItems[i].qty === undefined || cartItems[i].qty === null) {
       cartItems[i].qty = 1;
     }
 
