@@ -194,26 +194,6 @@ export const clearFoodTypeFilters = () => dispatch => {
   cart actions calls 
   ------------------ */
 
-// export const addToCart = (product, qty) => dispatch => {
-//   dispatch({
-//     type: "ADD_TO_CART",
-//     payload: product,
-//     qty: qty
-//   });
-//   toast.success("Item added to cart", {
-//     position: toast.POSITION.TOP_LEFT
-//   });
-// };
-// export const addToCart = (product, qty) => dispatch => {
-//   toast.success("Item Added to Cart");
-//   dispatch(addToCartUnsafe(product, qty));
-// };
-// export const addToCartUnsafe = (product, qty) => ({
-//   type: "ADD_TO_CART",
-//   product,
-//   qty
-// });
-
 export const addToCart = (product, qty) => dispatch => {
   dispatch({
     type: "ADD_TO_CART",
@@ -240,10 +220,14 @@ export const clearCart = () => dispatch => {
   });
 };
 
-export const incrementQuantity = product => dispatch => {
-  // console.log("product ... via ACTIONS:", product);
+export const incrementQty = (product, qty) => dispatch => {
+  toast.success("Item Added to Cart");
+  dispatch(addToCart(product, qty));
+};
+export const decrementQty = productId => dispatch => {
   dispatch({
-    type: "INCREMENT_QUANTITY",
-    payload: product
+    type: "DECREMENT_QTY",
+    productId
   });
+  toast.warn("Item Decrement Qty to Cart");
 };

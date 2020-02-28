@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { removeFromCart, incrementQuantity } from "../../actions";
+import { removeFromCart, incrementQty } from "../../actions";
 import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 import Icofont from "react-icofont";
@@ -119,6 +119,6 @@ const mapStateToProps = state => {
     state: "test"
   };
 };
-export default connect(mapStateToProps, { removeFromCart, incrementQuantity })(
+export default connect(mapStateToProps, { removeFromCart, incrementQty })(
   CheckoutItem
 );
