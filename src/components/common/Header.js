@@ -70,15 +70,6 @@ class Header extends React.Component {
                   Home <span className="sr-only">(current)</span>
                 </Nav.Link>
                 <Nav.Link
-                  eventKey={1}
-                  as={NavLink}
-                  activeclassname="active"
-                  to="/offers"
-                >
-                  <Icofont icon="sale-discount" /> Offers{" "}
-                  <Badge variant="danger">New</Badge>
-                </Nav.Link>
-                <Nav.Link
                   eventKey={2.1}
                   as={NavLink}
                   activeclassname="active"
@@ -109,28 +100,12 @@ class Header extends React.Component {
                       <Icofont icon="food-cart" /> Orders
                     </NavDropdown.Item>
                     <NavDropdown.Item
-                      eventKey={4.2}
-                      as={NavLink}
-                      activeclassname="active"
-                      to="/myaccount/offers"
-                    >
-                      <Icofont icon="sale-discount" /> Offers
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
                       eventKey={4.3}
                       as={NavLink}
                       activeclassname="active"
                       to="/myaccount/favourites"
                     >
                       <Icofont icon="heart" /> Favourites
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
-                      eventKey={4.4}
-                      as={NavLink}
-                      activeclassname="active"
-                      to="/myaccount/payments"
-                    >
-                      <Icofont icon="credit-card" /> Payments
                     </NavDropdown.Item>
                     <NavDropdown.Item
                       eventKey={4.5}

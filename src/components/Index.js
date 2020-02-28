@@ -63,7 +63,7 @@ class Index extends React.Component {
           <Container>
             <SectionHeading
               heading="Become a Member"
-              subHeading="Lorem Ipsum is simply dummy text of"
+              subHeading="Order the food you love!"
             />
             <Row>
               <Col sm={12} className="text-center">
