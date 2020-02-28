@@ -204,15 +204,24 @@ export const clearFoodTypeFilters = () => dispatch => {
 //     position: toast.POSITION.TOP_LEFT
 //   });
 // };
+// export const addToCart = (product, qty) => dispatch => {
+//   toast.success("Item Added to Cart");
+//   dispatch(addToCartUnsafe(product, qty));
+// };
+// export const addToCartUnsafe = (product, qty) => ({
+//   type: "ADD_TO_CART",
+//   product,
+//   qty
+// });
+
 export const addToCart = (product, qty) => dispatch => {
+  dispatch({
+    type: "ADD_TO_CART",
+    product,
+    qty
+  });
   toast.success("Item Added to Cart");
-  dispatch(addToCartUnsafe(product, qty));
 };
-export const addToCartUnsafe = (product, qty) => ({
-  type: "ADD_TO_CART",
-  product,
-  qty
-});
 
 export const removeFromCart = product_id => dispatch => {
   toast.error("Item Removed from Cart");
