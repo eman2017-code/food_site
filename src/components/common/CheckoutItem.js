@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { removeFromCart, incrementQty } from "../../actions";
+import { removeFromCart, incrementQty, getCartTotal } from "../../actions";
 import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 import Icofont from "react-icofont";
@@ -72,7 +72,7 @@ class CheckoutItem extends Component {
           <Button
             variant="outline-secondary"
             // onClick={this.IncrementItem}
-            onClick={() => this.props.incrementQuantity(item)}
+            onClick={() => this.props.incrementQty(item, 1)}
             className="btn-sm right inc"
           >
             {" "}

@@ -224,10 +224,20 @@ export const incrementQty = (product, qty) => dispatch => {
   toast.success("Item Added to Cart");
   dispatch(addToCart(product, qty));
 };
+
 export const decrementQty = productId => dispatch => {
   dispatch({
     type: "DECREMENT_QTY",
     productId
   });
   toast.warn("Item Decrement Qty to Cart");
+};
+
+export const getCartTotal = cartItems => {
+  var total = 0;
+  for (var i = 0; i < cartItems.length; i++) {
+    total +=
+      Number(cartItems[i].qty, 10) * Number(cartItems[i].price / 100, 10);
+  }
+  return total;
 };
