@@ -194,10 +194,11 @@ export const clearFoodTypeFilters = () => dispatch => {
   cart actions calls 
   ------------------ */
 
-export const addToCart = product => dispatch => {
+export const addToCart = (product, qty) => dispatch => {
   dispatch({
     type: "ADD_TO_CART",
-    payload: product
+    payload: product,
+    qty: qty
   });
   toast.success("Item added to cart", {
     position: toast.POSITION.TOP_LEFT
