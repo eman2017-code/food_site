@@ -30,6 +30,7 @@ class Checkout extends React.Component {
 
     this.state = {
       showAddressModal: false,
+      restaurant: {},
       addressSelected: {},
 
       // credit card payments
@@ -37,8 +38,20 @@ class Checkout extends React.Component {
       validDate: '',
       cvv: '',
       cardHolderName: ''
-    };
+    }
   }
+
+  componentDidMount() {
+    
+    // sets the restaurant being ordered from in the state
+    this.setState({
+      restaurant: this.props.cartItems[0].restaurant
+    });
+
+    this.props.getUsersDeliveryAddresses();
+  }
+
+  
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
@@ -51,10 +64,7 @@ class Checkout extends React.Component {
   hideAddressModal = () => this.setState({ showAddressModal: false });
 
   getQty = ({ id, quantity }) => {};
-
-  componentDidMount() {
-    this.props.getUsersDeliveryAddresses();
-  }
+  
 
   render() {
     const { cartItems, user, deliveryAddresses, isLoggedIn } = this.props;
@@ -64,7 +74,7 @@ class Checkout extends React.Component {
       if (cartItems === undefined) {
         return <h1>0</h1>;
       } else {
-        cartItems.cart.map(item => {
+        cartItems.map(item => {
           total += item.totalPrice;
         });
         // rounds each number to the nearest 100th
@@ -86,6 +96,7 @@ class Checkout extends React.Component {
         />
         <Container>
           <Row>
+        
             <Col md={8}>
               <div className="offer-dedicated-body-left">
                 <div className="pt-2"></div>
@@ -98,7 +109,8 @@ class Checkout extends React.Component {
 						            Add Delivery Address
 				            </button>
                   <Row>
-                    {isLoggedIn === true
+
+                    {isLoggedIn === true 
                       ? deliveryAddresses.map((address, i) => {
                           return (
                           <Col md={6} key={i}>
@@ -114,6 +126,7 @@ class Checkout extends React.Component {
                           );
                         })
                       : ""}
+
                   </Row>
                 </div>
                 <div className="pt-2"></div>
@@ -152,7 +165,6 @@ class Checkout extends React.Component {
                                 <Icofont icon="jcb-alt" />
                               </span>
                             </p>
-
 
                             <Form>
                               <div className="form-row">
@@ -287,7 +299,7 @@ class Checkout extends React.Component {
                   ? // dont show anything
                     ""
                   : // otherwise shows list of cartItems
-                    cartItems.cart.map((item, apiKey) => {
+                    cartItems.map((item, apiKey) => {
                       return (
                         <div
                           className="bg-white rounded shadow-sm mb-2"
@@ -352,7 +364,7 @@ class Checkout extends React.Component {
 // export default Checkout;
 const mapStateToProps = state => {
   return {
-    cartItems: state.cartItems,
+    cartItems: state.cartItems.cart,
     user: state.user.userInfo,
     isLoggedIn: state.user.isLoggedIn,
     deliveryAddresses: state.addresses.deliveryAddresses

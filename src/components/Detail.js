@@ -182,6 +182,7 @@ class Detail extends React.Component {
             show={this.state.showFoodCustomizationModal}
             onHide={this.hideFoodCustomizationModal}
             foodItem={this.state.selectedFoodItem}
+            restaurant={restaurant}
           />
         ) : (
           ""
