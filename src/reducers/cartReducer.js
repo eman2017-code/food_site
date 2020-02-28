@@ -77,6 +77,31 @@ export default function cartReducer(state = initialState, action) {
         cart: state.cart
       };
 
+    // decrements the quantity of a product
+    case "DECREMENT_QTY":
+      indexOfProduct = state.cart.findIndex(
+        product => product.id === action.payload.id
+      );
+
+      // if the quantity of the product is atleast two
+      if (state.cart[indexOfProduct].qty >= 1) {
+        const productToUpdate = state.cart[indexOfProduct];
+
+        productToUpdate.qty = action.product.qty; // quantity already updated in the action
+        productToUpdate.sum = productToUpdate.price * productToUpdate.qty;
+
+        return {
+          ...state,
+          cart: state.cart
+        };
+
+        // if the quantity is only one
+      } else {
+        return {
+          cart: state.cart.filter(product => product.id !== action.payload.id) // removes the product
+        };
+      }
+
     default:
       return state;
   }
