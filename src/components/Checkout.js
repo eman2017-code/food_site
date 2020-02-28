@@ -58,7 +58,7 @@ class Checkout extends React.Component {
   
 
   render() {
-    const { cartItems, user, deliveryAddresses, isLoggedIn } = this.props;
+    const { cartItems, restaurant, user, deliveryAddresses, isLoggedIn } = this.props;
 
     const getTotalPrice = cartItems => {
       let total = 0;
@@ -281,10 +281,10 @@ class Checkout extends React.Component {
                   </div>
                 </div>
 
-                <div className="bg-white rounded shadow-sm mb-2">
-                    <strong>
-                      Ordering from { this.state.rest }
-                    </strong>
+                <div className="bg-white rounded shadow-sm text-center mb-2 p-1 pt-2">
+                    <h6>
+                      {restaurant.name}
+                    </h6>
                 </div>
                 <Button
                   className="btn btn-sm btn-primary mr-2"
