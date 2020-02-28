@@ -252,7 +252,7 @@ class Checkout extends React.Component {
                 >
                   Clear Cart
                 </Button>
-                {cartItems === undefined
+                {cartItems.length < 1
                   ? // dont show anything
                     ""
                   : // otherwise shows list of cartItems
@@ -269,7 +269,7 @@ class Checkout extends React.Component {
                             qty={1}
                             show={true}
                             getValue={this.getQty}
-                            customizations={item.customizatons}
+                            customizations={item.customizations}
                           />
                           <button>
                             <Icofont

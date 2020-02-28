@@ -78,17 +78,17 @@ class CheckoutItem extends Component {
           <div className="media-body">
             <p className="mt-1 mb-0 text-black">{this.props.itemName}</p>
 
-            <ul>
             {
+            this.props.customizations.length > 0 
+            ?
             this.props.customizations.map((customization, i) => {
               return (
-                <li key={i}>
-                  {customization}
-                </li>
+                <small key={i} className="d-block">{customization.selectionName}, ${customization.price}</small>
               )
             })
+            :
+            ""
             }
-            </ul>
 
           </div>
         </div>

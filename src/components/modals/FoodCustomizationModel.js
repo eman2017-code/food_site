@@ -42,6 +42,7 @@ class FoodCustomizatonModal extends React.Component {
 
         // gets the attributes from the select boxes 
         const selectionApiKey = e.target.getAttribute('apikey');
+        const selectionName = e.target.getAttribute('name');
         const optionApiKey = e.target.childNodes[e.target.selectedIndex].getAttribute('apikey');
         const optionPrice = e.target.childNodes[e.target.selectedIndex].getAttribute('price');
         const optionName = e.target.childNodes[e.target.selectedIndex].getAttribute('name');
@@ -50,9 +51,10 @@ class FoodCustomizatonModal extends React.Component {
 
         const additionalChargeToAdd = {
             selectionApiKey: selectionApiKey,
+            selectionName: selectionName,
             optionApiKey: optionApiKey,
             price: parseFloat(optionPrice),
-            name: optionName 
+            optionName: optionName 
         }
  
         this.setState({ 
@@ -128,6 +130,7 @@ class FoodCustomizatonModal extends React.Component {
                                             <Form.Control 
                                                 as="select" 
                                                 apikey={ choice.apiKey } 
+                                                name={ choice.name }
                                                 onChange={ this.foodOptionSelected } >
 
                                                 {choice.customizationChoices.map((option, i) => {
