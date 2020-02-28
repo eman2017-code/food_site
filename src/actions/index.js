@@ -234,9 +234,11 @@ export const decrementQty = productId => dispatch => {
 };
 
 export const getCartTotal = cartItems => {
-  var total = 0;
+  let total = 0;
   for (let i = 0; i < cartItems.length; i++) {
-    console.log("cartItems[i]:", cartItems[i].qty);
+    console.log("cartItems[i].qty:", cartItems[i].qty);
+    console.log("cartItems[i].totalPrice:", cartItems[i].totalPrice);
+    console.log("total:", cartItems[i].qty * cartItems[i].totalPrice);
     total +=
       parseInt(cartItems[i].qty) * parseInt(cartItems[i].totalPrice / 100);
   }

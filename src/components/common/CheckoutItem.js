@@ -114,7 +114,6 @@ CheckoutItem.defaultProps = {
 // export default CheckoutItem;
 
 const mapStateToProps = state => {
-  console.log("state in CheckoutItem:", state);
   console.warn("state in CheckoutItem:", state);
   return {
     cartItems: state.cartItems.cart,
