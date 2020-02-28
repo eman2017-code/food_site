@@ -6,10 +6,34 @@ const initialState = {
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case "ADD_TO_CART":
+      const newProduct = action.payload;
+      const quantity = action.quantity;
+
+      // find the product
+      let indexOfProduct = state.cart.findIndex(
+        product => product.id === newProduct.id
+      );
+
+      // if the product already exists
+      if (indexOfProduct !== -1) {
+        state.cart[indexOfProduct].qty = quantity;
+        state.cart[indexOfProduct].sum =
+          newProduct.price * state.cart[indexOfProduct].qty;
+
+        // if the product doesnt already exist
+      } else {
+        const formattedProduct = {
+          ...newProduct,
+          qty: quantity,
+          sum: newProduct.price * quantity
+        };
+
+        state.cart.push(formattedProduct);
+      }
+
       return {
         ...state,
-        cart: [action.payload, ...state.cart],
-        total: 1
+        cart: state.cart
       };
 
     case "CLEAR_CART":
@@ -26,23 +50,6 @@ export default function cartReducer(state = initialState, action) {
       };
 
     case "INCREMENT_QUANTITY":
-      // find the product
-      const foundProduct = state.cart.find(
-        product => product.apiKey === action.payload.apiKey
-      );
-      // console.log("foundProduct:", foundProduct);
-
-      // const productToAdd = action.payload
-      // console.log("productToAdd:", productToAdd);
-
-      // const quantityToAdd = action.qty;
-      // console.log("quantityToAdd:", quantityToAdd);
-
-      // let indexOfProduct = state.cart.findIndex(
-      //   product => product.upc === productToAdd.id
-      // );
-      // console.log("indexOfProduct:", indexOfProduct);
-
       return {
         ...state,
         quantity: state.quantity + 1

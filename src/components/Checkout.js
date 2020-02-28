@@ -249,7 +249,7 @@ class Checkout extends React.Component {
                 >
                   Clear Cart
                 </Button>
-                {cartItems === undefined
+                {cartItems === undefined || cartItems === null
                   ? ""
                   : cartItems.cart.map((item, apiKey) => {
                       return (
@@ -341,7 +341,6 @@ class Checkout extends React.Component {
 
 // export default Checkout;
 const mapStateToProps = state => {
-  // console.log("state in Checkout:", state);
   return {
     cartItems: state.cartItems,
     user: state.user.userInfo,
