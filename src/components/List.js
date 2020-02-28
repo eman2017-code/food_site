@@ -1,6 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { clearFoodTypeFilters, setFoodTypeFilter, removeFoodTypeFilter } from "../actions";
+import {
+  clearFoodTypeFilters,
+  setFoodTypeFilter,
+  removeFoodTypeFilter
+} from "../actions";
 import { restaurantFilter } from "../filters/restaurantFilter.js";
 import { Link } from "react-router-dom";
 import {
@@ -11,7 +15,8 @@ import {
   Accordion,
   Button,
   Form,
-  Spinner
+  Spinner,
+  InputGroup
 } from "react-bootstrap";
 import Icofont from "react-icofont";
 import PageTitle from "./common/PageTitle";
@@ -26,7 +31,13 @@ class List extends React.Component {
 
     this.state = {
       isLoading: true,
-    }
+
+      // search results
+      filteredResults: [],
+      isTyping: false
+    };
+
+    this.handleChange = this.handleChange.bind(this);
 
     // clears any food type filters that may be in the store
     this.props.clearFoodTypeFilters();
@@ -56,6 +67,48 @@ class List extends React.Component {
       this.setState({ isLoading: false });
     }, 1000);
   };
+
+  handleChange(e) {
+    // items reduced to own arrays
+    let menuItems = [];
+
+    // list of searched items
+    let newList = [];
+
+    // items reduced singular objects
+    const allItems = this.props.restaurants;
+
+    // this.props.restaurant.restaurantMenu.map(item => {
+    //   const itemObject = item.items;
+    //   menuItems.push(itemObject);
+    // });
+    // menuItems.map(item => {
+    //   item.map(singeItem => {
+    //     allItems.push(singeItem);
+    //   });
+    // });
+
+    // if the search bar isn't empty
+    if (e.target.value !== "") {
+      newList = allItems.filter(item => {
+        // change current item to lowercase
+        const lc = item.name.toLowerCase();
+        // change search term to lowercase
+        // elimates issues with search
+        const filter = e.target.value.toLowerCase();
+
+        return lc.includes(filter);
+      });
+    } else {
+      // if the search bar is empty, set newList to original task list
+      newList = allItems;
+    }
+
+    this.setState({
+      filteredResults: newList,
+      isTyping: true
+    });
+  }
 
   render() {
     const { restaurants } = this.props;
@@ -357,37 +410,63 @@ class List extends React.Component {
               </Col>
               <Col md={9}>
                 <CategoriesCarousel />
-                {/* shows a loading spinner if the icon restaurants are loading */
-                this.state.isLoading ? (
-                  <div className="text-center mt-4 pt-4">
-                    <Spinner animation="border" variant="primary" />
-                  </div>
-                ) : (
-                  /* once done loading the restuarants are displayed */
-
-                  restaurants.map((restaurant, i) => {
-                    return (
-                      <div className="grid-container" key={i}>
-                        <div className="grid-item">
-                          <CardItem
-                            apiKey={restaurant.apiKey}
-                            title={restaurant.name}
-                            subTitle={restaurant.city}
-                            imageAlt="Product"
-                            image={restaurant.logoUrl}
-                            imageClass="img-fluid item-img"
-                            offerText="65% off | Use Coupon OSAHAN50"
-                            time={`${restaurant.minWaitTime} - ${restaurant.maxWaitTime} minutes`}
-                            phoneNumber={restaurant.phone}
-                            showPromoted={false}
-                            promotedVariant="dark"
-                            favIcoIconColor="text-danger"
-                          />
+                <Form className="explore-outlets-search mb-4">
+                  <InputGroup>
+                    <Form.Control
+                      type="text"
+                      placeholder="Search for restaurants..."
+                      onChange={this.handleChange}
+                    />
+                    <InputGroup.Append>
+                      <Button type="button" variant="link">
+                        <Icofont icon="search" />
+                      </Button>
+                    </InputGroup.Append>
+                  </InputGroup>
+                </Form>
+                {this.state.isTyping
+                  ? this.state.filteredResults.map((result, i) => {
+                      return (
+                        <CardItem
+                          key={i}
+                          apiKey={result.apiKey}
+                          title={result.name}
+                          subTitle={result.city}
+                          imageAlt="Product"
+                          image={result.logoUrl}
+                          imageClass="img-fluid item-img"
+                          offerText="65% off | Use Coupon OSAHAN50"
+                          time={`${result.minWaitTime} - ${result.maxWaitTime} minutes`}
+                          phoneNumber={result.phone}
+                          showPromoted={false}
+                          promotedVariant="dark"
+                          favIcoIconColor="text-danger"
+                        />
+                      );
+                    })
+                  : restaurants.map((restaurant, i) => {
+                      return (
+                        <div className="grid-container" key={i}>
+                          <div className="grid-item">
+                            <CardItem
+                              key={i}
+                              apiKey={restaurant.apiKey}
+                              title={restaurant.name}
+                              subTitle={restaurant.city}
+                              imageAlt="Product"
+                              image={restaurant.logoUrl}
+                              imageClass="img-fluid item-img"
+                              offerText="65% off | Use Coupon OSAHAN50"
+                              time={`${restaurant.minWaitTime} - ${restaurant.maxWaitTime} minutes`}
+                              phoneNumber={restaurant.phone}
+                              showPromoted={false}
+                              promotedVariant="dark"
+                              favIcoIconColor="text-danger"
+                            />
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })
-                )}
+                      );
+                    })}
               </Col>
             </Row>
           </Container>
@@ -404,10 +483,10 @@ class List extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { 
+  return {
     restaurants: restaurantFilter(state.restaurants.restaurants, state.filters),
     filters: state.filters
-  }
+  };
 };
 
 export default connect(mapStateToProps, {
