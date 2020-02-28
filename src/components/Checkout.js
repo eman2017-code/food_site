@@ -29,6 +29,10 @@ class Checkout extends React.Component {
     super(props, context);
 
     this.state = {
+      // values of the check boxes where the user selects whether they want delivery or pick up
+      deliveryCheckbox: false,
+      pickupCheckbox: false,
+
       showAddressModal: false,
       addressSelected: {},
 
@@ -47,6 +51,14 @@ class Checkout extends React.Component {
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
+
+  handleCheckboxChange = (e) => {
+    this.setState({ 
+      deliveryCheckbox: false,
+      pickupCheckbox: false,
+      [e.target.name]: e.target.checked
+    });
+  }
   
   // shows the create delivery address modal
   showAddressModal = () => this.setState({ showAddressModal: true });
@@ -59,6 +71,8 @@ class Checkout extends React.Component {
 
   render() {
     const { cartItems, restaurant, user, deliveryAddresses, isLoggedIn } = this.props;
+    console.log('delivery checkbox:', this.state.deliveryCheckbox);
+    console.log('pickup checkbox:', this.state.deliveryCheckbox);
 
     const getTotalPrice = cartItems => {
       let total = 0;
@@ -91,6 +105,47 @@ class Checkout extends React.Component {
             <Col md={8}>
               <div className="offer-dedicated-body-left">
                 <div className="pt-2"></div>
+
+                <div className="bg-white rounded shadow-sm p-4 mb-4">
+                  <h6>Delivery or Pickup?</h6>
+                  <p>* Some restaurants may only offer delivery or pickup</p>
+
+                  <Form>
+                    {restaurant.offersDelivery
+                    ? (
+                      <Form.Check 
+                        label="Delivery"
+                        name="deliveryCheckbox"
+                        checked={this.state.deliveryCheckbox}
+                        onChange={this.handleCheckboxChange}
+                      />
+                    )
+                    : (
+                      ""
+                    )
+                    }
+
+                    {restaurant.offersPickup
+                    ? (
+                      <Form.Check                         
+                        label="Pickup"
+                        name="pickupCheckbox"
+                        checked={this.state.pickupCheckbox}
+                        onChange={this.handleCheckboxChange}
+                      />
+                    )
+                    : (
+                      ""
+                    )
+                    }
+                    </Form>
+
+                </div>
+
+            
+              {
+                this.state.deliveryCheckbox
+                ?
                 <div className="bg-white rounded shadow-sm p-4 mb-4">
                   <h4 className="mb-1">Choose a delivery address</h4>
                   <button 
@@ -100,7 +155,6 @@ class Checkout extends React.Component {
 						            Add Delivery Address
 				            </button>
                   <Row>
-
                     {isLoggedIn === true 
                       ? deliveryAddresses.map((address, i) => {
                           return (
@@ -117,9 +171,13 @@ class Checkout extends React.Component {
                           );
                         })
                       : ""}
-
                   </Row>
                 </div>
+                :
+                ""
+              }
+                
+
                 <div className="pt-2"></div>
                 <div className="bg-white rounded shadow-sm p-4 osahan-payment">
                   <h4 className="mb-1">Choose payment method</h4>
