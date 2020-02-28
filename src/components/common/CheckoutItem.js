@@ -78,7 +78,17 @@ class CheckoutItem extends Component {
           <div className="media-body">
             <p className="mt-1 mb-0 text-black">{this.props.itemName}</p>
 
-
+            <ul>
+            {
+            this.props.customizations.map((customization, i) => {
+              return (
+                <li key={i}>
+                  {customization}
+                </li>
+              )
+            })
+            }
+            </ul>
 
           </div>
         </div>

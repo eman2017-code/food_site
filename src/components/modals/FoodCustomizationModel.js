@@ -44,13 +44,15 @@ class FoodCustomizatonModal extends React.Component {
         const selectionApiKey = e.target.getAttribute('apikey');
         const optionApiKey = e.target.childNodes[e.target.selectedIndex].getAttribute('apikey');
         const optionPrice = e.target.childNodes[e.target.selectedIndex].getAttribute('price');
+        const optionName = e.target.childNodes[e.target.selectedIndex].getAttribute('name');
 
         await this.verifyAdditionalChargesAreUnique(selectionApiKey);
 
         const additionalChargeToAdd = {
             selectionApiKey: selectionApiKey,
             optionApiKey: optionApiKey,
-            price: parseFloat(optionPrice)
+            price: parseFloat(optionPrice),
+            name: optionName 
         }
  
         this.setState({ 
@@ -133,7 +135,8 @@ class FoodCustomizatonModal extends React.Component {
                                                         <option 
                                                             key={i}
                                                             apikey={ option.apiKey } 
-                                                            price={ option.price } >
+                                                            price={ option.price } 
+                                                            name={ option.name } >
                                                              { option.name } - ${ option.price }
                                                         </option>
                                                     )
