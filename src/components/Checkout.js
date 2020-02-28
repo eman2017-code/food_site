@@ -34,7 +34,7 @@ class Checkout extends React.Component {
       pickupCheckbox: false,
 
       showAddressModal: false,
-      addressSelected: {},
+      addressSelected: '',
 
       // credit card payments
       cardNumber: '',
@@ -57,6 +57,18 @@ class Checkout extends React.Component {
       deliveryCheckbox: false,
       pickupCheckbox: false,
       [e.target.name]: e.target.checked
+    });
+  }
+
+  setDeliveryAddress = (address) => {
+    this.setState({
+      addressSelected: address
+    });
+  }
+
+  removeDeliveryAddress = () => {
+    this.setState({
+      addressSelected: ''
     });
   }
   
@@ -161,6 +173,9 @@ class Checkout extends React.Component {
                               icoIcon="briefcase"
                               iconclassName="icofont-3x"
                               address={address.address}
+                              setDeliveryAddress={this.setDeliveryAddress}
+                              removeDeliveryAddress={this.removeDeliveryAddress}
+                              addressSelected={this.state.addressSelected}
                             />
                           </Col>
                           );
