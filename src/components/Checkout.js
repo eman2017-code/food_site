@@ -51,8 +51,6 @@ class Checkout extends React.Component {
     this.props.getUsersDeliveryAddresses();
   }
 
-  
-
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -288,6 +286,12 @@ class Checkout extends React.Component {
                       10029
                     </p> */}
                   </div>
+                </div>
+
+                <div className="bg-white rounded shadow-sm mb-2">
+                    <strong>
+                      Ordering from { this.state.rest }
+                    </strong>
                 </div>
                 <Button
                   className="btn btn-sm btn-primary mr-2"
