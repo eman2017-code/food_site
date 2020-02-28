@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { removeFromCart, incrementQty, getCartTotal } from "../../actions";
+import { removeFromCart, incrementQty } from "../../actions";
+import { getCartTotal } from "../../services";
 import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 import Icofont from "react-icofont";
@@ -12,7 +13,8 @@ class CheckoutItem extends Component {
       quantity: this.props.qty || 1,
       show: this.props.show || true,
       max: this.props.maxValue || 5,
-      min: this.props.minValue || 0
+      min: this.props.minValue || 0,
+      total: 0
     };
   }
 
@@ -46,6 +48,7 @@ class CheckoutItem extends Component {
   };
 
   render() {
+    console.warn(this.state);
     const { item } = this.props;
 
     return (
@@ -71,7 +74,6 @@ class CheckoutItem extends Component {
           />
           <Button
             variant="outline-secondary"
-            // onClick={this.IncrementItem}
             onClick={() => this.props.incrementQty(item, 1)}
             className="btn-sm right inc"
           >
@@ -111,15 +113,14 @@ CheckoutItem.defaultProps = {
   priceUnit: "$"
 };
 
-// export default CheckoutItem;
-
 const mapStateToProps = state => {
-  console.warn("state in CheckoutItem:", state);
+  // console.warn("state in CheckoutItem:", state);
   return {
     cartItems: state.cartItems.cart,
     total: getCartTotal(state.cartItems.cart)
   };
 };
+
 export default connect(mapStateToProps, { removeFromCart, incrementQty })(
   CheckoutItem
 );

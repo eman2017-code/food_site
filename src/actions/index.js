@@ -232,19 +232,3 @@ export const decrementQty = productId => dispatch => {
   });
   toast.warn("Item Decrement Qty to Cart");
 };
-
-export const getCartTotal = cartItems => {
-  let total = 0;
-  for (let i = 0; i < cartItems.length; i++) {
-    if (cartItems[i].qty === undefined) {
-      cartItems[i].qty = 1;
-    }
-    console.log("cartItems[i].qty:", cartItems[i].qty);
-    console.log("cartItems[i].totalPrice:", cartItems[i].totalPrice);
-    console.log("total:", cartItems[i].qty * cartItems[i].totalPrice);
-    total +=
-      parseInt(cartItems[i].qty) * parseInt(cartItems[i].totalPrice / 100);
-  }
-  console.log("total:", total);
-  return total;
-};
