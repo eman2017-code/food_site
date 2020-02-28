@@ -1,7 +1,7 @@
 /* This is where all of the api calls are made to talk to the API */
 
 /* This allows us to switch url for production and testing purposes */
-const debug = true;
+const debug = false;
 
 let apiURL;
 if (debug) {
