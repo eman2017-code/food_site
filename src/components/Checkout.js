@@ -71,8 +71,6 @@ class Checkout extends React.Component {
 
   render() {
     const { cartItems, restaurant, user, deliveryAddresses, isLoggedIn } = this.props;
-    console.log('delivery checkbox:', this.state.deliveryCheckbox);
-    console.log('pickup checkbox:', this.state.deliveryCheckbox);
 
     const getTotalPrice = cartItems => {
       let total = 0;
@@ -88,6 +86,7 @@ class Checkout extends React.Component {
     };
 
     return (
+
       <section className="offer-dedicated-body mt-4 mb-4 pt-2 pb-2">
         {this.props.location.pathname !== "/login" &&
         this.props.location.pathname !== "/register" ? (
@@ -124,7 +123,6 @@ class Checkout extends React.Component {
                       ""
                     )
                     }
-
                     {restaurant.offersPickup
                     ? (
                       <Form.Check                         
@@ -139,10 +137,7 @@ class Checkout extends React.Component {
                     )
                     }
                     </Form>
-
                 </div>
-
-            
               {
                 this.state.deliveryCheckbox
                 ?
@@ -182,6 +177,7 @@ class Checkout extends React.Component {
                 <div className="bg-white rounded shadow-sm p-4 osahan-payment">
                   <h4 className="mb-1">Choose payment method</h4>
                   <h6 className="mb-3 text-black-50">Credit/Debit Cards</h6>
+
                   <Tab.Container
                     id="left-tabs-example"
                     defaultActiveKey="first"
@@ -189,12 +185,30 @@ class Checkout extends React.Component {
                     <Row>
                       <Col sm={4} className="pr-0">
                         <Nav variant="pills" className="flex-column">
-                          <Nav.Link eventKey="first">
-                            <Icofont icon="credit-card" /> Credit/Debit Cards
-                          </Nav.Link>
-                          <Nav.Link eventKey="fifth">
-                            <Icofont icon="money" /> Pay on Delivery
-                          </Nav.Link>
+
+                          {
+                            // if the restaurant accepts cards then the card payment method is shown
+                            restaurant.acceptsCard
+                            ? (
+                              <Nav.Link eventKey="first">
+                                <Icofont icon="credit-card" /> Credit/Debit Cards
+                              </Nav.Link>
+                            )
+                            :
+                            ""
+                          }
+
+                          {
+                            // if the restaurant accepts cash then the cash payment method is shown
+                            restaurant.acceptsCash
+                            ? (
+                              <Nav.Link eventKey="fifth">
+                                <Icofont icon="money" /> Pay on Delivery
+                              </Nav.Link>
+                            )
+                            :
+                            ""
+                          }
                         </Nav>
                       </Col>
                       <Col sm={8} className="pl-0">
@@ -286,9 +300,8 @@ class Checkout extends React.Component {
                                 </Form.Group>
                               </div>
                             </Form>
-
-
                           </Tab.Pane>
+                          
                           <Tab.Pane eventKey="fifth">
                             <h6 className="mb-3 mt-0 mb-3">Cash</h6>
                             <p>
