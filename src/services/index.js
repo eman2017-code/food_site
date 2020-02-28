@@ -11,6 +11,5 @@ export const getCartTotal = cartItems => {
 
     total += cartItems[i].qty * cartItems[i].totalPrice;
   }
-  console.log("total:", total);
   return total;
 };

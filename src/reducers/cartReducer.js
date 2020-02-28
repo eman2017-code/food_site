@@ -45,13 +45,11 @@ export default function cartReducer(
   switch (action.type) {
     case "ADD_TO_CART":
       const productId = action.product.apiKey;
-      console.log("productId:", productId);
 
       if (
         state.cart.findIndex(product => product.apiKey === productId) !== -1
       ) {
         const cart = state.cart.reduce((cartAcc, product) => {
-          console.log("product:", product);
           if (product.apiKey === productId) {
             cartAcc.push({
               ...product,
@@ -82,16 +80,15 @@ export default function cartReducer(
 
     case "DECREMENT_QTY":
       if (
-        state.cart.findIndex(product => product.id === action.productId) !== -1
+        state.cart.findIndex(product => product.apiKey === action.productId) !==
+        -1
       ) {
         const cart = state.cart.reduce((cartAcc, product) => {
-          console.log("product:", product);
-          if (product.id === action.product && product.qty > 1) {
-            console.log("price: " + product.price + "Qty: " + product.qty);
+          if (product.apiKey === action.productId && product.qty > 1) {
             cartAcc.push({
               ...product,
               qty: product.qty - 1,
-              sum: (product.price / 100) * (product.qty - 1)
+              sum: (product.totalPrice / 100) * (product.qty - 1)
             }); // Decrement qty
           } else {
             cartAcc.push(product);
@@ -110,7 +107,7 @@ export default function cartReducer(
           {
             ...action.product,
             qty: action.qty,
-            sum: action.product.price * action.qty
+            sum: action.payload.totalPrice * action.qty
           }
         ]
       };

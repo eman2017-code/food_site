@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { removeFromCart, incrementQty } from "../../actions";
+import { removeFromCart, incrementQty, decrementQty } from "../../actions";
 import { getCartTotal } from "../../services";
 import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
@@ -18,37 +18,11 @@ class CheckoutItem extends Component {
     };
   }
 
-  // IncrementItem = () => {
-  //   if (this.state.quantity >= this.state.max) {
-  //   } else {
-  //     this.setState({
-  //       quantity: this.state.quantity + 1
-  //     });
-  //     this.props.getValue({
-  //       id: this.props.id,
-  //       // quantity: this.state.quantity + 1
-  //       quantity: console.log(this.props.qty)
-  //     });
-  //   }
-  // };
-
-  // DecreaseItem = () => {
-  //   if (this.state.quantity <= this.state.min + 1) {
-  //   } else {
-  //     this.setState({ quantity: this.state.quantity - 1 });
-  //     this.props.getValue({
-  //       id: this.props.id,
-  //       quantity: this.state.quantity - 1
-  //     });
-  //   }
-  // };
-
   ToggleClick = () => {
     this.setState({ show: !this.state.show });
   };
 
   render() {
-    console.warn(this.state);
     const { item } = this.props;
 
     return (
@@ -60,18 +34,12 @@ class CheckoutItem extends Component {
         <span className="count-number float-right">
           <Button
             variant="outline-secondary"
-            // onClick={this.DecreaseItem}
+            onClick={() => this.props.decrementQty(item.apiKey)}
             className="btn-sm left dec"
           >
             {" "}
             <Icofont icon="minus" />{" "}
           </Button>
-          <input
-            className="count-number-input"
-            type="text"
-            value={this.state.quantity}
-            readOnly
-          />
           <Button
             variant="outline-secondary"
             onClick={() => this.props.incrementQty(item, 1)}
@@ -114,13 +82,14 @@ CheckoutItem.defaultProps = {
 };
 
 const mapStateToProps = state => {
-  // console.warn("state in CheckoutItem:", state);
   return {
     cartItems: state.cartItems.cart,
     total: getCartTotal(state.cartItems.cart)
   };
 };
 
-export default connect(mapStateToProps, { removeFromCart, incrementQty })(
-  CheckoutItem
-);
+export default connect(mapStateToProps, {
+  removeFromCart,
+  incrementQty,
+  decrementQty
+})(CheckoutItem);

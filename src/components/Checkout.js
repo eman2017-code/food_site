@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 import { connect } from "react-redux";
 import { clearCart, getUsersDeliveryAddresses } from "../actions";
+import { getCartTotal } from "../services";
 import {
   Row,
   Col,
@@ -37,30 +38,13 @@ class Checkout extends React.Component {
   }
 
   render() {
-    const { cartItems, user, deliveryAddresses, isLoggedIn } = this.props;
-
-    // const getTotalPrice = cartItems => {
-    //   let total = 0;
-    //   if (cartItems === undefined) {
-    //     return <h1>0</h1>;
-    //   } else {
-    //     cartItems.cart.map(item => {
-    //       total += item.basePrice;
-    //     });
-    //     // rounds each number to the nearest 100th
-    //     return Math.round(100 * total) / 100;
-    //   }
-    // };
-
-    // //to add the quantity
-    // handleAddQuantity = id => {
-    //   this.props.addQuantity(id);
-    // };
-
-    // //to substruct from the quantity
-    // handleSubtractQuantity = id => {
-    //   this.props.subtractQuantity(id);
-    // };
+    const {
+      cartItems,
+      user,
+      deliveryAddresses,
+      isLoggedIn,
+      total
+    } = this.props;
 
     return (
       <section className="offer-dedicated-body mt-4 mb-4 pt-2 pb-2">
@@ -185,9 +169,9 @@ class Checkout extends React.Component {
                                     to="/thanks"
                                     className="btn btn-success btn-block btn-lg"
                                   >
-                                    {/* {cartItems === undefined
+                                    {cartItems === undefined
                                       ? ""
-                                      : getTotalPrice(cartItems)} */}
+                                      : `$ ${Math.round(100 * total) / 100}`}
                                     <Icofont icon="long-arrow-right" />
                                   </Link>
                                 </Form.Group>
@@ -206,9 +190,10 @@ class Checkout extends React.Component {
                                 to="/thanks"
                                 className="btn btn-success btn-block btn-lg"
                               >
-                                {/* {cartItems === undefined
+                                {cartItems === undefined
                                   ? ""
-                                  : getTotalPrice(cartItems)} */}
+                                  : `$ ${Math.round(100 * total) / 100}`}
+                                }
                                 <Icofont icon="long-arrow-right" />
                               </Link>
                             </Form>
@@ -237,10 +222,6 @@ class Checkout extends React.Component {
                         <span>Thank You for Shopping Guest</span>
                       )}
                     </h6>
-                    {/* <p className="mb-0 text-white">
-                      <Icofont icon="location-pin" /> 2036 2ND AVE, NEW YORK, NY
-                      10029
-                    </p> */}
                   </div>
                 </div>
                 <Button
@@ -266,30 +247,6 @@ class Checkout extends React.Component {
                             getValue={this.getQty}
                             qty={1}
                           />
-                          {/* <button>
-                            <Icofont
-                              icon="icofont-delete"
-                              onClick={() => this.props.removeFromCart(item)}
-                            />
-                          </button> */}
-                          {/* <Button
-                            variant="outline-secondary"
-                            onClick={this.DecreaseItem}
-                            // onClick={() => this.props.updateCartQuantity()}
-                            className="btn-sm left dec"
-                          >
-                            {" "}
-                            <Icofont icon="minus" />{" "}
-                          </Button>
-                          <Button
-                            variant="outline-secondary"
-                            onClick={this.DecreaseItem}
-                            // onClick={() => this.props.updateCartQuantity()}
-                            className="btn-sm left dec"
-                          >
-                            {" "}
-                            <Icofont icon="plus" />{" "}
-                          </Button> */}
                         </div>
                       );
                     })}
@@ -308,21 +265,13 @@ class Checkout extends React.Component {
                   </InputGroup>
                 </div>
                 <div className="mb-2 bg-white rounded p-2 clearfix">
-                  {/* <p className="mb-1">
-                    Item Total{" "}
-                    <span className="float-right text-dark">$3140</span>
-                  </p> */}
-                  {/* <p className="mb-1 text-success">
-                    Total Discount
-                    <span className="float-right text-success">$1884</span>
-                  </p> */}
                   <hr />
-                  {/* <h6 className="font-weight-bold mb-0">
+                  <h6 className="font-weight-bold mb-0">
                     TOTAL{" "}
                     <span className="float-right">
-                      ${getTotalPrice(cartItems)}
+                      ${Math.round(100 * total) / 100}
                     </span>
-                  </h6> */}
+                  </h6>
                 </div>
               </div>
             </Col>
@@ -345,7 +294,8 @@ const mapStateToProps = state => {
     cartItems: state.cartItems,
     user: state.user.userInfo,
     isLoggedIn: state.user.isLoggedIn,
-    deliveryAddresses: state.addresses.deliveryAddresses
+    deliveryAddresses: state.addresses.deliveryAddresses,
+    total: getCartTotal(state.cartItems.cart)
   };
 };
 

@@ -230,5 +230,5 @@ export const decrementQty = productId => dispatch => {
     type: "DECREMENT_QTY",
     productId
   });
-  toast.warn("Item Decrement Qty to Cart");
+  toast.warn("Item Decrement Qty in Cart");
 };
