@@ -120,6 +120,11 @@ export default function cartReducer(
         )
       };
 
+    case "CLEAR_CART":
+      return {
+        cart: []
+      };
+
     default:
   }
   return state;

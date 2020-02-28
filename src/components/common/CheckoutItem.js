@@ -114,9 +114,11 @@ CheckoutItem.defaultProps = {
 // export default CheckoutItem;
 
 const mapStateToProps = state => {
-  // console.warn("state in CheckoutItem:", state);
+  console.log("state in CheckoutItem:", state);
+  console.warn("state in CheckoutItem:", state);
   return {
-    state: "test"
+    cartItems: state.cartItems.cart,
+    total: getCartTotal(state.cartItems.cart)
   };
 };
 export default connect(mapStateToProps, { removeFromCart, incrementQty })(
