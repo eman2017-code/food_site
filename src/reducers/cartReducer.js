@@ -46,9 +46,7 @@ export default function cartReducer(state = initialState, action) {
     case "REMOVE_ITEM_FROM_CART":
       return {
         ...state,
-        cart: state.cart.filter(
-          product => product.apiKey !== action.payload.apiKey
-        )
+        cart: state.cart.filter(product => product.id !== action.payload.id)
       };
 
     // increments the quantity of a product
