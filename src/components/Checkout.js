@@ -79,10 +79,36 @@ class Checkout extends React.Component {
   hideAddressModal = () => this.setState({ showAddressModal: false });
 
   getQty = ({ id, quantity }) => {};
+
+
+  // makes a request to the EatStreet api to place an order
+  placeOrder = () => {
+    const orderObject = {
+      restaurant: this.props.restaurant.apiKey,
+      items: this.formatCartItemsForOrder()
+    }
+    console.log('orderObject:', orderObject);
+  }
+
+  formatCartItemsForOrder = () => {
+    const formattedCartItems = this.props.cartItems.map(item => {
+      const itemObject = {
+        apiKey: item.apiKey,
+        customizationChoices: item.customizations.map(customization => {
+           return { apiKey: customization.optionApiKey } 
+        })
+      }  
+      return itemObject;
+    });
+    console.log('formattedCartItems:', formattedCartItems);
+
+    return formattedCartItems;
+  }
   
 
   render() {
     const { cartItems, restaurant, user, deliveryAddresses, isLoggedIn } = this.props;
+    console.log('cart items:', cartItems);
 
     const getTotalPrice = cartItems => {
       let total = 0;
@@ -304,9 +330,11 @@ class Checkout extends React.Component {
 
                                 <Form.Group className="col-md-12 mb-0">
                                   <Link
-                                    to="/thanks"
+                                    to="#"
+                                    onClick={this.placeOrder}
                                     className="btn btn-success btn-block btn-lg"
                                   >
+                                    $
                                     {cartItems === undefined
                                       ? ""
                                       : getTotalPrice(cartItems)}
@@ -326,9 +354,11 @@ class Checkout extends React.Component {
                             <hr />
                             <Form>
                               <Link
-                                to="/thanks"
+                                to="#"
+                                onClick={this.placeOrder}
                                 className="btn btn-success btn-block btn-lg"
                               >
+                                $
                                 {cartItems === undefined
                                   ? ""
                                   : getTotalPrice(cartItems)}
