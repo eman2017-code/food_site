@@ -32,13 +32,23 @@ class Checkout extends React.Component {
       showAddressModal: false,
       addressSelected: {},
 
-    
+      // credit card payments
+      cardNumber: '',
+      validDate: '',
+      cvv: '',
+      cardHolderName: ''
     };
   }
 
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+  
+  // shows the create delivery address modal
   showAddressModal = () => this.setState({ showAddressModal: true });
-  hideAddressModal = () => this.setState({ showAddressModal: false });
 
+  // hides the create delivery address modal
+  hideAddressModal = () => this.setState({ showAddressModal: false });
 
   getQty = ({ id, quantity }) => {};
 
@@ -142,14 +152,20 @@ class Checkout extends React.Component {
                                 <Icofont icon="jcb-alt" />
                               </span>
                             </p>
+
+
                             <Form>
                               <div className="form-row">
+
                                 <Form.Group className="col-md-12">
                                   <Form.Label>Card number</Form.Label>
                                   <InputGroup>
                                     <Form.Control
                                       type="number"
-                                      placeholder="Card number"
+                                      placeholder="Enter card number"
+                                      name="cardNumber"
+                                      value={this.state.cardNumber}
+                                      onChange={this.handleChange}
                                     />
                                     <InputGroup.Append>
                                       <Button
@@ -162,27 +178,40 @@ class Checkout extends React.Component {
                                     </InputGroup.Append>
                                   </InputGroup>
                                 </Form.Group>
+
                                 <Form.Group className="col-md-8">
-                                  <Form.Label>Valid through(MM/YY)</Form.Label>
+                                  <Form.Label>Valid through (MM/YY)</Form.Label>
                                   <Form.Control
-                                    type="number"
-                                    placeholder="Enter Valid through(MM/YY)"
+                                    type="text"
+                                    placeholder="Enter valid through (MM/YY)"
+                                    name="validDate"
+                                    value={this.state.validDate}
+                                    onChange={this.handleChange}
                                   />
                                 </Form.Group>
+
                                 <Form.Group className="col-md-4">
                                   <Form.Label>CVV</Form.Label>
                                   <Form.Control
                                     type="number"
-                                    placeholder="Enter CVV Number"
+                                    placeholder="Enter the CVV number"
+                                    name="cvv"
+                                    value={this.state.cvv}
+                                    onChange={this.handleChange}
                                   />
                                 </Form.Group>
+
                                 <Form.Group className="col-md-12">
                                   <Form.Label>Name on card</Form.Label>
                                   <Form.Control
                                     type="text"
-                                    placeholder="Enter Card number"
+                                    placeholder="Enter the name of your card"
+                                    name="cardHolderName"
+                                    value={this.state.cardHolderName}
+                                    onChange={this.handleChange}
                                   />
                                 </Form.Group>
+
                                 <Form.Group className="col-md-12 mb-0">
                                   <Link
                                     to="/thanks"
@@ -196,6 +225,8 @@ class Checkout extends React.Component {
                                 </Form.Group>
                               </div>
                             </Form>
+
+
                           </Tab.Pane>
                           <Tab.Pane eventKey="fifth">
                             <h6 className="mb-3 mt-0 mb-3">Cash</h6>
@@ -295,14 +326,6 @@ class Checkout extends React.Component {
                   </InputGroup>
                 </div>
                 <div className="mb-2 bg-white rounded p-2 clearfix">
-                  {/* <p className="mb-1">
-                    Item Total{" "}
-                    <span className="float-right text-dark">$3140</span>
-                  </p> */}
-                  {/* <p className="mb-1 text-success">
-                    Total Discount
-                    <span className="float-right text-success">$1884</span>
-                  </p> */}
                   <hr />
                   <h6 className="font-weight-bold mb-0">
                     TOTAL{" "}
