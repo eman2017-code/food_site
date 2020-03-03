@@ -154,9 +154,11 @@ export const fetchSingleRestaurantMenu = restaurant_api_key => async dispatch =>
 };
 
 // action for getting all of the restaurants near a certain delivery address
-export const getRestaurantsNearBy = address => async dispatch => {
-  const response = await apiConnector.getRestaurantsNearBy(address);
-  const foundRestaurants = response.data.restaurants;
+export const getRestaurantsNearBy = coordinates => async dispatch => {
+  const response = await apiConnector.getRestaurantsNearBy(coordinates);
+  console.log('response:', response);
+
+  const foundRestaurants = response.data.map(restaurant => restaurant._source);
 
   dispatch({
     type: "LIST_RESTAURANTS",

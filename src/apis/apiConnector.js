@@ -57,10 +57,10 @@ export default {
   },
 
   // makes api call to get restaurants near a address
-  getRestaurantsNearBy: async (address, pickupRadius = 25, searchTerm = "") => {
+  getRestaurantsNearBy: async (coordinates, pickupRadius = 25, searchTerm = "") => {
     const response = await fetch(
-      apiURL +
-        `restaurants/search?street_address=${address}&pickup_radius=${pickupRadius}&search_term=${searchTerm}`
+      apiURL + 'elasticsearch/restaurants/nearme?latitude=' + coordinates[0] + 
+                                                '&longitude=' + coordinates[1]
     );
     const parsedResponse = await response.json();
     return parsedResponse;

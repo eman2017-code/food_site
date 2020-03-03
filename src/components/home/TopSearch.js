@@ -27,7 +27,7 @@ class TopSearch extends React.Component {
     const coordinates = [this.state.address.coordinates.lat, this.state.address.coordinates.lng]
 
     // calls the action to get restaurants near the users location
-    await this.props.getRestaurantsNearBy(this.state.address.place);
+    await this.props.getRestaurantsNearBy(coordinates);
 
     // this causes the user to be redirected to the restaurant listing page
     this.setState({
