@@ -136,19 +136,19 @@ class Detail extends React.Component {
 
     const renderCorrectDays = () => {
       switch (this.state.numberOfDay) {
-        case 0 !== undefined:
+        case 0:
           return `Today: ${this.state.sunday[0]}`;
-        case 1 !== undefined:
+        case 1:
           return `Today: ${this.state.monday[0]}`;
-        case 2 !== undefined:
+        case 2:
           return `Today: ${this.state.tuesday[0]}`;
-        case 3 !== undefined:
+        case 3:
           return `Today: ${this.state.wednesday[0]}`;
-        case 4 !== undefined:
+        case 4:
           return `Today: ${this.state.thursday[0]}`;
-        case 5 !== undefined:
+        case 5:
           return `Today: ${this.state.friday[0]}`;
-        case 6 !== undefined:
+        case 6:
           return `Today: ${this.state.saturday[0]}`;
         default:
           return "This Shop's Hours are Available Today";
