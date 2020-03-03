@@ -82,14 +82,19 @@ class Checkout extends React.Component {
 
 
   // makes a request to the EatStreet api to place an order
-  placeOrder = () => {
+  placeOrder = (paymentMethod) => {
     const orderObject = {
       restaurant: this.props.restaurant.apiKey,
-      items: this.formatCartItemsForOrder()
+      items: this.formatCartItemsForOrder(),
+      method: this.state.deliveryCheckBox ? 'delivery' : 'pickup',
+      payment: paymentMethod,
+      test: true,
+      tip: 2
     }
     console.log('orderObject:', orderObject);
   }
 
+  // returns an array of the cart items formatted correctly to place the order
   formatCartItemsForOrder = () => {
     const formattedCartItems = this.props.cartItems.map(item => {
       const itemObject = {
@@ -100,7 +105,6 @@ class Checkout extends React.Component {
       }  
       return itemObject;
     });
-    console.log('formattedCartItems:', formattedCartItems);
 
     return formattedCartItems;
   }
@@ -331,7 +335,7 @@ class Checkout extends React.Component {
                                 <Form.Group className="col-md-12 mb-0">
                                   <Link
                                     to="#"
-                                    onClick={this.placeOrder}
+                                    onClick={() => this.placeOrder('card')}
                                     className="btn btn-success btn-block btn-lg"
                                   >
                                     $
@@ -355,7 +359,7 @@ class Checkout extends React.Component {
                             <Form>
                               <Link
                                 to="#"
-                                onClick={this.placeOrder}
+                                onClick={() => this.placeOrder('cash')}
                                 className="btn btn-success btn-block btn-lg"
                               >
                                 $
