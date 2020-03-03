@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+
 import userReducer from "./userReducer";
 import restaurantReducer from "./restaurantReducer";
 import filtersReducer from "./filtersReducer";
@@ -6,7 +7,7 @@ import addressReducer from "./addressReducer";
 import favoritesReducer from "./favoritesReducer";
 import cartReducer from "./cartReducer";
 
-export default combineReducers({
+const rootReducer = combineReducers({
   user: userReducer,
   restaurants: restaurantReducer,
   filters: filtersReducer,
@@ -14,3 +15,5 @@ export default combineReducers({
   favorites: favoritesReducer,
   cartItems: cartReducer
 });
+
+export default rootReducer;
