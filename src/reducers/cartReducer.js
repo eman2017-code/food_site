@@ -1,9 +1,12 @@
-export default function cartReducer(
-  state = {
-    cart: []
-  },
-  action
-) {
+
+
+const initialState = {
+  cart: [],
+  restaurant: {}
+};
+
+export default function cartReducer(state = initialState, action) {
+
   switch (action.type) {
     case "ADD_TO_CART":
       const productId = action.product.apiKey;
@@ -30,6 +33,7 @@ export default function cartReducer(
 
       return {
         ...state,
+
         cart: [
           ...state.cart,
           {
@@ -37,7 +41,8 @@ export default function cartReducer(
             qty: action.qty,
             sum: (action.product.totalPrice / 100) * action.qty
           }
-        ]
+        ],
+        restaurant: action.payload.restaurant
       };
 
     case "DECREMENT_QTY":
