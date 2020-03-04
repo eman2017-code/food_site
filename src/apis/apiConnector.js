@@ -63,6 +63,8 @@ export default {
                                                 '&longitude=' + coordinates[1]
     );
     const parsedResponse = await response.json();
+    console.log('getRestaurantsNearBy response:', parsedResponse);  
+
     return parsedResponse;
   },
 

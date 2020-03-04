@@ -25,6 +25,7 @@ class TopSearch extends React.Component {
 
     // gets the users latitude and longitude
     const coordinates = [this.state.address.coordinates.lat, this.state.address.coordinates.lng]
+    console.log('users current coordinates:', coordinates);
 
     // calls the action to get restaurants near the users location
     await this.props.getRestaurantsNearBy(coordinates);
