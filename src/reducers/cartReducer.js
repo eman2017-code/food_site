@@ -42,7 +42,7 @@ export default function cartReducer(state = initialState, action) {
             sum: (action.product.totalPrice / 100) * action.qty
           }
         ],
-        restaurant: action.payload.restaurant
+        
       };
 
     case "DECREMENT_QTY":
