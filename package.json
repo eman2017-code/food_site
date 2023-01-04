@@ -15,7 +15,7 @@
     "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",
     "react-google-location": "^1.2.2",
-    "react-icofont": "0.0.6",
+    "react-icofont": "1.0.19",
     "react-owl-carousel3": "^2.2.5",
     "react-redux": "^7.1.3",
     "react-router-dom": "^5.0.1",
